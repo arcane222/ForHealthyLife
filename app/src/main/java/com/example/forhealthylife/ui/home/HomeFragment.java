@@ -17,44 +17,19 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.forhealthylife.R;
 import com.example.forhealthylife.ui.running.RunningFragment;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment
+{
 
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState)
+    {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        Button button = (Button) root.findViewById(R.id.btn_running);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Fragment fg;
-                //view.findViewById(R.id.btn_running)
-                if(v.getId() == R.id.btn_running) {
-                    fg = new RunningFragment();
-
-                    FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-
-                    ft.replace(R.id.child_fragment_container, fg);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                }
-            }
-        });
-
-
 
         return root;
 
-
-
-
     }
-
-
-
 }

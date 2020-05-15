@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/bottom_menu_home">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/bottom_menu_home"
         android:name="com.example.forhealthylife.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
@@ -14,17 +14,17 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/bottom_menu_schedule"
         android:name="com.example.forhealthylife.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_schedule"
         tools:layout="@layout/fragment_dashboard" >
 
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/button_menu_community"
         android:name="com.example.forhealthylife.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_community"
         tools:layout="@layout/fragment_notifications" >
     </fragment>
 
