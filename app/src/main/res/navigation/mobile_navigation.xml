@@ -27,4 +27,5 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" >
     </fragment>
+
 </navigation>
