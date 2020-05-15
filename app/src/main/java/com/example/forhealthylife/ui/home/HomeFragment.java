@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        final FragmentTransaction menuFt = getChildFragmentManager().beginTransaction();
+
         Button runBtn = (Button) root.findViewById(R.id.btn_run);
         runBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment
             public void onClick(View v)
             {
                 Fragment menu = new RunningFragment();
+                FragmentTransaction menuFt = getChildFragmentManager().beginTransaction();
                 menuFt.replace(R.id.fragment_home, menu);
                 menuFt.addToBackStack(null);
                 menuFt.commit();
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment
             public void onClick(View v)
             {
                 Fragment menu = new EatingFragment();
+                FragmentTransaction menuFt = getChildFragmentManager().beginTransaction();
                 menuFt.replace(R.id.fragment_home, menu);
                 menuFt.addToBackStack(null);
                 menuFt.commit();
@@ -62,6 +64,7 @@ public class HomeFragment extends Fragment
             public void onClick(View v)
             {
                 Fragment menu = new ExerciseFragment();
+                FragmentTransaction menuFt = getChildFragmentManager().beginTransaction();
                 menuFt.replace(R.id.fragment_home, menu);
                 menuFt.addToBackStack(null);
                 menuFt.commit();
