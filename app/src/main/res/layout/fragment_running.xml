@@ -4,17 +4,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.running.RunningFragment">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="269dp"
-        android:layout_height="211dp"
-        android:src="@drawable/ic_home_black_24dp" />
-
-</FrameLayout>
+    android:background="@color/cardview_light_background"
+    tools:context=".ui.running.RunningFragment"/>

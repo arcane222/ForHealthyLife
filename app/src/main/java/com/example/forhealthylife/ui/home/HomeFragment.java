@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.forhealthylife.R;
+import com.example.forhealthylife.ui.eating.EatingFragment;
+import com.example.forhealthylife.ui.exercise.ExerciseFragment;
 import com.example.forhealthylife.ui.running.RunningFragment;
 
 public class HomeFragment extends Fragment
@@ -29,7 +28,49 @@ public class HomeFragment extends Fragment
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        final FragmentTransaction menuFt = getChildFragmentManager().beginTransaction();
+        Button runBtn = (Button) root.findViewById(R.id.btn_run);
+        runBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment menu = new RunningFragment();
+                menuFt.replace(R.id.fragment_home, menu);
+                menuFt.addToBackStack(null);
+                menuFt.commit();
+            }
+        });
+
+        Button eatBtn = (Button) root.findViewById(R.id.btn_eat);
+        eatBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment menu = new EatingFragment();
+                menuFt.replace(R.id.fragment_home, menu);
+                menuFt.addToBackStack(null);
+                menuFt.commit();
+            }
+        });
+
+        Button exeBtn = (Button) root.findViewById(R.id.btn_exe);
+        exeBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment menu = new ExerciseFragment();
+                menuFt.replace(R.id.fragment_home, menu);
+                menuFt.addToBackStack(null);
+                menuFt.commit();
+            }
+        });
+
+
         return root;
 
     }
+
 }
