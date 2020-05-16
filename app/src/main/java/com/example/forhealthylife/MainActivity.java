@@ -2,15 +2,18 @@ package com.example.forhealthylife;
 
 import android.os.Bundle;
 
+import com.example.forhealthylife.ui.eating.EatingFragment;
+import com.example.forhealthylife.ui.eating.RiceFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,4 +32,13 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().hide();
     }
+
+    public void onListSelected(int positon) {
+        RiceFragment riceF = new RiceFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.eat_container, riceF);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }
