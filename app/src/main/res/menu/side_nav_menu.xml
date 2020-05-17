@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/side_menu_profile"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="@string/side_menu_profile" />
+        <item
+            android:id="@+id/side_menu_analysis"
+            android:icon="@android:drawable/ic_menu_view"
+            android:title="@string/side_menu_analysis" />
+        <item
+            android:id="@+id/side_menu_notice"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="@string/side_menu_notice" />
+        <item
+            android:id="@+id/side_menu_settings"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="@string/side_menu_settings" />
+    </group>
+</menu>
