@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -68,6 +69,9 @@ public class RiceFragment extends Fragment {
         eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
     }
 
+
+
+
     public class CustomList extends ArrayAdapter<String>
     {
         private final Activity context;
@@ -93,15 +97,20 @@ public class RiceFragment extends Fragment {
 
             imageView.setImageResource(Data.riceImage[position]);
             foodName.setText(Data.riceName[position]);
-
+            amount.setText(Data.amountCount[position]+"");
 
             incrButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    if(Integer.parseInt(amount.getText().toString()) < 9)
-                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) + 1));
+                    eatingViewModel.setInteger(pos);
+                    eatingViewModel.setOperation(1);
+                    if(Integer.parseInt(amount.getText().toString()) < 9){
+                       amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) + 1));
+                       eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
+                    }
+
                 }
             });
 
@@ -110,8 +119,12 @@ public class RiceFragment extends Fragment {
                 @Override
                 public void onClick(View v)
                 {
-                    if(Integer.parseInt(amount.getText().toString()) > 0)
+                    eatingViewModel.setInteger(pos);
+                    eatingViewModel.setOperation(0);
+                    if(Integer.parseInt(amount.getText().toString()) > 0) {
                         amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) - 1));
+                        eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
+                    }
                 }
             });
 
@@ -146,4 +159,6 @@ public class RiceFragment extends Fragment {
         ((MainActivity)context).setOnKeyBackPressedListener(this);
     }
     */
+
+
 }

@@ -32,6 +32,8 @@ public class EatingFragment extends Fragment
     private EatingViewModel eatingViewModel;
     private TextView kcalView;
     private int kcalSum;
+    private int pos;
+    private int opr;
 
     public interface OnListSelectedListener
     {
@@ -91,16 +93,46 @@ public class EatingFragment extends Fragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
-        kcalSum = 0;
+
         super.onActivityCreated(savedInstanceState);
         eatingViewModel =  ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
+
         eatingViewModel.getInteger().observe(this, new Observer<Integer>()
         {
             @Override
             public void onChanged(Integer integer)
             {
-                kcalSum += Data.riceKcal[integer];
-                kcalView.setText(String.valueOf(kcalSum));
+                pos = integer;
+            }
+        });
+        eatingViewModel.getOperation().observe(this, new Observer<Integer>()
+        {
+            @Override
+            public void onChanged(Integer integer)
+            {
+                opr = integer;
+            }
+        });
+        eatingViewModel.getCount().observe(this, new Observer<Integer>()
+        {
+
+            @Override
+            public void onChanged(Integer integer)
+            {
+                if(opr == 1){
+                    if(integer > 0){
+                        kcalSum += Data.riceKcal[pos];
+                        kcalView.setText(String.valueOf(kcalSum));
+                    }
+                }
+
+                else{
+                    if(integer >= 0){
+                        kcalSum -= Data.riceKcal[pos];
+                        kcalView.setText(String.valueOf(kcalSum));
+                    }
+                }
+
             }
         });
     }
