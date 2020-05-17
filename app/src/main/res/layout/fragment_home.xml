@@ -85,7 +85,8 @@
                     android:id="@+id/run_layout"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_red_light">
 
                     <Button
                         android:id="@+id/btn_run"
@@ -103,7 +104,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_orange_dark">
 
                     <Button
                         android:id="@+id/btn_eat"
@@ -121,7 +123,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_orange_light">
 
                     <Button
                         android:id="@+id/btn_exe"
@@ -139,13 +142,19 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_green_light">
 
                     <Button
                         android:id="@+id/button6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Button" />
+                        android:text="Button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.95"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

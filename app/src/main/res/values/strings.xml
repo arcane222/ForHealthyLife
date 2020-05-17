@@ -3,4 +3,19 @@
     <string name="title_home">Home</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_community">Community</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="side_menu_title">사용자: </string>
+    <string name="side_menu_subtitle">프로필: </string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="side_menu_profile">Profile</string>
+    <string name="side_menu_analysis">Weekly Analysis</string>
+    <string name="side_menu_notice">Notice</string>
+    <string name="side_menu_settings">Settings</string>
+
+    <string name="home_second">Home Second</string>
 </resources>

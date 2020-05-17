@@ -1,4 +1,4 @@
-package com.example.forhealthylife.ui.notifications;
+package com.example.forhealthylife.ui.community;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.forhealthylife.R;
 
-public class NotificationsFragment extends Fragment {
+public class CommunityFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private CommunityViewModel communityViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        communityViewModel =
+                ViewModelProviders.of(this).get(CommunityViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_community, container, false);
+        final TextView textView = root.findViewById(R.id.text_community);
+        communityViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

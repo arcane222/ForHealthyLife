@@ -1,6 +1,5 @@
 package com.example.forhealthylife.ui.exercise;
 
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.forhealthylife.R;
-import com.example.forhealthylife.ui.running.RunningViewModel;
 
 public class ExerciseFragment extends Fragment {
 
@@ -27,7 +25,7 @@ public class ExerciseFragment extends Fragment {
         exerciseViewModel =
                 ViewModelProviders.of(this).get(ExerciseViewModel.class);
         View root = inflater.inflate(R.layout.fragment_exercise, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
+        final TextView textView = root.findViewById(R.id.text_community);
 
         return root;
     }

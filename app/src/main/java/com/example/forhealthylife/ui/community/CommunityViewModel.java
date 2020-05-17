@@ -1,16 +1,16 @@
-package com.example.forhealthylife.ui.dashboard;
+package com.example.forhealthylife.ui.community;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class CommunityViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public CommunityViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is Community fragment");
     }
 
     public LiveData<String> getText() {

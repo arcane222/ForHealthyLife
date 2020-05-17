@@ -1,4 +1,4 @@
-package com.example.forhealthylife.ui.dashboard;
+package com.example.forhealthylife.ui.schedule;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.forhealthylife.R;
 
-public class DashboardFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private ScheduleViewModel scheduleViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        scheduleViewModel =
+                ViewModelProviders.of(this).get(ScheduleViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_schedule, container, false);
+        final TextView textView = root.findViewById(R.id.text_schedule);
+        scheduleViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
