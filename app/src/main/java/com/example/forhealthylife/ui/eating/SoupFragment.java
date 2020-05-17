@@ -64,6 +64,7 @@ public class SoupFragment extends Fragment {
         public View getView(int position, View view, ViewGroup parent)
         {
             final int pos = position;
+            eatingViewModel.setVersion(1);
 
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.food_item, null, true);

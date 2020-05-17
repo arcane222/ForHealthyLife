@@ -85,6 +85,7 @@ public class RiceFragment extends Fragment {
         public View getView(int position, View view, ViewGroup parent)
         {
             final int pos = position;
+            eatingViewModel.setVersion(0);
 
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.food_item, null, true);
@@ -113,7 +114,6 @@ public class RiceFragment extends Fragment {
 
                 }
             });
-
             decrButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override

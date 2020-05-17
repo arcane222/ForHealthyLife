@@ -3,8 +3,12 @@ package com.example.forhealthylife;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.forhealthylife.ui.eating.DrinkFragment;
 import com.example.forhealthylife.ui.eating.EatingFragment;
+import com.example.forhealthylife.ui.eating.FastFoodFragment;
 import com.example.forhealthylife.ui.eating.RiceFragment;
+import com.example.forhealthylife.ui.eating.SideDishFragment;
+import com.example.forhealthylife.ui.eating.SoupFragment;
 import com.example.forhealthylife.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -67,12 +71,32 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
 
     public void onListSelected(int position)
     {
-        RiceFragment riceF = new RiceFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_e, riceF);
+        switch (position){
+            case 0:
+                RiceFragment riceF = new RiceFragment();
+                transaction.replace(R.id.fragment_e, riceF);
+                break;
+            case 1:
+                SoupFragment soupF = new SoupFragment();
+                transaction.replace(R.id.fragment_e, soupF);
+                break;
+            case 2:
+                SideDishFragment sidedishF = new SideDishFragment();
+                transaction.replace(R.id.fragment_e, sidedishF);
+                break;
+           case 3:
+                FastFoodFragment fastfoodF = new FastFoodFragment();
+                transaction.replace(R.id.fragment_e, fastfoodF);
+                break;
+            case 4:
+                DrinkFragment drinkF = new DrinkFragment();
+                transaction.replace(R.id.fragment_e, drinkF);
+                break;
+        }
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
     public void onBtnClik(View v)

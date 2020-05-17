@@ -31,9 +31,8 @@ public class EatingFragment extends Fragment
 
     private EatingViewModel eatingViewModel;
     private TextView kcalView;
-    private int kcalSum;
-    private int pos;
-    private int opr;
+    private int kcalSum, pos, opr, ver;
+
 
     public interface OnListSelectedListener
     {
@@ -113,26 +112,92 @@ public class EatingFragment extends Fragment
                 opr = integer;
             }
         });
+        eatingViewModel.getVersion().observe(this, new Observer<Integer>()
+        {
+            @Override
+            public void onChanged(Integer integer)
+            {
+                ver = integer;
+            }
+        });
         eatingViewModel.getCount().observe(this, new Observer<Integer>()
         {
 
             @Override
             public void onChanged(Integer integer)
             {
-                if(opr == 1){
-                    if(integer > 0){
-                        kcalSum += Data.riceKcal[pos];
-                        kcalView.setText(String.valueOf(kcalSum));
-                    }
+                switch(ver){
+                    case 0:
+                        if(opr == 1){
+                            if(integer > 0){
+                                kcalSum += Data.riceKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        else{
+                            if(integer >= 0){
+                                kcalSum -= Data.riceKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        break;
+                    case 1:
+                        if(opr == 1){
+                            if(integer > 0){
+                                kcalSum += Data.soupKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        else{
+                            if(integer >= 0){
+                                kcalSum -= Data.soupKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        break;
+                    case 2:
+                        if(opr == 1){
+                            if(integer > 0){
+                                kcalSum += Data.sideDishKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        else{
+                            if(integer >= 0){
+                                kcalSum -= Data.sideDishKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        break;
+                    case 3:
+                        if(opr == 1){
+                            if(integer > 0){
+                                kcalSum += Data.fastFoodKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        else{
+                            if(integer >= 0){
+                                kcalSum -= Data.fastFoodKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        break;
+                    case 4:
+                        if(opr == 1){
+                            if(integer > 0){
+                                kcalSum += Data.drinkKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        else{
+                            if(integer >= 0){
+                                kcalSum -= Data.drinkKcal[pos];
+                                kcalView.setText(String.valueOf(kcalSum));
+                            }
+                        }
+                        break;
                 }
-
-                else{
-                    if(integer >= 0){
-                        kcalSum -= Data.riceKcal[pos];
-                        kcalView.setText(String.valueOf(kcalSum));
-                    }
-                }
-
             }
         });
     }

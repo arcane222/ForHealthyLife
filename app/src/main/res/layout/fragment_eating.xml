@@ -5,7 +5,7 @@
     android:id="@+id/fragment_eat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
+    android:background="?android:attr/windowBackground"
 
     tools:context=".ui.eating.EatingFragment">
 
@@ -65,7 +65,7 @@
                 android:id="@+id/eat_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cardview_light_background" />
+                android:background="?android:attr/windowBackground" />
         </FrameLayout>
 
 

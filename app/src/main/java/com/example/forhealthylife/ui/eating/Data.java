@@ -5,8 +5,8 @@ import com.example.forhealthylife.R;
 public class Data {
 
     static String[] eats = {
-            "밥,죽,면류",
-            "국,찌개",
+            "밥, 면류",
+            "국, 찌개",
             "반찬",
             "패스트 푸드",
             "음료"
@@ -31,17 +31,17 @@ public class Data {
     static Integer[] amountCount = {0,0,0,0,0,0,0,0,0,0,0};
 
     static Integer[] riceImage = {
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice,
+            R.drawable.ic_rice
     };
 
     static String[] soupName = {
@@ -72,7 +72,7 @@ public class Data {
             R.drawable.ic_home
     };
 
-    static String[] sideDish = {
+    static String[] sideDishName = {
             "콩나물 무침  (50Kcal)",
             "시금치 나물  (40Kcal)",
             "깍두기   (20Kcal)",
@@ -92,7 +92,7 @@ public class Data {
             R.drawable.ic_home
     };
 
-    static String[] fastFood = {
+    static String[] fastFoodName = {
             "3분 짜장  (370Kcal)",
             "3분 카레  (175Kcal)",
             "크림스프  (330Kcal)",
@@ -118,7 +118,7 @@ public class Data {
             R.drawable.ic_home
     };
 
-    static String[] drink = {
+    static String[] drinkName = {
             "콜라  (100Kcal)",
             "사이다  (100Kcal)",
             "환타  (120Kcal)",

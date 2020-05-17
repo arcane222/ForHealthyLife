@@ -10,7 +10,8 @@
         android:id="@+id/riceName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_light_background">
+        android:background="?android:attr/windowBackground"
+        android:divider="@null">
 
     </ListView>
 </FrameLayout>

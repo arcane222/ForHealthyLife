@@ -8,11 +8,13 @@ public class EatingViewModel extends ViewModel {
     private MutableLiveData<Integer> position;
     private MutableLiveData<Integer> count;
     private MutableLiveData<Integer> operation;
+    private MutableLiveData<Integer> version;
 
     public EatingViewModel() {
         position = new MutableLiveData<>();
         count = new MutableLiveData<>();
         operation = new MutableLiveData<>();
+        version = new MutableLiveData<>();
     }
 
     public LiveData<Integer> getInteger() {
@@ -39,5 +41,12 @@ public class EatingViewModel extends ViewModel {
         operation.setValue(opr);
     }
 
+    public LiveData<Integer> getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer ver) {
+        version.setValue(ver);
+    }
 
 }
