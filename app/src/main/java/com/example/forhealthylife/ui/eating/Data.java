@@ -44,7 +44,7 @@ public class Data {
             R.drawable.ic_home
     };
 
-    static String[] soup = {
+    static String[] soupName = {
             "쇠고기미역국  (90Kcal)",
             "콩나물국  (50Kcal)",
             "무국  (50Kcal)",
