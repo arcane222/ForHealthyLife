@@ -20,12 +20,18 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.Stack;
 
-public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClikListener{
-
+public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClikListener
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initBottomNavMenu();
+    }
+
+    public void initBottomNavMenu()
+    {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -35,14 +41,10 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        getSupportActionBar().hide();
-
-
-
     }
 
-    public void onListSelected(int positon) {
+    public void onListSelected(int position)
+    {
         RiceFragment riceF = new RiceFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         transaction.commit();
     }
 
-    public void onBtnClik(View v) {
+    public void onBtnClik(View v)
+    {
         Fragment menu = new EatingFragment();
         FragmentTransaction menuFt = getSupportFragmentManager().beginTransaction();
         menuFt.replace(R.id.fragment_home, menu);
@@ -78,8 +81,4 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         }
     }
     */
-
-
-
-
 }
