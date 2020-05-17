@@ -26,12 +26,15 @@ import com.example.forhealthylife.R;
 import com.example.forhealthylife.ui.home.HomeFragment;
 
 
-public class EatingFragment extends Fragment {
+public class EatingFragment extends Fragment
+{
 
     private EatingViewModel eatingViewModel;
     private TextView kcalView;
+    private int kcalSum;
 
-    public interface OnListSelectedListener {
+    public interface OnListSelectedListener
+    {
         public void onListSelected(int position);
     }
 
@@ -39,7 +42,8 @@ public class EatingFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
 
         View root = inflater.inflate(R.layout.fragment_eating, container, false);
 
@@ -73,9 +77,7 @@ public class EatingFragment extends Fragment {
 
             }
         });*/
-
         return root;
-
     }
 /*
     public class CustomList extends ArrayAdapter<String> {
@@ -87,20 +89,26 @@ public class EatingFragment extends Fragment {
     }*/
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        kcalSum = 0;
         super.onActivityCreated(savedInstanceState);
-        eatingViewModel =
-                ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
-        eatingViewModel.getInteger().observe(this, new Observer<Integer>() {
+        eatingViewModel =  ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
+        eatingViewModel.getInteger().observe(this, new Observer<Integer>()
+        {
             @Override
-            public void onChanged(Integer integer) {
-                kcalView.setText(Data.riceKcal[integer]+"");
+            public void onChanged(Integer integer)
+            {
+                kcalSum += Data.riceKcal[integer];
+                kcalView.setText(String.valueOf(kcalSum));
             }
         });
     }
 
+    public void onFoodBtnClicked(View view)
+    {
 
-
+    }
 
     /*
     public void onStart() {

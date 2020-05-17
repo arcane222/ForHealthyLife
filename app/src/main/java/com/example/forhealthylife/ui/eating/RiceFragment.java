@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,46 +62,74 @@ public class RiceFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
         eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
-
     }
 
-
-    public class CustomList extends ArrayAdapter<String> {
+    public class CustomList extends ArrayAdapter<String>
+    {
         private final Activity context;
-        public CustomList(Activity context) {
+
+        public CustomList(Activity context)
+        {
             super(context, R.layout.food_item, Data.riceName);
             this.context = context;
         }
 
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(int position, View view, ViewGroup parent)
+        {
             final int pos = position;
 
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.food_item, null, true);
+
             ImageView imageView = (ImageView) rowView.findViewById(R.id.riceImage);
-            TextView name = (TextView) rowView.findViewById(R.id.riceName);
-            name.setText(Data.riceName[position]);
+            TextView foodName = (TextView) rowView.findViewById(R.id.riceName);
+            final TextView amount = (TextView) rowView.findViewById(R.id.foodAmount);
+            Button incrButton = (Button) rowView.findViewById(R.id.incrAmountBtn);
+            Button decrButton = (Button) rowView.findViewById(R.id.decrAmountBtn);
+
             imageView.setImageResource(Data.riceImage[position]);
+            foodName.setText(Data.riceName[position]);
 
 
-            name.setOnClickListener(new View.OnClickListener() {
+            incrButton.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
-                    eatingViewModel.setInteger(pos);
-                    Toast.makeText(context, pos + "번째 이미지 선택", Toast.LENGTH_SHORT).show();
-
-                    /*EatingFragment eatF = new EatingFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("position",pos);
-                    eatF.setArguments(bundle);*/
+                public void onClick(View v)
+                {
+                    if(Integer.parseInt(amount.getText().toString()) < 9)
+                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) + 1));
                 }
             });
 
-            return rowView;
+            decrButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    if(Integer.parseInt(amount.getText().toString()) > 0)
+                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) - 1));
+                }
+            });
 
+            /*name.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    eatingViewModel.setInteger(pos);
+                    Toast.makeText(context, pos + "번째 이미지 선택", Toast.LENGTH_SHORT).show();
+
+                    EatingFragment eatF = new EatingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("position",pos);
+                    eatF.setArguments(bundle);
+                }
+            });*/
+            return rowView;
         }
     }
 
