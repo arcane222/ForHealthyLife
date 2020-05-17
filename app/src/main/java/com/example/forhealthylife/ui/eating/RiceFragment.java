@@ -36,7 +36,8 @@ public class RiceFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_rice, container, false);
         ListView listview = view.findViewById(R.id.riceName);
         CustomList adapter = new CustomList((Activity) view.getContext());
@@ -56,10 +57,7 @@ public class RiceFragment extends Fragment {
                 mEatModel.setInteger(position);
             }
         });*/
-
-
         return view;
-
     }
 
     @Override
@@ -68,9 +66,6 @@ public class RiceFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
     }
-
-
-
 
     public class CustomList extends ArrayAdapter<String>
     {

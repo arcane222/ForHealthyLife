@@ -57,7 +57,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
-            android:id="@+id/fragment_e"
+            android:id="@+id/eat_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

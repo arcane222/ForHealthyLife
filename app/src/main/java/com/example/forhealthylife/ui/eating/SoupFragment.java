@@ -48,9 +48,6 @@ public class SoupFragment extends Fragment {
         eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
     }
 
-
-
-
     public class CustomList extends ArrayAdapter<String>
     {
         private final Activity context;

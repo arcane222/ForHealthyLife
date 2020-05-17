@@ -32,7 +32,8 @@ public class FastFoodFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_fast_food, container, false);
         ListView listview = view.findViewById(R.id.fastfoodName);
         CustomList adapter = new CustomList((Activity) view.getContext());
@@ -47,9 +48,6 @@ public class FastFoodFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
     }
-
-
-
 
     public class CustomList extends ArrayAdapter<String>
     {

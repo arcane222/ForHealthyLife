@@ -9,7 +9,9 @@ import com.example.forhealthylife.ui.eating.FastFoodFragment;
 import com.example.forhealthylife.ui.eating.RiceFragment;
 import com.example.forhealthylife.ui.eating.SideDishFragment;
 import com.example.forhealthylife.ui.eating.SoupFragment;
+import com.example.forhealthylife.ui.exercise.ExerciseFragment;
 import com.example.forhealthylife.ui.home.HomeFragment;
+import com.example.forhealthylife.ui.running.RunningFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,7 +25,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClikListener
+public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClickListener
 {
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -65,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 R.id.bottom_menu_home, R.id.bottom_menu_schedule, R.id.bottom_menu_community)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
 
@@ -74,36 +75,52 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (position){
             case 0:
-                RiceFragment riceF = new RiceFragment();
-                transaction.replace(R.id.fragment_e, riceF);
+                RiceFragment riceFragment = new RiceFragment();
+                transaction.replace(R.id.eat_list_layout, riceFragment);
                 break;
             case 1:
-                SoupFragment soupF = new SoupFragment();
-                transaction.replace(R.id.fragment_e, soupF);
+                SoupFragment soupFragment = new SoupFragment();
+                transaction.replace(R.id.eat_list_layout, soupFragment);
                 break;
             case 2:
-                SideDishFragment sidedishF = new SideDishFragment();
-                transaction.replace(R.id.fragment_e, sidedishF);
+                SideDishFragment sidedishFragment = new SideDishFragment();
+                transaction.replace(R.id.eat_list_layout, sidedishFragment);
                 break;
            case 3:
-                FastFoodFragment fastfoodF = new FastFoodFragment();
-                transaction.replace(R.id.fragment_e, fastfoodF);
+                FastFoodFragment fastfoodFragment = new FastFoodFragment();
+                transaction.replace(R.id.eat_list_layout, fastfoodFragment);
                 break;
             case 4:
-                DrinkFragment drinkF = new DrinkFragment();
-                transaction.replace(R.id.fragment_e, drinkF);
+                DrinkFragment drinkFragment = new DrinkFragment();
+                transaction.replace(R.id.eat_list_layout, drinkFragment);
                 break;
         }
         transaction.addToBackStack(null);
         transaction.commit();
-
     }
 
-    public void onBtnClik(View v)
+    /* Home Fragment Button Click Listener (Eating, Running, Exercise) */
+    public void onBtnClick(View v)
     {
-        Fragment menu = new EatingFragment();
+        Fragment eatingFragment = new EatingFragment();
+        Fragment runningFragment = new RunningFragment();
+        Fragment exerciseFragment = new ExerciseFragment();
+
         FragmentTransaction menuFt = getSupportFragmentManager().beginTransaction();
-        menuFt.replace(R.id.fragment_home, menu);
+        switch(v.getId())
+        {
+            case R.id.btn_run:
+                menuFt.replace(R.id.fragment_home, runningFragment);
+                break;
+            case R.id.btn_eat:
+                menuFt.replace(R.id.fragment_home, eatingFragment);
+                break;
+            case R.id.btn_exe:
+                menuFt.replace(R.id.fragment_home, exerciseFragment);
+                break;
+            default:
+                break;
+        }
         menuFt.addToBackStack(null);
         menuFt.commit();
     }
