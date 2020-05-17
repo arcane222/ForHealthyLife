@@ -2,6 +2,7 @@ package com.example.forhealthylife.ui.eating;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.forhealthylife.MainActivity;
 import com.example.forhealthylife.R;
@@ -26,9 +28,10 @@ import com.example.forhealthylife.ui.home.HomeFragment;
 
 public class EatingFragment extends Fragment {
 
-    private EatingViewModel eatingViewModel;
+    // private EatingViewModel eatingViewModel;
+    private TextView textview;
 
-    public interface OnListSelectedListener{
+    public interface OnListSelectedListener {
         public void onListSelected(int position);
     }
 
@@ -37,12 +40,13 @@ public class EatingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        eatingViewModel =
-                ViewModelProviders.of(this).get(EatingViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_eating, container, false);
 
 
         ListView listview = root.findViewById(R.id.eat_list);
+        textview = root.findViewById(R.id.calculKcal);
+
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Data.eats);
         listview.setAdapter(adapter);
         mListSelListener = (MainActivity) getActivity();
@@ -52,6 +56,13 @@ public class EatingFragment extends Fragment {
                 mListSelListener.onListSelected(position);
             }
         });
+        /*
+        if(savedInstanceState != null){
+            int pos = getArguments().getInt("position");
+            textview.setText(Data.riceKcal[pos]+"Kcal");
+        }
+        */
+
 
         //listview.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Data.eats));
         /*mWordSelListener = (MainActivity) getActivity();
@@ -74,5 +85,30 @@ public class EatingFragment extends Fragment {
             this.context = context;
         }
     }*/
+    /*
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        eatingViewModel =
+                ViewModelProviders.of(this).get(EatingViewModel.class);
+        eatingViewModel.getInteger().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                textview.setText(Data.riceKcal[integer]+"Kcal");
+            }
+        });
+    }
+
+    */
+
+    public void onStart() {
+        super.onStart();
+
+        Bundle args = getArguments();
+        if (args != null) {
+            int pos = args.getInt("position");
+            textview.setText(Data.riceKcal[pos]+"Kcal");
+        }
+    }
 
 }

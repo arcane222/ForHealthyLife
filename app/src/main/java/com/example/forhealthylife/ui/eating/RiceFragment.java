@@ -1,8 +1,10 @@
 package com.example.forhealthylife.ui.eating;
 
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,16 +14,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.forhealthylife.MainActivity;
 import com.example.forhealthylife.R;
 
 public class RiceFragment extends Fragment {
 
-    private RiceViewModel mViewModel;
+    //private EatingViewModel eatingViewModel;
 
     public static RiceFragment newInstance() {
         return new RiceFragment();
@@ -34,7 +39,7 @@ public class RiceFragment extends Fragment {
         ListView listview = view.findViewById(R.id.riceName);
         CustomList adapter = new CustomList((Activity) view.getContext());
         listview.setAdapter(adapter);
-       // listview.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_checked, Data.riceName));
+       //listview.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_checked, Data.riceName));
         /*mWordSelListener = (MainActivity) getActivity();
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -43,16 +48,25 @@ public class RiceFragment extends Fragment {
             }
         });*/
 
+        /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mEatModel.setInteger(position);
+            }
+        });*/
+
+
         return view;
 
     }
-
+    /*
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(RiceViewModel.class);
-        // TODO: Use the ViewModel
+        eatingViewModel = ViewModelProviders.of(this).get(EatingViewModel.class);
+
     }
+    */
 
     public class CustomList extends ArrayAdapter<String> {
         private final Activity context;
@@ -62,6 +76,8 @@ public class RiceFragment extends Fragment {
         }
 
         public View getView(int position, View view, ViewGroup parent) {
+            final int pos = position;
+
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.food_item, null, true);
             ImageView imageView = (ImageView) rowView.findViewById(R.id.riceImage);
@@ -69,13 +85,36 @@ public class RiceFragment extends Fragment {
             name.setText(Data.riceName[position]);
             imageView.setImageResource(Data.riceImage[position]);
 
+
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //eatingViewModel.setInteger(pos);
+                    Toast.makeText(context, pos + "번째 이미지 선택", Toast.LENGTH_SHORT).show();
+
+                    /*EatingFragment eatF = new EatingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("position",pos);
+                    eatF.setArguments(bundle);*/
+                }
+            });
+
             return rowView;
-
-
-
-
 
         }
     }
 
+    /*
+    @Override
+    public void onBackKey() {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((MainActivity)context).setOnKeyBackPressedListener(this);
+    }
+    */
 }
