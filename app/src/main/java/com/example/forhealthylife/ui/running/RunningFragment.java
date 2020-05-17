@@ -6,9 +6,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,43 +28,59 @@ public class RunningFragment extends Fragment implements SensorEventListener
 {
 
     private RunningViewModel runningViewModel;
+
+    private Button mReset;
+    private TextView mStepNum;
     private SensorManager sensorManager;
     private Sensor stepCountSensor;
-    TextView tvStepCount;
+
+    private int mSteps = 0;
+    private int mCounterSteps = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        runningViewModel =
-                ViewModelProviders.of(this).get(RunningViewModel.class);
+        runningViewModel = ViewModelProviders.of(this).get(RunningViewModel.class);
         View root = inflater.inflate(R.layout.fragment_running, container, false);
-        final TextView textView = root.findViewById(R.id.text_community);
 
-        tvStepCount = (TextView) root.findViewById(R.id.tvStepCount);
-        AppCompatActivity currentActivity = (MainActivity) getActivity();
-        sensorManager = (SensorManager) currentActivity.getSystemService (Context.SENSOR_SERVICE);
+        //센서 연결[걸음수 센서를 이용한 흔듬 감지]
+        sensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
+        //accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-
         if(stepCountSensor == null)
         {
-            Toast.makeText(getContext(), "No Step Detect Sensor", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"No Step Detect Sensor",Toast.LENGTH_SHORT).show();
         }
+
+        mReset = (Button)root.findViewById(R.id.resetStepBtn);
+        mStepNum = root.findViewById(R.id.stepNumView);
+
+        //초기화 버튼 : 다시 숫자를 0으로 만들어준다.
+        mReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSteps = 0;
+                mCounterSteps = 0;
+                mStepNum.setText("Step Count : " + Integer.toString(mSteps));
+            }
+        });
 
         return root;
     }
 
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        sensorManager.registerListener(this, stepCountSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    public void onStart() {
+        super.onStart();
+        if(stepCountSensor !=null){
+            //센서의 속도 설정
+            sensorManager.registerListener(this,stepCountSensor,SensorManager.SENSOR_DELAY_GAME);
+        }
     }
 
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        sensorManager.unregisterListener(this);
+    public void onStop(){
+        super.onStop();
+        if(sensorManager!=null){
+            sensorManager.unregisterListener(this);
+        }
     }
 
     @Override
@@ -70,14 +88,20 @@ public class RunningFragment extends Fragment implements SensorEventListener
     {
         if(event.sensor.getType() == Sensor.TYPE_STEP_COUNTER)
         {
-            tvStepCount.setText("Step Count : " + String.valueOf(event.values[0]));
+
+            //stepcountsenersor는 앱이 꺼지더라도 초기화 되지않는다. 그러므로 우리는 초기값을 가지고 있어야한다.
+            if (mCounterSteps < 1) {
+                // initial value
+                mCounterSteps = (int) event.values[0];
+            }
+            //리셋 안된 값 + 현재값 - 리셋 안된 값
+            mSteps = (int) event.values[0] - mCounterSteps;
+            mStepNum.setText(Integer.toString(mSteps));
+            Log.i("log: ", "New step detected by STEP_COUNTER sensor. Total step count: " + mSteps );
         }
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy)
-    {
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
 }
