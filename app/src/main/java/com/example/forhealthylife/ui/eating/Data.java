@@ -28,6 +28,8 @@ public class Data {
 
     static Integer[] riceKcal = {300,300,320,380,600,630,590,690,460,650,700};
 
+    static Integer[] amountCount = {0,0,0,0,0,0,0,0,0,0,0};
+
     static Integer[] riceImage = {
             R.drawable.ic_home,
             R.drawable.ic_home,
@@ -42,7 +44,7 @@ public class Data {
             R.drawable.ic_home
     };
 
-    static String[] soup = {
+    static String[] soupName = {
             "쇠고기미역국  (90Kcal)",
             "콩나물국  (50Kcal)",
             "무국  (50Kcal)",
