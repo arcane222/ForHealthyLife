@@ -28,8 +28,8 @@ import com.example.forhealthylife.ui.home.HomeFragment;
 
 public class EatingFragment extends Fragment {
 
-    // private EatingViewModel eatingViewModel;
-    private TextView textview;
+    private EatingViewModel eatingViewModel;
+    private TextView kcalView;
 
     public interface OnListSelectedListener {
         public void onListSelected(int position);
@@ -45,7 +45,7 @@ public class EatingFragment extends Fragment {
 
 
         ListView listview = root.findViewById(R.id.eat_list);
-        textview = root.findViewById(R.id.calculKcal);
+        kcalView = root.findViewById(R.id.calculKcal);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Data.eats);
         listview.setAdapter(adapter);
@@ -85,22 +85,24 @@ public class EatingFragment extends Fragment {
             this.context = context;
         }
     }*/
-    /*
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         eatingViewModel =
-                ViewModelProviders.of(this).get(EatingViewModel.class);
+                ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
         eatingViewModel.getInteger().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                textview.setText(Data.riceKcal[integer]+"Kcal");
+                kcalView.setText(Data.riceKcal[integer]+"");
             }
         });
     }
 
-    */
 
+
+
+    /*
     public void onStart() {
         super.onStart();
 
@@ -110,5 +112,5 @@ public class EatingFragment extends Fragment {
             textview.setText(Data.riceKcal[pos]+"Kcal");
         }
     }
-
+    */
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         RiceFragment riceF = new RiceFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.fragment_home, riceF);
+        transaction.replace(R.id.fragment_e, riceF);
         transaction.addToBackStack(null);
         transaction.commit();
     }

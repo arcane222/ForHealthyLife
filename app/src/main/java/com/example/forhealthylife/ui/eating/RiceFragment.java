@@ -26,7 +26,7 @@ import com.example.forhealthylife.R;
 
 public class RiceFragment extends Fragment {
 
-    //private EatingViewModel eatingViewModel;
+    private EatingViewModel eatingViewModel;
 
     public static RiceFragment newInstance() {
         return new RiceFragment();
@@ -59,14 +59,14 @@ public class RiceFragment extends Fragment {
         return view;
 
     }
-    /*
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        eatingViewModel = ViewModelProviders.of(this).get(EatingViewModel.class);
+        eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
 
     }
-    */
+
 
     public class CustomList extends ArrayAdapter<String> {
         private final Activity context;
@@ -89,7 +89,7 @@ public class RiceFragment extends Fragment {
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //eatingViewModel.setInteger(pos);
+                    eatingViewModel.setInteger(pos);
                     Toast.makeText(context, pos + "번째 이미지 선택", Toast.LENGTH_SHORT).show();
 
                     /*EatingFragment eatF = new EatingFragment();

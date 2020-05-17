@@ -17,16 +17,20 @@
         <TextView
             android:id="@+id/calculKcal"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:text="Hello" />
+            android:layout_height="150dp" />
 
 
-
-        <ListView
-            android:id="@+id/eat_list"
+        <FrameLayout
+            android:id="@+id/fragment_e"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_light_background" />
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/eat_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background" />
+        </FrameLayout>
 
 
     </LinearLayout>
