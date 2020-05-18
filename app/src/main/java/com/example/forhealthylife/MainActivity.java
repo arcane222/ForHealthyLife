@@ -1,6 +1,9 @@
 package com.example.forhealthylife;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.forhealthylife.ui.eating.DrinkFragment;
@@ -17,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,6 +33,8 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClickListener
 {
     private AppBarConfiguration mAppBarConfiguration;
+    private String[] REQUEST_PERMISSIONS={ Manifest.permission.ACTIVITY_RECOGNITION };
+    private static final int REQUEST_RECOGNITION  = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,8 +43,19 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         setContentView(R.layout.activity_main);
         initToolbar();
         initBottomNavMenu();
+        checkRecogPermission();
     }
 
+    public boolean checkRecogPermission()
+    {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+        != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS,
+                    REQUEST_RECOGNITION);
+        }
+        return true;
+    }
     // 상단 툴바 초기설정 메소드
     public void initToolbar()
     {
