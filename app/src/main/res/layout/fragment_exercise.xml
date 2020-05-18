@@ -4,19 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
     tools:context=".ui.exercise.ExerciseFragment">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/holo_purple"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
         android:text="This is Exercise Fragment"
         android:textSize="24sp" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="303dp"
-        android:src="@drawable/ic_home_black_24dp" />
 
 </FrameLayout>

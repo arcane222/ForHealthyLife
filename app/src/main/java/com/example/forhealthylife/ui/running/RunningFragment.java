@@ -34,20 +34,20 @@ public class RunningFragment extends Fragment implements SensorEventListener
     private SensorManager sensorManager;
     private Sensor stepCountSensor;
 
-
     private int mSteps = 0;
     private int mCounterSteps = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
         runningViewModel = ViewModelProviders.of(this).get(RunningViewModel.class);
         View root = inflater.inflate(R.layout.fragment_running, container, false);
 
         //센서 연결[걸음수 센서를 이용한 흔듬 감지]
         sensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
         //accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if(stepCountSensor == null)
         {
             Toast.makeText(getContext(),"No Step Detect Sensor",Toast.LENGTH_SHORT).show();
@@ -57,7 +57,8 @@ public class RunningFragment extends Fragment implements SensorEventListener
         mStepNum = root.findViewById(R.id.stepNumView);
 
         //초기화 버튼 : 다시 숫자를 0으로 만들어준다.
-        mReset.setOnClickListener(new View.OnClickListener() {
+        mReset.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 mSteps = 0;
@@ -69,17 +70,21 @@ public class RunningFragment extends Fragment implements SensorEventListener
         return root;
     }
 
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
-        if(stepCountSensor !=null){
+        if(stepCountSensor !=null)
+        {
             //센서의 속도 설정
             sensorManager.registerListener(this,stepCountSensor,SensorManager.SENSOR_DELAY_GAME);
         }
     }
 
-    public void onStop(){
+    public void onStop()
+    {
         super.onStop();
-        if(sensorManager!=null){
+        if(sensorManager!=null)
+        {
             sensorManager.unregisterListener(this);
         }
     }
@@ -89,9 +94,9 @@ public class RunningFragment extends Fragment implements SensorEventListener
     {
         if(event.sensor.getType() == Sensor.TYPE_STEP_COUNTER)
         {
-
             //stepcountsenersor는 앱이 꺼지더라도 초기화 되지않는다. 그러므로 우리는 초기값을 가지고 있어야한다.
-            if (mCounterSteps < 1) {
+            if (mCounterSteps < 1)
+            {
                 // initial value
                 mCounterSteps = (int) event.values[0];
             }

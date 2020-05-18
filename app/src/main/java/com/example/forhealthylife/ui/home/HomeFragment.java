@@ -47,10 +47,12 @@ public class HomeFragment extends Fragment
         Button runFragBtn = (Button) root.findViewById(R.id.btn_run);
         Button eatFragBtn = (Button) root.findViewById(R.id.btn_eat);
         Button exerciseFragBtn = (Button) root.findViewById(R.id.btn_exercise);
+        Button weightFragBtn = (Button) root.findViewById(R.id.btn_weight);
 
         runFragBtn.setOnClickListener(onHomeFragBtnClickListener);
         eatFragBtn.setOnClickListener(onHomeFragBtnClickListener);
         exerciseFragBtn.setOnClickListener(onHomeFragBtnClickListener);
+        weightFragBtn.setOnClickListener(onHomeFragBtnClickListener);
 
         return root;
     }

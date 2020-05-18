@@ -15,6 +15,7 @@ import com.example.forhealthylife.ui.eating.SoupFragment;
 import com.example.forhealthylife.ui.exercise.ExerciseFragment;
 import com.example.forhealthylife.ui.home.HomeFragment;
 import com.example.forhealthylife.ui.running.RunningFragment;
+import com.example.forhealthylife.ui.weight.WeightFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -43,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         setContentView(R.layout.activity_main);
         initToolbar();
         initBottomNavMenu();
-        checkRecogPermission();
+        checkRecognitionPermission();
     }
 
-    public boolean checkRecogPermission()
+    public boolean checkRecognitionPermission()
     {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
         != PackageManager.PERMISSION_GRANTED)
@@ -123,24 +124,28 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         Fragment eatingFragment = new EatingFragment();
         Fragment runningFragment = new RunningFragment();
         Fragment exerciseFragment = new ExerciseFragment();
+        Fragment weightFragment = new WeightFragment();
 
-        FragmentTransaction menuFt = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction menuFragTransaction = getSupportFragmentManager().beginTransaction();
         switch(v.getId())
         {
             case R.id.btn_run:
-                menuFt.replace(R.id.fragment_home, runningFragment);
+                menuFragTransaction.replace(R.id.fragment_home, runningFragment);
                 break;
             case R.id.btn_eat:
-                menuFt.replace(R.id.fragment_home, eatingFragment);
+                menuFragTransaction.replace(R.id.fragment_home, eatingFragment);
                 break;
             case R.id.btn_exercise:
-                menuFt.replace(R.id.fragment_home, exerciseFragment);
+                menuFragTransaction.replace(R.id.fragment_home, exerciseFragment);
+                break;
+            case R.id.btn_weight:
+                menuFragTransaction.replace(R.id.fragment_home, weightFragment);
                 break;
             default:
                 break;
         }
-        menuFt.addToBackStack(null);
-        menuFt.commit();
+        menuFragTransaction.addToBackStack(null);
+        menuFragTransaction.commit();
     }
 
     @Override
