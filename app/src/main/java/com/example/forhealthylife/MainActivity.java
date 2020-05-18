@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
             case R.id.btn_eat:
                 menuFt.replace(R.id.fragment_home, eatingFragment);
                 break;
-            case R.id.btn_exe:
+            case R.id.btn_exercise:
                 menuFt.replace(R.id.fragment_home, exerciseFragment);
                 break;
             default:

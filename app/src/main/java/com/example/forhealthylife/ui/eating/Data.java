@@ -93,6 +93,7 @@ public class Data {
     };
 
     static String[] fastFoodName = {
+            "핫도그  (180Kcal)",
             "3분 짜장  (370Kcal)",
             "3분 카레  (175Kcal)",
             "크림스프  (330Kcal)",
@@ -100,13 +101,13 @@ public class Data {
             "닭다리 1조각  (180Kcal)",
             "치킨너겟 2조각  (100Kcal)",
             "감자튀김  (320Kcal)",
-            "피자 1조각  (320Kcal)",
-            "핫도그  (180Kcal)"
+            "피자 1조각  (320Kcal)"
     };
 
-    static Integer[] fastFoodKcal = {370,175,330,350,180,100,320,320,180};
+    static Integer[] fastFoodKcal = {180,370,175,330,350,180,100,320,320};
 
     static Integer[] fastFoodImage = {
+            R.drawable.ic_hotdog,
             R.drawable.ic_home,
             R.drawable.ic_home,
             R.drawable.ic_home,
@@ -115,7 +116,6 @@ public class Data {
             R.drawable.ic_home,
             R.drawable.ic_home,
             R.drawable.ic_home,
-            R.drawable.ic_home
     };
 
     static String[] drinkName = {

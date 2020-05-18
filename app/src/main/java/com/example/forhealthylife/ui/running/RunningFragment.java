@@ -34,6 +34,7 @@ public class RunningFragment extends Fragment implements SensorEventListener
     private SensorManager sensorManager;
     private Sensor stepCountSensor;
 
+
     private int mSteps = 0;
     private int mCounterSteps = 0;
 
@@ -46,7 +47,7 @@ public class RunningFragment extends Fragment implements SensorEventListener
         //센서 연결[걸음수 센서를 이용한 흔듬 감지]
         sensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
         //accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         if(stepCountSensor == null)
         {
             Toast.makeText(getContext(),"No Step Detect Sensor",Toast.LENGTH_SHORT).show();
@@ -61,7 +62,7 @@ public class RunningFragment extends Fragment implements SensorEventListener
             public void onClick(View v) {
                 mSteps = 0;
                 mCounterSteps = 0;
-                mStepNum.setText("Step Count : " + Integer.toString(mSteps));
+                mStepNum.setText(Integer.toString(mSteps));
             }
         });
 

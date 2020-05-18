@@ -1,6 +1,5 @@
 package com.example.forhealthylife.ui.home;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,17 +8,10 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.forhealthylife.MainActivity;
 import com.example.forhealthylife.R;
-import com.example.forhealthylife.ui.eating.EatingFragment;
-import com.example.forhealthylife.ui.exercise.ExerciseFragment;
-import com.example.forhealthylife.ui.running.RunningFragment;
-
-import java.util.Stack;
 
 public class HomeFragment extends Fragment
 {
@@ -54,7 +46,7 @@ public class HomeFragment extends Fragment
         /* Set Button Click Listener in running, eating, exercise button*/
         Button runFragBtn = (Button) root.findViewById(R.id.btn_run);
         Button eatFragBtn = (Button) root.findViewById(R.id.btn_eat);
-        Button exerciseFragBtn = (Button) root.findViewById(R.id.btn_exe);
+        Button exerciseFragBtn = (Button) root.findViewById(R.id.btn_exercise);
 
         runFragBtn.setOnClickListener(onHomeFragBtnClickListener);
         eatFragBtn.setOnClickListener(onHomeFragBtnClickListener);
