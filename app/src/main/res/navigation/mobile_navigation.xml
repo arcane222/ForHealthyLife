@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/bottom_menu_home"
-        android:name="com.example.forhealthylife.ui.home.HomeFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
 
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/bottom_menu_schedule"
-        android:name="com.example.forhealthylife.ui.schedule.ScheduleFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.schedule.ScheduleFragment"
         android:label="@string/title_schedule"
         tools:layout="@layout/fragment_schedule" >
 
@@ -23,35 +23,35 @@
 
     <fragment
         android:id="@+id/bottom_menu_community"
-        android:name="com.example.forhealthylife.ui.community.CommunityFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.community.CommunityFragment"
         android:label="@string/title_community"
         tools:layout="@layout/fragment_community" >
     </fragment>
 
     <fragment
         android:id="@+id/side_menu_profile"
-        android:name="com.example.forhealthylife.ui.profile.ProfileFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.profile.ProfileFragment"
         android:label="@string/side_menu_profile"
         tools:layout="@layout/fragment_profile" >
     </fragment>
 
     <fragment
         android:id="@+id/side_menu_analysis"
-        android:name="com.example.forhealthylife.ui.analysis.AnalysisFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.analysis.AnalysisFragment"
         android:label="@string/side_menu_analysis"
         tools:layout="@layout/fragment_analysis" >
     </fragment>
 
     <fragment
         android:id="@+id/side_menu_notice"
-        android:name="com.example.forhealthylife.ui.notice.NoticeFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.notice.NoticeFragment"
         android:label="@string/side_menu_notice"
         tools:layout="@layout/fragment_notice" >
     </fragment>
 
     <fragment
         android:id="@+id/side_menu_settings"
-        android:name="com.example.forhealthylife.ui.settings.SettingsFragment"
+        android:name="com.team_comfortable.forhealthylife.ui.settings.SettingsFragment"
         android:label="@string/side_menu_settings"
         tools:layout="@layout/fragment_settings" >
     </fragment>

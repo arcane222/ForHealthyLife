@@ -1,0 +1,153 @@
+package com.team_comfortable.forhealthylife.ui.eating;
+
+import androidx.lifecycle.ViewModelProviders;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.team_comfortable.forhealthylife.R;
+
+public class RiceFragment extends Fragment {
+
+    private EatingViewModel eatingViewModel;
+
+    public static RiceFragment newInstance() {
+        return new RiceFragment();
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.fragment_rice, container, false);
+        ListView listview = view.findViewById(R.id.riceName);
+        CustomList adapter = new CustomList((Activity) view.getContext());
+        listview.setAdapter(adapter);
+       //listview.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_checked, Data.riceName));
+        /*mWordSelListener = (MainActivity) getActivity();
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mWordSelListener.onWordSelected(position);
+            }
+        });*/
+
+        /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mEatModel.setInteger(position);
+            }
+        });*/
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+        eatingViewModel = ViewModelProviders.of(getActivity()).get(EatingViewModel.class);
+    }
+
+    public class CustomList extends ArrayAdapter<String>
+    {
+        private final Activity context;
+
+        public CustomList(Activity context)
+        {
+            super(context, R.layout.food_item, Data.riceName);
+            this.context = context;
+        }
+
+        public View getView(int position, View view, ViewGroup parent)
+        {
+            final int pos = position;
+            eatingViewModel.setVersion(0);
+
+            LayoutInflater inflater = context.getLayoutInflater();
+            View rowView = inflater.inflate(R.layout.food_item, null, true);
+
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.riceImage);
+            TextView foodName = (TextView) rowView.findViewById(R.id.riceName);
+            final TextView amount = (TextView) rowView.findViewById(R.id.foodAmount);
+            Button incrButton = (Button) rowView.findViewById(R.id.incrAmountBtn);
+            Button decrButton = (Button) rowView.findViewById(R.id.decrAmountBtn);
+
+            imageView.setImageResource(Data.riceImage[position]);
+            foodName.setText(Data.riceName[position]);
+            amount.setText(Data.amountCount[position]+"");
+
+            incrButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    eatingViewModel.setInteger(pos);
+                    eatingViewModel.setOperation(1);
+                    if(Integer.parseInt(amount.getText().toString()) < 9){
+                       amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) + 1));
+                       eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
+                    }
+
+                }
+            });
+            decrButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    eatingViewModel.setInteger(pos);
+                    eatingViewModel.setOperation(0);
+                    if(Integer.parseInt(amount.getText().toString()) > 0) {
+                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) - 1));
+                        eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
+                    }
+                }
+            });
+
+            /*name.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    eatingViewModel.setInteger(pos);
+                    Toast.makeText(context, pos + "번째 이미지 선택", Toast.LENGTH_SHORT).show();
+
+                    EatingFragment eatF = new EatingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("position",pos);
+                    eatF.setArguments(bundle);
+                }
+            });*/
+            return rowView;
+        }
+    }
+
+    /*
+    @Override
+    public void onBackKey() {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.setOnKeyBackPressedListener(null);
+        activity.onBackPressed();
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((MainActivity)context).setOnKeyBackPressedListener(this);
+    }
+    */
+
+
+}
