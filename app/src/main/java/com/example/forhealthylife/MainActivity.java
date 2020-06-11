@@ -12,7 +12,11 @@ import com.example.forhealthylife.ui.eating.FastFoodFragment;
 import com.example.forhealthylife.ui.eating.RiceFragment;
 import com.example.forhealthylife.ui.eating.SideDishFragment;
 import com.example.forhealthylife.ui.eating.SoupFragment;
+import com.example.forhealthylife.ui.exercise.BackFragment;
+import com.example.forhealthylife.ui.exercise.ChestFragment;
+import com.example.forhealthylife.ui.exercise.CoreFragment;
 import com.example.forhealthylife.ui.exercise.ExerciseFragment;
+import com.example.forhealthylife.ui.exercise.StretchingFragment;
 import com.example.forhealthylife.ui.home.HomeFragment;
 import com.example.forhealthylife.ui.running.RunningFragment;
 import com.example.forhealthylife.ui.weight.WeightFragment;
@@ -105,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 SideDishFragment sidedishFragment = new SideDishFragment();
                 transaction.replace(R.id.eat_list_layout, sidedishFragment);
                 break;
-           case 3:
+            case 3:
                 FastFoodFragment fastfoodFragment = new FastFoodFragment();
                 transaction.replace(R.id.eat_list_layout, fastfoodFragment);
                 break;
@@ -113,6 +117,23 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 DrinkFragment drinkFragment = new DrinkFragment();
                 transaction.replace(R.id.eat_list_layout, drinkFragment);
                 break;
+            case 5:
+                StretchingFragment stretchFragment = new StretchingFragment();
+                transaction.replace(R.id.exercise_list_layout, stretchFragment);
+                break;
+            case 6:
+                ChestFragment chestFragment = new ChestFragment();
+                transaction.replace(R.id.exercise_list_layout, chestFragment);
+                break;
+            case 7:
+                BackFragment backFragment = new BackFragment();
+                transaction.replace(R.id.exercise_list_layout, backFragment);
+                break;
+            case 8:
+                CoreFragment coreFragment = new CoreFragment();
+                transaction.replace(R.id.exercise_list_layout, coreFragment);
+                break;
+
         }
         transaction.addToBackStack(null);
         transaction.commit();
