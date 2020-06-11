@@ -3,12 +3,10 @@ package com.team_comfortable.forhealthylife;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -40,11 +38,16 @@ public class LoginActivity extends AppCompatActivity
 
 
         mAuth = FirebaseAuth.getInstance();
-        /*if (mAuth.getCurrentUser() != null) {
+        FirebaseUser currUser = mAuth.getCurrentUser();
+        if (currUser != null) {
             Intent intent = new Intent(getApplication(), MainActivity.class);
+            intent.putExtra("userName", currUser.getDisplayName());
+            intent.putExtra("userEmail", currUser.getEmail());
+            intent.putExtra("userId", currUser.getUid());
+            intent.putExtra("userImgUrl", String.valueOf(currUser.getPhotoUrl()));
             startActivity(intent);
             finish();
-        }*/
+        }
 
         signInButton = findViewById(R.id.signInButton);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -106,8 +109,10 @@ public class LoginActivity extends AppCompatActivity
     private void updateUI(FirebaseUser user, GoogleSignInAccount account) { //update ui code here
         if (user != null) {
             Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("username", account.getDisplayName());
-            intent.putExtra("user_img_url", String.valueOf(account.getPhotoUrl()));
+            intent.putExtra("userName", user.getDisplayName());
+            intent.putExtra("userEmail", user.getEmail());
+            intent.putExtra("userId", user.getUid());
+            intent.putExtra("userImgUrl", String.valueOf(user.getPhotoUrl()));
             startActivity(intent);
             finish();
         }

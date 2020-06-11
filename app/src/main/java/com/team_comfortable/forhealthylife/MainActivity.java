@@ -1,18 +1,16 @@
 package com.team_comfortable.forhealthylife;
 
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-//import com.bumptech.glide.Glide;
-import com.team_comfortable.forhealthylife.R;
+import com.bumptech.glide.Glide;
 import com.team_comfortable.forhealthylife.ui.eating.DrinkFragment;
 import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
 import com.team_comfortable.forhealthylife.ui.eating.FastFoodFragment;
@@ -24,20 +22,9 @@ import com.team_comfortable.forhealthylife.ui.exercise.ExerciseFragment;
 import com.team_comfortable.forhealthylife.ui.home.HomeFragment;
 import com.team_comfortable.forhealthylife.ui.running.RunningFragment;
 import com.team_comfortable.forhealthylife.ui.weight.WeightFragment;
-import com.team_comfortable.forhealthylife.ui.eating.DrinkFragment;
-import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
-import com.team_comfortable.forhealthylife.ui.eating.FastFoodFragment;
-import com.team_comfortable.forhealthylife.ui.eating.RiceFragment;
-import com.team_comfortable.forhealthylife.ui.eating.SideDishFragment;
-import com.team_comfortable.forhealthylife.ui.eating.SoupFragment;
-//import com.team_comfortable.forhealthylife.ui.exercise.BackFragment;
 import com.team_comfortable.forhealthylife.ui.exercise.ChestFragment;
 import com.team_comfortable.forhealthylife.ui.exercise.CoreFragment;
-import com.team_comfortable.forhealthylife.ui.exercise.ExerciseFragment;
 import com.team_comfortable.forhealthylife.ui.exercise.StretchingFragment;
-import com.team_comfortable.forhealthylife.ui.home.HomeFragment;
-import com.team_comfortable.forhealthylife.ui.running.RunningFragment;
-import com.team_comfortable.forhealthylife.ui.weight.WeightFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -56,7 +43,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClickListener
 {
     private AppBarConfiguration mAppBarConfiguration;
-    //private String[] REQUEST_PERMISSIONS={ Manifest.permission.ACTI};
+    private String[] REQUEST_PERMISSIONS={ Manifest.permission.ACTIVITY_RECOGNITION };
     private static final int REQUEST_RECOGNITION  = 1;
 
     @Override
@@ -67,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
 
         initToolbar();
         initBottomNavMenu();
-        //checkRecognitionPermission();
+        checkRecognitionPermission();
         setProfile();
     }
 
@@ -75,28 +62,33 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     {
         NavigationView navigationView = (NavigationView) findViewById(R.id.side_nav_view);
         View header = navigationView.getHeaderView(0);
-        TextView userNameView = (TextView) header.findViewById(R.id.username);
+
+        TextView userNameView = (TextView) header.findViewById(R.id.userName);
+        TextView userEmailView = (TextView) header.findViewById(R.id.userEmail);
+        TextView userIdView = (TextView) header.findViewById(R.id.userId);
         ImageView userImgView = (ImageView) header.findViewById(R.id.user_img);
 
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("username");
-        String userImgUrl = intent.getStringExtra("user_img_url");
+        String userName = intent.getStringExtra("userName");
+        String userEmail = intent.getStringExtra("userEmail");
+        String userId = intent.getStringExtra("userId");
+        String userImgUrl = intent.getStringExtra("userImgUrl");
 
         userNameView.setText("사용자 : " + userName);
-        //Glide.with(this).load(userImgUrl).into(userImgView);
+        userEmailView.setText("이메일 : " + userEmail);
+        userIdView.setText("사용자UID : " + userId);
+        Glide.with(this).load(userImgUrl).into(userImgView);
     }
 
-    /*public boolean checkRecognitionPermission()
+    public boolean checkRecognitionPermission()
     {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
         != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS,
-                    REQUEST_RECOGNITION);
+            ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS, REQUEST_RECOGNITION);
         }
         return true;
-    }*/
-
+    }
 
 
     // 상단 툴바 초기설정 메소드
