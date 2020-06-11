@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "496295341580-lsta3d9qur9njk67upmdvo26ec80aa43.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team_comfortable.forhealthylife",
+            "certificate_hash": "4d066548a4cade9f75b9fa23d0bd5cbed4af6f56"
+          }
+        },
+        {
           "client_id": "496295341580-pdd3l8td7bdtqok6kqmeotk05dmu7njr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
