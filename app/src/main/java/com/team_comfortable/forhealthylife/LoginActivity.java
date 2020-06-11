@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String toastStr = "로그인에 성공하였습니다. \n" + "사용자: " + user.getDisplayName() + "님";
+                            String toastStr = "로그인에 성공하였습니다. \n" + "사용자: " + user.getDisplayName() + " 님";
                             Toast.makeText(getApplicationContext(), toastStr, Toast.LENGTH_SHORT).show();
                             updateUI(user);
                         } else {

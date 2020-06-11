@@ -53,7 +53,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClickListener
 {
     private AppBarConfiguration mAppBarConfiguration;
-    private String[] REQUEST_PERMISSIONS={ Manifest.permission.ACTIVITY_RECOGNITION };
+    //private String[] REQUEST_PERMISSIONS={ Manifest.permission.ACTIVITY_RECOGNITION };
     private static final int REQUEST_RECOGNITION  = 1;
 
     @Override
@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
 
     public boolean checkRecognitionPermission()
     {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
+        /*if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
         != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS, REQUEST_RECOGNITION);
-        }
+        }*/
         return true;
     }
 

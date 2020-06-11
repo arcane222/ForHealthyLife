@@ -15,9 +15,8 @@
 
     <fragment
         android:id="@+id/bottom_menu_schedule"
-        android:name="com.team_comfortable.forhealthylife.ui.schedule.ScheduleFragment"
-        android:label="@string/title_schedule"
-        tools:layout="@layout/fragment_schedule" >
+        android:name="com.team_comfortable.forhealthylife.ui.calendar.fragment.CalendarFragment"
+        android:label="@string/title_schedule">
 
     </fragment>
 
