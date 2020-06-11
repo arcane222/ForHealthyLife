@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 mAuth.signOut(); // Firebase Sign out
                 mGoogleSignInClient.signOut(); // Google Sign out
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Toast.makeText(getApplicationContext(), "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }
