@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/side_menu_layout"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="280dp"
     android:background="@android:color/holo_blue_light"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
         android:text="LogOut"
         android:textColor="@color/fui_bgTwitter" />
