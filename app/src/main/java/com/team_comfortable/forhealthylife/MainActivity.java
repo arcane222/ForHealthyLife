@@ -19,6 +19,7 @@ import com.team_comfortable.forhealthylife.ui.eating.FastFoodFragment;
 import com.team_comfortable.forhealthylife.ui.eating.RiceFragment;
 import com.team_comfortable.forhealthylife.ui.eating.SideDishFragment;
 import com.team_comfortable.forhealthylife.ui.eating.SoupFragment;
+import com.team_comfortable.forhealthylife.ui.exercise.BackFragment;
 import com.team_comfortable.forhealthylife.ui.exercise.ExerciseFragment;
 import com.team_comfortable.forhealthylife.ui.home.HomeFragment;
 import com.team_comfortable.forhealthylife.ui.running.RunningFragment;
@@ -163,10 +164,10 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 ChestFragment chestFragment = new ChestFragment();
                 transaction.replace(R.id.exercise_list_layout, chestFragment);
                 break;
-            /*case 7:
+            case 7:
                 BackFragment backFragment = new BackFragment();
                 transaction.replace(R.id.exercise_list_layout, backFragment);
-                break;*/
+                break;
             case 8:
                 CoreFragment coreFragment = new CoreFragment();
                 transaction.replace(R.id.exercise_list_layout, coreFragment);

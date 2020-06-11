@@ -37,7 +37,7 @@ public class CoreFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                exerciseViewModel.setInteger(position);
+                exerciseViewModel.setInteger(position+9);
             }
         });
         return root;

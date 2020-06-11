@@ -66,24 +66,6 @@ public class ExerciseFragment extends Fragment {
                 mListSelListener.onListSelected(position+5);
             }
         });
-
-        /*
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                imageId.add(R.drawable.image1);
-                imageId.add(R.drawable.image2);
-                v_fllipper.setAdapter(new galleryAdapter(getActivity()));
-
-                v_fllipper.setFlipInterval(1000);
-
-                v_fllipper.startFlipping();
-            }
-        });*/
-
-
-
-
         return root;
     }
 
@@ -93,7 +75,7 @@ public class ExerciseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
 
-        exerciseViewModel.getInteger().observe(this, new Observer<Integer>() {
+        exerciseViewModel.getInteger().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
 
@@ -110,22 +92,65 @@ public class ExerciseFragment extends Fragment {
         imageId.clear();
         switch(position){
             case 0:
-                for(int i =0; i < DataExercise.stretchImage.length; i++){
-                    imageId.add(DataExercise.stretchImage[i]);
+                for(int i =0; i < DataExercise.bowImage.length; i++){
+                    imageId.add(DataExercise.bowImage[i]);
                 }
                 break;
             case 1:
-                imageId.add(R.drawable.childe_stretching1);
-                imageId.add(R.drawable.childe_stretching2);
-                imageId.add(R.drawable.childe_stretching3);
+                for(int i =0; i < DataExercise.childeImage.length; i++){
+                    imageId.add(DataExercise.childeImage[i]);
+                }
                 break;
             case 2:
-                imageId.add(R.drawable.twist_stretching1);
-                imageId.add(R.drawable.twist_stretching2);
-                imageId.add(R.drawable.twist_stretching3);
-                imageId.add(R.drawable.twist_stretching4);
+                for(int i =0; i < DataExercise.twistImage.length; i++){
+                    imageId.add(DataExercise.twistImage[i]);
+                }
                 break;
-
+            case 3:
+                for(int i =0; i < DataExercise.benchImage.length; i++){
+                    imageId.add(DataExercise.benchImage[i]);
+                }
+                break;
+            case 4:
+                for(int i =0; i < DataExercise.dumbbellImage.length; i++){
+                    imageId.add(DataExercise.dumbbellImage[i]);
+                }
+                break;
+            case 5:
+                for(int i =0; i < DataExercise.dipsImage.length; i++){
+                    imageId.add(DataExercise.dipsImage[i]);
+                }
+                break;
+            case 6:
+                for(int i =0; i < DataExercise.pullupImage.length; i++){
+                    imageId.add(DataExercise.pullupImage[i]);
+                }
+                break;
+            case 7:
+                for(int i =0; i < DataExercise.latImage.length; i++){
+                    imageId.add(DataExercise.latImage[i]);
+                }
+                break;
+            case 8:
+                for(int i =0; i < DataExercise.barbellrowImage.length; i++){
+                    imageId.add(DataExercise.barbellrowImage[i]);
+                }
+                break;
+            case 9:
+                for(int i =0; i < DataExercise.situpImage.length; i++){
+                    imageId.add(DataExercise.situpImage[i]);
+                }
+                break;
+            case 10:
+                for(int i =0; i < DataExercise.kneeImage.length; i++){
+                    imageId.add(DataExercise.kneeImage[i]);
+                }
+                break;
+            case 11:
+                for(int i =0; i < DataExercise.climberImage.length; i++){
+                    imageId.add(DataExercise.climberImage[i]);
+                }
+                break;
         }
 
         v_fllipper.setAdapter(new galleryAdapter(getActivity()));

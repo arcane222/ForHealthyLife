@@ -31,12 +31,12 @@ public class ChestFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_chest, container, false);
         ListView listview = root.findViewById(R.id.chestName);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, com.team_comfortable.forhealthylife.ui.exercise.DataExercise.chestName);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, DataExercise.chestName);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                exerciseViewModel.setInteger(position);
+                exerciseViewModel.setInteger(position+3);
             }
         });
 
