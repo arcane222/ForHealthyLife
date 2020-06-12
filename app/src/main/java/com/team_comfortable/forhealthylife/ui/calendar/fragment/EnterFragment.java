@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,19 +31,25 @@ import java.util.Map;
 
 public class EnterFragment extends Fragment {
 
-    // TODO: Rename and change types and number of parameters
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
     private EditText EditSch, EditDate;
-    private boolean check;
-    public String sch,date;
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    public void initFirebase()
+    {
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
     }
 
     @Override
@@ -52,78 +59,75 @@ public class EnterFragment extends Fragment {
         Button EnterBtn = (Button) root.findViewById(R.id.btn_enter);
         EditSch = (EditText) root.findViewById(R.id.edit_sch);
         EditDate = (EditText) root.findViewById(R.id.edit_date);
-
-
-
+        initFirebase();
         EnterBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
-                sch = EditSch.getText().toString();
-                date = EditDate.getText().toString();
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                final FirebaseUser user = mAuth.getCurrentUser();
-                mDatabase = FirebaseDatabase.getInstance();
-                mReference = mDatabase.getReference();
-                DatabaseReference userListDB = mReference.child("UserList").child(user.getUid()).child("userSchedule");
-                Map<String, Object> map = new HashMap<String, Object>();
-                if(checkSch(user)){
-                    map.put(date, sch);
-                    userListDB.updateChildren(map);
+            public void onClick(View v)
+            {
+                String schedule = EditSch.getText().toString();
+                String date = EditDate.getText().toString();
+                if(!checkFormat(date)) {
+                    Toast.makeText(getContext(), "날짜형식을 맞춰주세요.(YYMMDD)", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    map.put(date, check);
-                    userListDB.updateChildren(map);
+                    setScheduleInDB(date, schedule);
                 }
             }
         });
-
         return root;
     }
 
-   /* private void registInDB(final FirebaseUser user)
+    public void setScheduleInDB(final String date, final String schedule)
     {
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference();
-        final DatabaseReference userListDB = mReference.child("UserList");
-        userListDB.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference dbReference = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
+        dbReference.addListenerForSingleValueEvent(new ValueEventListener()
+        {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                boolean isExist = false;
+                Map<String, Object> map = new HashMap<String, Object>();
+                String tmp = "";
+
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
-                    String value = data.getValue().toString();
-                    if(value.equals(user.getUid()))
+                    String key= data.getKey()+"";
+                    Log.i("tmp", key+"");
+                    if(key.equals(date))
                     {
-                        isExist = true;
+                        tmp = data.getValue().toString() + "/" + schedule;
                         break;
                     }
-                }*/
-    public boolean checkSch(final FirebaseUser user){
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference();
-        final DatabaseReference userListDB = mReference.child("UserList").child(user.getUid()).child("userSchedule");
-        userListDB.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot data : dataSnapshot.getChildren()) {
-                    String value = data.getKey();
-                    if(value.equals(date))
-                    {
-                        check = false;
-                        break;
-                    }
-                    else{
-                        check = true;
-                    }
+                    tmp = schedule;
                 }
+                map.put(date, tmp);
+                dbReference.updateChildren(map);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-        return check;
+    }
+
+    public boolean checkFormat(String data)
+    {
+        if(data.length() != 6) return false;
+        else
+        {
+            for(int i = 0; i < data.length(); i++)
+            {
+                if(!Character.isDigit(data.charAt(i))) return false;
+            }
+        }
+        int yymmdd = Integer.valueOf(data);
+        yymmdd = yymmdd - (yymmdd / 1000000) * 100000;
+        yymmdd = yymmdd - (yymmdd / 10000) * 10000;
+        int month = yymmdd / 100;
+        yymmdd = yymmdd - (yymmdd / 1000) * 1000;
+        yymmdd = yymmdd - (yymmdd / 100) * 100;
+        int day = yymmdd;
+        Boolean check = ((month>= 1 && month <= 12) && (day >= 1 && day <= 31));
+        if(!check) return false;
+        return true;
     }
 }
