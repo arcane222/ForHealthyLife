@@ -65,7 +65,9 @@
                 android:id="@+id/eat_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?android:attr/windowBackground" />
+                android:background="?android:attr/windowBackground" >
+
+            </ListView>
         </FrameLayout>
 
 

@@ -17,9 +17,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.MainActivity;
 import com.team_comfortable.forhealthylife.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class EatingFragment extends Fragment
@@ -28,6 +39,7 @@ public class EatingFragment extends Fragment
     private EatingViewModel eatingViewModel;
     private TextView kcalView;
     private int kcalSum, pos, opr, ver;
+
 
 
     public interface OnListSelectedListener
@@ -74,6 +86,8 @@ public class EatingFragment extends Fragment
 
             }
         });*/
+
+
         return root;
     }
 /*
@@ -196,6 +210,7 @@ public class EatingFragment extends Fragment
                 }
             }
         });
+
     }
 
     public void onFoodBtnClicked(View view)

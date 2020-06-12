@@ -5,12 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.calendar.adapter.CalendarAdapter;
 import com.team_comfortable.forhealthylife.ui.calendar.util.Keys;
@@ -39,6 +43,19 @@ public class CalendarFragment extends Fragment
         initView(rootView);
         initSet();
         setRecycler();
+        FloatingActionButton FloatingBtn = (FloatingActionButton) rootView.findViewById(R.id.btn_floating);
+        FloatingBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                EnterFragment enterFragment = new EnterFragment();
+                transaction.replace(R.id.fragment_calendar, enterFragment);
+                transaction.addToBackStack(this.getClass().getSimpleName());
+                transaction.commit();
+            }
+        });
+
         return rootView;
     }
 
