@@ -1,23 +1,35 @@
 package com.team_comfortable.forhealthylife.ui.calendar.adapter;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.R;
+import com.team_comfortable.forhealthylife.ui.calendar.fragment.EnterFragment;
 import com.team_comfortable.forhealthylife.ui.calendar.model.CalendarHeader;
 import com.team_comfortable.forhealthylife.ui.calendar.model.Day;
 import com.team_comfortable.forhealthylife.ui.calendar.model.EmptyDay;
 import com.team_comfortable.forhealthylife.ui.calendar.model.ViewModel;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CalendarAdapter extends RecyclerView.Adapter
 {
@@ -27,8 +39,18 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
     private List<Object> mCalendarList;
 
+    public interface OnSelectedListener
+    {
+        public void onSelected(int position);
+    }
+
+    OnSelectedListener mSelListener;
+
+
+
     public CalendarAdapter(List<Object> calendarList) {
         mCalendarList = calendarList;
+
     }
 
     public void setCalendarList(List<Object> calendarList)
@@ -115,6 +137,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
             DayViewHolder holder = (DayViewHolder) viewHolder;
             Object item = mCalendarList.get(position);
             Day model = new Day();
+
             if (item instanceof Calendar) {
                 // Model에 Calendar값을 넣어서 몇일인지 데이터 넣기
                 model.setCalendar((Calendar) item);
@@ -178,6 +201,8 @@ public class CalendarAdapter extends RecyclerView.Adapter
         };
     }
 
+
+
     // TODO : item_day와 매칭
     private class DayViewHolder extends RecyclerView.ViewHolder
     {// 요일 입 ViewHolder
@@ -188,11 +213,19 @@ public class CalendarAdapter extends RecyclerView.Adapter
         {
             super(itemView);
             initView(itemView);
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
         }
 
         public void initView(View v){
             itemDay = (TextView)v.findViewById(R.id.item_day);
-            //dayText = (TextView)v.findViewById(R.id.day_text);
+            dayText = (TextView)v.findViewById(R.id.day_text);
         }
 
         public void bind(ViewModel model)

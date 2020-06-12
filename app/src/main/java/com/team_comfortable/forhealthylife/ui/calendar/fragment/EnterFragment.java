@@ -92,7 +92,6 @@ public class EnterFragment extends Fragment {
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
                     String key= data.getKey()+"";
-                    Log.i("tmp", key+"");
                     if(key.equals(date))
                     {
                         tmp = data.getValue().toString() + "/" + schedule;
