@@ -65,14 +65,15 @@ public class EnterFragment extends Fragment {
                 final FirebaseUser user = mAuth.getCurrentUser();
                 mDatabase = FirebaseDatabase.getInstance();
                 mReference = mDatabase.getReference();
-                DatabaseReference userListDB = mReference.child("UserList");
+                DatabaseReference userListDB = mReference.child("UserList").child(user.getUid()).child("userSchedule");
                 Map<String, Object> map = new HashMap<String, Object>();
                 if(checkSch(user)){
                     map.put(date, sch);
-                    userListDB.child(user.getUid()).updateChildren(map);
+                    userListDB.updateChildren(map);
                 }
                 else{
-
+                    map.put(date, check);
+                    userListDB.updateChildren(map);
                 }
             }
         });
@@ -102,13 +103,13 @@ public class EnterFragment extends Fragment {
     public boolean checkSch(final FirebaseUser user){
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
-        final DatabaseReference userListDB = mReference.child("UserList");
+        final DatabaseReference userListDB = mReference.child("UserList").child(user.getUid()).child("userSchedule");
         userListDB.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
-                    String value = data.getValue().toString();
+                    String value = data.getKey();
                     if(value.equals(date))
                     {
                         check = false;

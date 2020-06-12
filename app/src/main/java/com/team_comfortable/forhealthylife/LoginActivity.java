@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity
                 boolean isExist = false;
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
-                    String value = data.getValue().toString();
+                    String value = data.getKey();
                     if(value.equals(user.getUid()))
                     {
                         isExist = true;
@@ -170,6 +170,8 @@ public class LoginActivity extends AppCompatActivity
                     map.put("userName", user.getDisplayName());
                     map.put("userEmail", user.getEmail());
                     map.put("userImgUrl", user.getPhotoUrl().toString());
+                    map.put("userSchedule", "");
+                    userListDB.child(user.getUid()).updateChildren(map);
                     userInfo.put(user.getUid(), map);
                     userListDB.updateChildren(userInfo);
                 }
