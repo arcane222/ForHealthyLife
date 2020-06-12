@@ -1,5 +1,6 @@
 package com.team_comfortable.forhealthylife.ui.calendar.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -181,7 +182,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
     private class DayViewHolder extends RecyclerView.ViewHolder
     {// 요일 입 ViewHolder
 
-        TextView itemDay;
+        TextView itemDay, dayText;
 
         public DayViewHolder(@NonNull View itemView)
         {
@@ -191,6 +192,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
         public void initView(View v){
             itemDay = (TextView)v.findViewById(R.id.item_day);
+            //dayText = (TextView)v.findViewById(R.id.day_text);
         }
 
         public void bind(ViewModel model)
@@ -199,6 +201,12 @@ public class CalendarAdapter extends RecyclerView.Adapter
             String day = ((Day)model).getDay();
             // 일자 값 View에 보이게하기
             itemDay.setText(day);
+           // dayText.setBackgroundColor(Color.RED);
+           // dayText.setText(day);
         };
+
+        public void onTouch(View v){
+
+        }
     }
 }
