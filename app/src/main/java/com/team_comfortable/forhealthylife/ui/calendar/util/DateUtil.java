@@ -14,12 +14,15 @@ public class DateUtil
     public final static String MIN_FORMAT = "mm";
     public final static String SEC_FORMAT = "ss";
 
-    public static String getDate(long date, String pattern) {
-        try {
+    public static String getDate(long date, String pattern)
+    {
+        try
+        {
             SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.ENGLISH);
             Date d = new Date(date);
             return formatter.format(d).toUpperCase();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             return " ";
         }
     }
