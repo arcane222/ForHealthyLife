@@ -7,9 +7,11 @@ import java.util.Calendar;
 public class Day extends ViewModel
 {
     private String day;
+    
     public Day()
     {
     }
+
     public String getDay() {
         return day;
     }

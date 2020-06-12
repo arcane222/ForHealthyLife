@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         tool:text="2018년 8월" />
 </LinearLayout>

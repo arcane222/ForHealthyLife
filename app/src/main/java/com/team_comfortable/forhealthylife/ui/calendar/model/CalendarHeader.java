@@ -23,6 +23,7 @@ public class CalendarHeader extends ViewModel
     public void setHeader(String header) {
         this.header = header;
     }
+    
     public void setmCurrentTime(long mCurrentTime){
         this.mCurrentTime = mCurrentTime;
     }
