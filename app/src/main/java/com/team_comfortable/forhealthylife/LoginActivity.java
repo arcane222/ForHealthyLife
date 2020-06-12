@@ -2,6 +2,7 @@ package com.team_comfortable.forhealthylife;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +24,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -34,12 +44,20 @@ public class LoginActivity extends AppCompatActivity
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton signInButton;
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setLogInSystem();
+    }
+
+    private void setLogInSystem()
+    {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -101,9 +119,10 @@ public class LoginActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+                            registInDB(user);
+                            updateUI(user);
                             String toastStr = "로그인에 성공하였습니다. \n" + "사용자: " + user.getDisplayName() + " 님";
                             Toast.makeText(getApplicationContext(), toastStr, Toast.LENGTH_SHORT).show();
-                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
@@ -123,5 +142,42 @@ public class LoginActivity extends AppCompatActivity
             startActivity(intent);
             finish();
         }
+    }
+
+    private void registInDB(final FirebaseUser user)
+    {
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+        final DatabaseReference userListDB = mReference.child("UserList");
+        userListDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                boolean isExist = false;
+                for(DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    String value = data.getValue().toString();
+                    if(value.equals(user.getUid()))
+                    {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if(!isExist)
+                {
+                    Map<String, Object> userInfo = new HashMap<String, Object>();
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("userName", user.getDisplayName());
+                    map.put("userEmail", user.getEmail());
+                    map.put("userImgUrl", user.getPhotoUrl().toString());
+                    userInfo.put(user.getUid(), map);
+                    userListDB.updateChildren(userInfo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }
