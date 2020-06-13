@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.R;
 
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +44,7 @@ public class EnterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     public void initFirebase()
@@ -57,6 +60,7 @@ public class EnterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = (View)inflater.inflate(R.layout.fragment_enter, container, false);
         Button EnterBtn = (Button) root.findViewById(R.id.btn_enter);
+        Button CancelBtn = (Button) root.findViewById(R.id.btn_cancel);
         EditSch = (EditText) root.findViewById(R.id.edit_sch);
         EditDate = (EditText) root.findViewById(R.id.edit_date);
         initFirebase();
@@ -72,9 +76,36 @@ public class EnterFragment extends Fragment {
                 }
                 else{
                     setScheduleInDB(date, schedule);
+                    Toast.makeText(getContext(), "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    CalendarFragment calendarFragment = new CalendarFragment();
+                    transaction.replace(R.id.fragment_calendar, calendarFragment);
+                    transaction.addToBackStack(this.getClass().getSimpleName());
+                    transaction.commit();
                 }
             }
         });
+        CancelBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                CalendarFragment calendarFragment = new CalendarFragment();
+                transaction.replace(R.id.fragment_calendar, calendarFragment);
+                transaction.addToBackStack(this.getClass().getSimpleName());
+                transaction.commit();
+
+            }
+        });
+
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return root;
     }
 
