@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
     {
-        if ( requestCode == PERMISSIONS_REQUEST_CODE && grantResults.length == 1) {
+        if (requestCode == PERMISSIONS_REQUEST_CODE && grantResults.length == 1) {
 
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
             boolean check_result = true;

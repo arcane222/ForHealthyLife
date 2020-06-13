@@ -171,6 +171,7 @@ public class LoginActivity extends AppCompatActivity
                     map.put("userEmail", user.getEmail());
                     map.put("userImgUrl", user.getPhotoUrl().toString());
                     map.put("userSchedule", "");
+                    map.put("userStepCount", "");
                     userInfo.put(user.getUid(), map);
                     userListDB.updateChildren(userInfo);
                 }
