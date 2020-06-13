@@ -2,9 +2,11 @@ package com.team_comfortable.forhealthylife;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.team_comfortable.forhealthylife.ui.eating.DrinkFragment;
 import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
@@ -39,6 +42,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -53,9 +57,11 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClickListener
 {
+    private static final int PERMISSIONS_REQUEST_CODE = 1000;
+    private static final String[] REQUEST_PERMISSIONS = {Manifest.permission.ACTIVITY_RECOGNITION};
     private AppBarConfiguration mAppBarConfiguration;
-    //private String[] REQUEST_PERMISSIONS={ Manifest.permission.ACTIVITY_RECOGNITION };
     private static final int REQUEST_RECOGNITION  = 1;
+    private View permissionBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
 
         initToolbar();
         initBottomNavMenu();
-        checkRecognitionPermission();
         setProfile();
     }
 
@@ -114,16 +119,6 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     public void onTouchCaneldarPanel(View v)
     {
         v.setBackgroundColor(Color.GREEN);
-    }
-
-    public boolean checkRecognitionPermission()
-    {
-        /*if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
-        != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS, REQUEST_RECOGNITION);
-        }*/
-        return true;
     }
 
 
@@ -218,7 +213,9 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         switch(v.getId())
         {
             case R.id.btn_run:
-                menuFragTransaction.replace(R.id.fragment_home, runningFragment);
+                permissionBtn = v;
+                boolean bool = checkPermission();
+                if(bool) menuFragTransaction.replace(R.id.fragment_home, runningFragment);
                 break;
             case R.id.btn_eat:
                 menuFragTransaction.replace(R.id.fragment_home, eatingFragment);
@@ -242,6 +239,83 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public boolean checkPermission()
+    {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED)
+        {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACTIVITY_RECOGNITION))
+            {
+                Snackbar.make(permissionBtn, "이 기능을 실행하려면 신체활동 접근 권한이 필요합니다.",
+                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        // 사용자게에 퍼미션 요청. 요청 결과는 onRequestPermissionResult 에 수신.
+                        ActivityCompat.requestPermissions(MainActivity.this, REQUEST_PERMISSIONS,
+                                PERMISSIONS_REQUEST_CODE);
+                    }
+                }).show();
+            }
+            else
+            {
+                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
+                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS,
+                        PERMISSIONS_REQUEST_CODE);
+            }
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        if ( requestCode == PERMISSIONS_REQUEST_CODE && grantResults.length == 1) {
+
+            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
+            boolean check_result = true;
+            // 모든 퍼미션을 허용했는지 체크합니다.
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    check_result = false;
+                    break;
+                }
+            }
+
+            if(!check_result){
+                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUEST_PERMISSIONS[0]))
+                {
+                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
+                    Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. \n앱을 다시 실행하여 퍼미션을 허용해주세요. ",
+                            Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view) {
+                        }
+                    }).show();
+                }
+                else
+                {
+                    // “다시 묻지 않음”을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
+                    Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. \n설정(앱 정보)에서 신체활동권한을 허용해야 합니다. ",
+                            Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    }).show();
+                }
+            }
+        }
     }
 
 

@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            registInDB(user);
+                            registerInDB(user);
                             updateUI(user);
                             String toastStr = "로그인에 성공하였습니다. \n" + "사용자: " + user.getDisplayName() + " 님";
                             Toast.makeText(getApplicationContext(), toastStr, Toast.LENGTH_SHORT).show();
@@ -144,7 +144,7 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
-    private void registInDB(final FirebaseUser user)
+    private void registerInDB(final FirebaseUser user)
     {
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
@@ -171,7 +171,6 @@ public class LoginActivity extends AppCompatActivity
                     map.put("userEmail", user.getEmail());
                     map.put("userImgUrl", user.getPhotoUrl().toString());
                     map.put("userSchedule", "");
-                    userListDB.child(user.getUid()).updateChildren(map);
                     userInfo.put(user.getUid(), map);
                     userListDB.updateChildren(userInfo);
                 }
