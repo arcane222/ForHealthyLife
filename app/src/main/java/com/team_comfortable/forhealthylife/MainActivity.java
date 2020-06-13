@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -202,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     }
 
     /* Home Fragment Button Click Listener (Eating, Running, Exercise) */
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     public void onBtnClick(View v)
     {
         Fragment eatingFragment = new EatingFragment();
@@ -242,9 +243,11 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 || super.onSupportNavigateUp();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
+
     public boolean checkPermission()
     {
+        int apiVersion = Build.VERSION.SDK_INT;
+        if(apiVersion < Build.VERSION_CODES.Q) return true;
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION);
         if(permissionCheck != PackageManager.PERMISSION_GRANTED)
         {
@@ -297,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUEST_PERMISSIONS[0]))
                 {
                     // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
-                    Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. \n앱을 다시 실행하여 퍼미션을 허용해주세요. ",
+                    Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. \n신체활동권한을 허용해주세요. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener()
                     {
                         @Override
@@ -312,7 +315,10 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                            intent.setData(uri);
+                            startActivityForResult(intent, 1000);
                         }
                     }).show();
                 }
