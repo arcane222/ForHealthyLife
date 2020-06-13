@@ -23,5 +23,8 @@ public class Day extends ViewModel
     public void setCalendar(Calendar calendar) {
         day = DateUtil.getDate(calendar.getTimeInMillis(), DateUtil.DAY_FORMAT);
     }
+
+
+
 }
 

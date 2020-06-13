@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.calendar.adapter.CalendarAdapter;
 import com.team_comfortable.forhealthylife.ui.calendar.util.Keys;
+import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ import java.util.GregorianCalendar;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
-public class CalendarFragment extends Fragment
+public class CalendarFragment extends Fragment implements CalendarAdapter.OnSelectedListener
 {
     public int mCenterPosition;
     private long mCurrentTime;
@@ -127,4 +128,16 @@ public class CalendarFragment extends Fragment
          }
          mCalendarList = calendarList;
      }
+
+
+    @Override
+    public void onSelected(int position) {
+        Log.i("tag", "124");
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        EnterFragment enterFragment = new EnterFragment();
+        transaction.replace(R.id.fragment_calendar, enterFragment);
+        transaction.addToBackStack(this.getClass().getSimpleName());
+        transaction.commit();
+
+    }
 }
