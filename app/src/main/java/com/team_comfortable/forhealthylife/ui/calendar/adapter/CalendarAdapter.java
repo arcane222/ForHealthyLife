@@ -1,5 +1,6 @@
 package com.team_comfortable.forhealthylife.ui.calendar.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.team_comfortable.forhealthylife.LoginActivity;
+import com.team_comfortable.forhealthylife.MainActivity;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.calendar.fragment.EnterFragment;
 import com.team_comfortable.forhealthylife.ui.calendar.model.CalendarHeader;
@@ -39,12 +42,17 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
     private List<Object> mCalendarList;
 
-    public interface OnSelectedListener
-    {
-        public void onSelected(int position);
+    public interface OnItemClickListener {
+        public void onItemClick(String date);
     }
 
-    OnSelectedListener mSelListener;
+
+    OnItemClickListener mClicklistener;
+
+    public void setOnItemClicklistener(OnItemClickListener mClicklistener){
+        this.mClicklistener = mClicklistener;
+    }
+
 
 
 
@@ -111,6 +119,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
         if (viewType == HEADER_TYPE)
         {
             HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
+
             Object item = mCalendarList.get(position);
             CalendarHeader model = new CalendarHeader();
 
@@ -135,6 +144,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
         else if (viewType == DAY_TYPE)
         {
             DayViewHolder holder = (DayViewHolder) viewHolder;
+
             Object item = mCalendarList.get(position);
             Day model = new Day();
 
@@ -162,6 +172,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
     { //날짜 타입 ViewHolder
 
         TextView itemHeaderTitle;
+
         public HeaderViewHolder(@NonNull View itemView)
         {
             super(itemView);
@@ -177,9 +188,11 @@ public class CalendarAdapter extends RecyclerView.Adapter
         {
             // 일자 값 가져오기
             String header = ((CalendarHeader)model).getHeader();
+
             // header에 표시하기, ex : 2018년 8월
             itemHeaderTitle.setText(header);
         };
+
     }
 
 
@@ -213,12 +226,13 @@ public class CalendarAdapter extends RecyclerView.Adapter
         {
             super(itemView);
             initView(itemView);
+
             itemView.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
-
-
+                    Log.i("tag", "123");
+                    mClicklistener.onItemClick(itemDay.getText().toString());
                 }
             });
         }

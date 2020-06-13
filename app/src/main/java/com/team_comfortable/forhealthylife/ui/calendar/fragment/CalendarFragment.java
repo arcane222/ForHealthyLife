@@ -26,7 +26,7 @@ import java.util.GregorianCalendar;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
 
-public class CalendarFragment extends Fragment implements CalendarAdapter.OnSelectedListener
+public class CalendarFragment extends Fragment
 {
     public int mCenterPosition;
     private long mCurrentTime;
@@ -88,6 +88,17 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnSele
          mAdapter.setCalendarList(mCalendarList);
          recyclerView.setLayoutManager(manager);
          recyclerView.setAdapter(mAdapter);
+         mAdapter.setOnItemClicklistener(new CalendarAdapter.OnItemClickListener() {
+             @Override
+             public void onItemClick(String date) {
+                 Log.i("tag", date);
+                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                 ScheduleFragment scheduleFragment = new ScheduleFragment();
+                 transaction.replace(R.id.fragment_calendar, scheduleFragment);
+                 transaction.addToBackStack(this.getClass().getSimpleName());
+                 transaction.commit();
+             }
+         });
 
          if (mCenterPosition >= 0) {
              recyclerView.scrollToPosition(mCenterPosition);
@@ -129,7 +140,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnSele
          mCalendarList = calendarList;
      }
 
-
+/*
     @Override
     public void onSelected(int position) {
         Log.i("tag", "124");
@@ -139,5 +150,5 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnSele
         transaction.addToBackStack(this.getClass().getSimpleName());
         transaction.commit();
 
-    }
+    }*/
 }
