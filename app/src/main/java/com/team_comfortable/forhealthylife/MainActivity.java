@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     }
 
     /* Home Fragment Button Click Listener (Eating, Running, Exercise) */
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public void onBtnClick(View v)
     {
         Fragment eatingFragment = new EatingFragment();
@@ -241,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 || super.onSupportNavigateUp();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public boolean checkPermission()
     {
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION);
