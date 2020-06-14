@@ -69,7 +69,6 @@ public class CalendarFragment extends Fragment
                 transaction.commit();
             }
         });
-
         return rootView;
     }
 
@@ -107,6 +106,7 @@ public class CalendarFragment extends Fragment
                  Log.i("tag", date);
                  FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                  ScheduleFragment scheduleFragment = new ScheduleFragment();
+                 scheduleFragment.getDate(date);
                  transaction.add(R.id.fragment_calendar, scheduleFragment);
                  transaction.addToBackStack(this.getClass().getSimpleName());
                  transaction.commit();
@@ -152,7 +152,4 @@ public class CalendarFragment extends Fragment
          }
          mCalendarList = calendarList;
      }
-
-
-
 }

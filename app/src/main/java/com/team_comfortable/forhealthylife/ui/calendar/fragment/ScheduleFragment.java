@@ -42,7 +42,7 @@ public class ScheduleFragment extends Fragment{
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     private String schedule;
-    private String[] scheduleList = {"1", "2","12"};
+    private String[] scheduleList;
 
     public void initFirebase()
     {
@@ -68,9 +68,10 @@ public class ScheduleFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //editScheduleInDB();
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ListView listview = view.findViewById(R.id.list_schedule);
+        TextView textDate = view.findViewById(R.id.text_date);
+        textDate.setText(newDate(Date));
         adapter = new CustomList((Activity) view.getContext());
         editScheduleInDB();
         listview.setAdapter(adapter);
@@ -90,25 +91,26 @@ public class ScheduleFragment extends Fragment{
 
     public void editScheduleInDB() {
         initFirebase();
+
         DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
         userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, Object> map = new HashMap<String, Object>();
-                String date = "200613";
+                String date = Date;
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String key = data.getKey() + "";
                     if (date.equals(key)) {
                         schedule = data.getValue().toString();
-                        Log.i("tag2", "78979879");
                         scheduleList = schedule.split("/");
-                        Log.i("tag1", scheduleList[0]);
-                        Log.i("tag1", scheduleList[1]);
-                        Log.i("tag1", scheduleList[2]);
-                        adapter.addAll(scheduleList);
+                        //adapter.addAll(scheduleList);
                         break;
                     }
+                    scheduleList = new String[]{"일정 없음"};
+
                 }
+                adapter.addAll(scheduleList);
             }
 
             @Override
@@ -118,8 +120,6 @@ public class ScheduleFragment extends Fragment{
 
     }
 
-
-    String[] riceName = {"1","2","3"};
 
     public class CustomList extends ArrayAdapter<String>
     {
@@ -145,7 +145,6 @@ public class ScheduleFragment extends Fragment{
             }
             ImageView dot = (ImageView) view.findViewById(R.id.dot);
             TextView schList = (TextView) view.findViewById(R.id.schedule);
-            Log.i("tag4", "44");
             dot.setImageResource(R.drawable.ic_circle_sky);
             schList.setText(scheduleList[position]);
             return view;
@@ -153,6 +152,25 @@ public class ScheduleFragment extends Fragment{
 
 
 
+    }
+
+    private String Date;
+
+    public void getDate(String date){
+        this.Date = date;
+    }
+
+    public String newDate(String date){
+        String MM = date.substring(2, 4);
+        if(MM.charAt(0) == '0') {
+            MM = MM.substring(1, 2);
+        }
+        String DD = date.substring(4, 6);
+        if(DD.charAt(0) == '0') {
+            DD = DD.substring(1, 2);
+        }
+
+        return MM+"월 "+DD+"일";
     }
 
 

@@ -231,8 +231,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
                 @Override
                 public void onClick(View v) {
-                    Log.i("tag", "123");
-                    mClicklistener.onItemClick(itemDay.getText().toString());
+                    mClicklistener.onItemClick(dayText.getText().toString());
                 }
             });
         }
@@ -246,8 +245,10 @@ public class CalendarAdapter extends RecyclerView.Adapter
         {
             // 일자 값 가져오기
             String day = ((Day)model).getDay();
+            String month = ((Day)model).getDate();
             // 일자 값 View에 보이게하기
             itemDay.setText(day);
+            dayText.setText(month);
            // dayText.setBackgroundColor(Color.RED);
            // dayText.setText(day);
         };
