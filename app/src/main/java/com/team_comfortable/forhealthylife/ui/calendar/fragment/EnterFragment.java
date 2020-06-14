@@ -47,10 +47,6 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
         super.onCreate(savedInstanceState);
         activity = (MainActivity) getActivity();
 
-
-
-
-
     }
 
     public void initFirebase()
@@ -101,7 +97,6 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
                 transaction.replace(R.id.fragment_calendar, calendarFragment);
                 transaction.addToBackStack(this.getClass().getSimpleName());
                 transaction.commit();
-
             }
         });
 
@@ -124,7 +119,7 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 Map<String, Object> map = new HashMap<String, Object>();
-                String tmp = "";
+                String tmp = schedule;
 
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
@@ -134,7 +129,7 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
                         tmp = data.getValue().toString() + "/" + schedule;
                         break;
                     }
-                    tmp = schedule;
+
                 }
                 map.put(date, tmp);
                 dbReference.updateChildren(map);
