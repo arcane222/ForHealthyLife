@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.team_comfortable.forhealthylife.MainActivity;
+import com.team_comfortable.forhealthylife.OnBackPressedListener;
 import com.team_comfortable.forhealthylife.R;
 
 import java.security.Key;
@@ -31,18 +33,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class EnterFragment extends Fragment {
+public class EnterFragment extends Fragment implements OnBackPressedListener {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     private EditText EditSch, EditDate;
-
+    MainActivity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = (MainActivity) getActivity();
+
+
+
 
 
     }
@@ -160,4 +166,25 @@ public class EnterFragment extends Fragment {
         if(!check) return false;
         return true;
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        CalendarFragment calendarFragment = new CalendarFragment();
+        transaction.replace(R.id.fragment_calendar, calendarFragment);
+        transaction.addToBackStack(this.getClass().getSimpleName());
+        transaction.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activity.setOnBackPressedListener(this);
+    }
+
+
+
+
 }

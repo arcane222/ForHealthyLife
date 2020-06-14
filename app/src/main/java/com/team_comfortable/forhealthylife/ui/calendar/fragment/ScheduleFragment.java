@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.eating.RiceFragment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,14 +64,15 @@ public class ScheduleFragment extends Fragment{
         super.onCreate(savedInstanceState);
     }
 
-
+    private CustomList adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //editScheduleInDB();
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ListView listview = view.findViewById(R.id.list_schedule);
-        CustomList adapter = new CustomList((Activity) view.getContext());
+        adapter = new CustomList((Activity) view.getContext());
+        editScheduleInDB();
         listview.setAdapter(adapter);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +88,36 @@ public class ScheduleFragment extends Fragment{
         return view;
     }
 
+    public void editScheduleInDB() {
+        initFirebase();
+        DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
+        userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                String date = "200613";
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String key = data.getKey() + "";
+                    if (date.equals(key)) {
+                        schedule = data.getValue().toString();
+                        Log.i("tag2", "78979879");
+                        scheduleList = schedule.split("/");
+                        Log.i("tag1", scheduleList[0]);
+                        Log.i("tag1", scheduleList[1]);
+                        Log.i("tag1", scheduleList[2]);
+                        adapter.addAll(scheduleList);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+    }
+
 
     String[] riceName = {"1","2","3"};
 
@@ -95,9 +128,7 @@ public class ScheduleFragment extends Fragment{
 
         public CustomList(Activity context)
         {
-            super(context, R.layout.schedule_item, riceName);
-            editScheduleInDB();
-
+            super(context, R.layout.schedule_item, new ArrayList<String>());
             this.context = context;
 
         }
@@ -112,9 +143,6 @@ public class ScheduleFragment extends Fragment{
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.schedule_item, parent, false);
             }
-
-            //LayoutInflater inflater = context.getLayoutInflater();
-            //View rowView = inflater.inflate(R.layout.schedule_item, null, true);
             ImageView dot = (ImageView) view.findViewById(R.id.dot);
             TextView schList = (TextView) view.findViewById(R.id.schedule);
             Log.i("tag4", "44");
@@ -123,38 +151,10 @@ public class ScheduleFragment extends Fragment{
             return view;
         }
 
-        public void editScheduleInDB() {
-            initFirebase();
-            DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
-            userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Map<String, Object> map = new HashMap<String, Object>();
-                    String date = "200613";
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        String key = data.getKey() + "";
-                        if (date.equals(key)) {
-                            schedule = data.getValue().toString();
-                            Log.i("tag2", "78979879");
-                            scheduleList = schedule.split("/");
-                            Log.i("tag1", scheduleList[0]);
-                            Log.i("tag1", scheduleList[1]);
-                            Log.i("tag1", scheduleList[2]);
-
-                            break;
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            });
-
-        }
 
 
     }
+
 
 
 }

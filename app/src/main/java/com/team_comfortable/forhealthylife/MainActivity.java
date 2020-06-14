@@ -327,25 +327,23 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     }
 
 
-    /*
-    public interface onKeyBackPressedListener { void onBackKey(); }
-    private onKeyBackPressedListener mOnKeyBackPressedListener;
-    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener) {
-        mOnKeyBackPressedListener = listener;
-    }
-    //EndToast endToast = new EndToast(this);
-    @Override public void onBackPressed() {
-        if (mOnKeyBackPressedListener != null) {
-            mOnKeyBackPressedListener.onBackKey();
-        } else {
-            if(getSupportFragmentManager().getBackStackEntryCount()==0){
-                //endToast.showEndToast("종료하려면 한번 더 누르세요.");
-            }
-            else{ super.onBackPressed();
-            }
-        }
-    }
-    */
+    OnBackPressedListener listener;
 
+
+    public void setOnBackPressedListener(OnBackPressedListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(listener!=null){
+            listener.onBackPressed();
+        }
+        else{
+            super.onBackPressed();
+        }
+
+    }
 
 }

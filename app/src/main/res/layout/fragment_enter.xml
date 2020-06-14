@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btn_weight_delete"
+            android:id="@+id/btn_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="취 소"
@@ -30,11 +30,11 @@
             android:id="@+id/btn_enter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="입 력"
             android:privateImeOptions="defaultInputmode=korean"
+            android:text="입 력"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_weight_delete"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.064" />
 
