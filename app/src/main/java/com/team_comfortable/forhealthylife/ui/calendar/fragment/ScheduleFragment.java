@@ -220,7 +220,7 @@ public class ScheduleFragment extends Fragment{
         public View getView(int position, View view, ViewGroup parent)
         {
             final int pos = position;
-
+            Log.i("tag2","tag11111111");
             if (view == null)
             {
                 final Context context = parent.getContext();

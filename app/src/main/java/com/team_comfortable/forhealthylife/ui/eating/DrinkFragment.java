@@ -57,6 +57,7 @@ public class DrinkFragment extends Fragment {
 
         public CustomList(Activity context)
         {
+
             super(context, R.layout.food_item, Data.drinkName);
             this.context = context;
         }
