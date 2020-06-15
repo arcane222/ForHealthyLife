@@ -1,5 +1,7 @@
 package com.team_comfortable.forhealthylife.ui.calendar.fragment;
 
+
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -144,7 +146,6 @@ public class CalendarFragment extends Fragment
                  for (int j = 1; j <= max; j++) {
                      calendarList.add(new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), j));
                  }
-                 // TODO : 결과값 넣을떄 여기다하면될듯
              }
              catch (Exception e) {
                  e.printStackTrace();
@@ -152,4 +153,5 @@ public class CalendarFragment extends Fragment
          }
          mCalendarList = calendarList;
      }
+
 }
