@@ -12,24 +12,31 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.team_comfortable.forhealthylife.R;
 
 public class CommunityFragment extends Fragment {
 
-    private CommunityViewModel communityViewModel;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        communityViewModel =
-                ViewModelProviders.of(this).get(CommunityViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View root = inflater.inflate(R.layout.fragment_community, container, false);
-        final TextView textView = root.findViewById(R.id.text_community);
-        communityViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        initFirebase();
         return root;
+    }
+
+    private void initFirebase()
+    {
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
     }
 }
