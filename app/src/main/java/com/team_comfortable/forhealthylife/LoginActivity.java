@@ -173,6 +173,9 @@ public class LoginActivity extends AppCompatActivity
                     map.put("userSchedule", "");
                     map.put("userStepCount", "");
                     map.put("userWeight", "");
+                    map.put("userHeight", "");
+                    map.put("userGender", "");
+                    map.put("userAge", "");
                     userInfo.put(user.getUid(), map);
                     userListDB.updateChildren(userInfo);
                 }
