@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.LoginActivity;
 import com.team_comfortable.forhealthylife.MainActivity;
 import com.team_comfortable.forhealthylife.R;
+import com.team_comfortable.forhealthylife.ui.calendar.fragment.CalendarFragment;
 import com.team_comfortable.forhealthylife.ui.calendar.fragment.EnterFragment;
 import com.team_comfortable.forhealthylife.ui.calendar.model.CalendarHeader;
 import com.team_comfortable.forhealthylife.ui.calendar.model.Day;
@@ -42,6 +44,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
     private List<Object> mCalendarList;
 
+
     public interface OnItemClickListener {
         public void onItemClick(String date);
     }
@@ -58,7 +61,6 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
     public CalendarAdapter(List<Object> calendarList) {
         mCalendarList = calendarList;
-
     }
 
     public void setCalendarList(List<Object> calendarList)
@@ -88,8 +90,9 @@ public class CalendarAdapter extends RecyclerView.Adapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // 날짜 타입
         if (viewType == HEADER_TYPE)
         {
@@ -143,8 +146,8 @@ public class CalendarAdapter extends RecyclerView.Adapter
         /** EX : 22 */
         else if (viewType == DAY_TYPE)
         {
-            DayViewHolder holder = (DayViewHolder) viewHolder;
 
+            DayViewHolder holder = (DayViewHolder) viewHolder;
             Object item = mCalendarList.get(position);
             Day model = new Day();
 
@@ -153,7 +156,9 @@ public class CalendarAdapter extends RecyclerView.Adapter
                 model.setCalendar((Calendar) item);
             }
             // Model의 데이터를 View에 표현하기
+
             holder.bind(model);
+
         }
     }
 
@@ -221,6 +226,9 @@ public class CalendarAdapter extends RecyclerView.Adapter
     {// 요일 입 ViewHolder
 
         TextView itemDay, dayText;
+        ImageView imgDay;
+        String month;
+
 
         public DayViewHolder(@NonNull View itemView)
         {
@@ -231,30 +239,104 @@ public class CalendarAdapter extends RecyclerView.Adapter
 
                 @Override
                 public void onClick(View v) {
-                    mClicklistener.onItemClick(dayText.getText().toString());
+                    mClicklistener.onItemClick(month);
                 }
             });
         }
 
         public void initView(View v){
             itemDay = (TextView)v.findViewById(R.id.item_day);
-            dayText = (TextView)v.findViewById(R.id.day_text);
+            imgDay = (ImageView)v.findViewById(R.id.item_img);
         }
 
-        public void bind(ViewModel model)
+        public void bind(final ViewModel model)
         {
+            final ViewModel vmodel = model;
             // 일자 값 가져오기
-            String day = ((Day)model).getDay();
-            String month = ((Day)model).getDate();
-            // 일자 값 View에 보이게하기
-            itemDay.setText(day);
-            dayText.setText(month);
+            initFirebase();
+            DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
+            userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String tmp = "000000";
+                    for(DataSnapshot data : dataSnapshot.getChildren())
+                    {
+                        String key= data.getKey()+"";
+                        tmp = tmp + "/" + data.getKey();
+                    }
+                    mDayList = tmp.split("/");
+
+
+                    String day = ((Day)vmodel).getDay();
+                    month = ((Day)vmodel).getDate();
+                    itemDay.setText(day);
+                    for(int i =0; i<mDayList.length;i++){
+                        if(month.equals(mDayList[i])) {
+                            imgDay.setImageResource(R.drawable.ic_calendar);
+                            break;
+                        }
+                        else{
+                            imgDay.setImageResource(R.drawable.ic_circle_sky);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+
            // dayText.setBackgroundColor(Color.RED);
            // dayText.setText(day);
         };
 
-        public void onTouch(View v){
+        public String getMonth(){
 
+            return month;
         }
     }
+
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
+    private String Date;
+    private String[] mDayList = {};
+    public void initFirebase()
+    {
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+    }
+/*
+    public void checkInDB(){
+        Log.i("tag","3");
+        initFirebase();
+        Log.i("tag","4");
+        DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
+        userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String tmp = "000000";
+                for(DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    String key= data.getKey()+"";
+                    tmp = tmp + "/" + data.getKey();
+                }
+                mDayList = tmp.split("/");
+                Log.i("tag",mDayList[0]+mDayList[1]+mDayList[2]);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+*/
+
+
+
 }

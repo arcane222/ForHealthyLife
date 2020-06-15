@@ -79,11 +79,6 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
                 else{
                     setScheduleInDB(date, schedule);
                     Toast.makeText(getContext(), "일정이 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    CalendarFragment calendarFragment = new CalendarFragment();
-                    transaction.replace(R.id.fragment_calendar, calendarFragment);
-                    transaction.addToBackStack(this.getClass().getSimpleName());
-                    transaction.commit();
                 }
             }
         });
@@ -133,6 +128,11 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
                 }
                 map.put(date, tmp);
                 dbReference.updateChildren(map);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                CalendarFragment calendarFragment = new CalendarFragment();
+                transaction.replace(R.id.fragment_calendar, calendarFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

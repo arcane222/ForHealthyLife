@@ -52,12 +52,16 @@ public class CalendarFragment extends Fragment
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_calendar, container, false);
         initView(rootView);
         initSet();
+        if (mCalendarList == null) {
+            Log.w(TAG, "No Query, not initializing RecyclerView");
+        }
         setRecycler();
         FloatingActionButton FloatingBtn = (FloatingActionButton) rootView.findViewById(R.id.btn_floating);
         FloatingBtn.setOnClickListener(new View.OnClickListener()
@@ -92,13 +96,8 @@ public class CalendarFragment extends Fragment
 
      private void setRecycler()
      {
-         if (mCalendarList == null) {
-             Log.w(TAG, "No Query, not initializing RecyclerView");
-         }
-
          manager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL);
          mAdapter = new CalendarAdapter(mCalendarList);
-
          mAdapter.setCalendarList(mCalendarList);
          recyclerView.setLayoutManager(manager);
          recyclerView.setAdapter(mAdapter);
@@ -114,10 +113,11 @@ public class CalendarFragment extends Fragment
                  transaction.commit();
              }
          });
-
          if (mCenterPosition >= 0) {
              recyclerView.scrollToPosition(mCenterPosition);
          }
+
+
      }
 
      public void setCalendarList(GregorianCalendar cal)
@@ -153,5 +153,4 @@ public class CalendarFragment extends Fragment
          }
          mCalendarList = calendarList;
      }
-
 }
