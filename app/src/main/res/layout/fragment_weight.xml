@@ -5,23 +5,22 @@
     android:id="@+id/layout_weight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD8D8"
+    android:background="#80D8FF"
     tools:context=".ui.weight.WeightFragment">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:background="#F3B6B6"
+        android:background="#FFD180"
         android:gravity="center"
-        android:text="매일 몸무게를 기록해보세요."
+        android:text="매일 체중를 기록해보세요."
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/datePicker_weight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48000002"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <DatePicker
@@ -40,9 +39,9 @@
         android:id="@+id/textView_displayWeight"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:background="@color/fui_bgAnonymous"
+        android:background="#FFD180"
         android:gravity="center"
-        android:text="몸무게는?"
+        android:text="당신의 몸무게는?"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editText_inputWeight"
@@ -53,7 +52,7 @@
     <EditText
         android:id="@+id/editText_inputWeight"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:backgroundTint="@android:color/holo_blue_light"
         android:ems="10"
         android:gravity="center"
@@ -71,7 +70,6 @@
         android:src="@drawable/ic_weight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_inputWeight" />
 
@@ -79,7 +77,7 @@
         android:id="@+id/btn_weight_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light"
+        android:background="#FFD180"
         android:text="등록"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +89,7 @@
         android:id="@+id/btn_weight_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light"
+        android:background="#FFD180"
         android:text="삭제"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_weight_register"

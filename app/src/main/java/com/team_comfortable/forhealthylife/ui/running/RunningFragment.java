@@ -126,9 +126,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 setStepCountInDB(mSteps);
-                mSteps = 0;
-                mCounterSteps = 0;
-                mStepCountTextView.setText(Integer.toString(mSteps));
                 Toast.makeText(getContext(), "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -154,8 +151,7 @@ public class RunningFragment extends Fragment implements SensorEventListener
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 Map<String, Object> map = new HashMap<String, Object>();
-                int tmp = 0;
-
+                int tmp = count;
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
                     String key= data.getKey();
@@ -164,10 +160,12 @@ public class RunningFragment extends Fragment implements SensorEventListener
                         tmp = Integer.parseInt(data.getValue().toString()) + count;
                         break;
                     }
-                    tmp = count;
                 }
                 map.put(date, tmp);
                 dbReference.updateChildren(map);
+                mSteps = 0;
+                mCounterSteps = 0;
+                mStepCountTextView.setText(Integer.toString(mSteps));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
