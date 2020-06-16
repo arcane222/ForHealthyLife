@@ -119,7 +119,7 @@ public class BoardFragment extends Fragment implements OnBackPressedListener {
         map.put("date", currentDate);
         map.put("title", EditBoardTitle.getText().toString());
         map.put("writer", mUser.getDisplayName());
-        map.put("uerUID", mUser.getUid());
+        map.put("userUID", mUser.getUid());
         boardInfo.put(timeDate, map);
         communityReference.updateChildren(boardInfo);
 

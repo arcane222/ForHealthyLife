@@ -49,6 +49,7 @@ public class CommunityFragment extends Fragment {
     private ArrayList<String> board_contentList = new ArrayList<String>();
     private ArrayList<String> board_writerList = new ArrayList<String>();
     private ArrayList<String> board_timeList = new ArrayList<String>();
+    private ArrayList<String> board_keyList = new ArrayList<String>();
 
 
     public void initFirebase()
@@ -86,7 +87,19 @@ public class CommunityFragment extends Fragment {
         adapter = new CustomList((Activity) view.getContext());
         editBoardInDB();
         listview.setAdapter(adapter);
+        adapter.setOnClicklistener2(new OnlistClickListener2() {
+            @Override
+            public void onListClick(String key) {
+                Log.i("tag", key);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                ContentFragment contentFragment = new ContentFragment();
+                contentFragment.getKey(key);
+                transaction.replace(R.id.fragment_community, contentFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
 
+            }
+        });
 
         return view;
     }
@@ -95,23 +108,19 @@ public class CommunityFragment extends Fragment {
     public void editBoardInDB() {
         initFirebase();
         DatabaseReference userCommunityDB = mReference.child("Community");
-        Log.i("tag4", String.valueOf(1));
-        final int finalI = 0;
-
         userCommunityDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     final String key12 = data.getKey() + "";
-                    Log.i("tag12",key12);
                     final DatabaseReference userCommunityDB = mReference.child("Community").child(key12);
+                    board_keyList.add(data.getKey());
                     userCommunityDB.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Map<String, Object> map = new HashMap<String, Object>();
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 String key = data.getKey() + "";
-                                Log.i("tag", key);
                                 switch(key){
                                     case "title":
                                         board_titleList.add(data.getValue().toString());
@@ -189,11 +198,30 @@ public class CommunityFragment extends Fragment {
 
 
     }
+    /*
+    public interface OnlistClickListener2 {
+        public void onListClick(int position);
+    }
+    */
 
+
+    public interface OnlistClickListener2 {
+        public void onListClick(String key);
+    }
 
     public class CustomList extends ArrayAdapter<String>
     {
         private final Activity context;
+
+
+
+        OnlistClickListener2 mClickedlistener2;
+
+        public void setOnClicklistener2(OnlistClickListener2 mClickedlistener){
+            this.mClickedlistener2 = mClickedlistener;
+        }
+
+
 
         public CustomList(Activity context)
         {
@@ -218,11 +246,18 @@ public class CommunityFragment extends Fragment {
             TextView titleList = (TextView) view.findViewById(R.id.communityTitle);
             TextView writerList = (TextView) view.findViewById(R.id.communityWriter);
             TextView timeList = (TextView) view.findViewById(R.id.writeTime);
-            Log.i("tag", "6");
+
             titleList.setText(board_titleList.get(position));
             writerList.setText(board_writerList.get(position));
             timeList.setText(board_timeList.get(position));
-            Log.i("tag", "7");
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    mClickedlistener2.onListClick(board_keyList.get(pos));
+                }
+            });
             return view;
         }
 
