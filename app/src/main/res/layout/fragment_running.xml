@@ -19,7 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.587" />
 
     <ImageView
         android:id="@+id/iv_footprint_1"
@@ -28,8 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652"
+        app:layout_constraintTop_toBottomOf="@+id/iv_stepCountBack"
+        app:layout_constraintVertical_bias="0.134"
         app:srcCompat="@drawable/ic_footprint" />
 
     <ImageView
@@ -41,32 +41,32 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"
+        app:layout_constraintVertical_bias="0.361"
         app:srcCompat="@drawable/ic_walkingcounter" />
 
     <Button
         android:id="@+id/btn_saveStep"
-        android:layout_width="128dp"
-        android:layout_height="58dp"
-        android:text="Save"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:text="저장"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_stepCountBack"
-        app:layout_constraintVertical_bias="0.416" />
+        app:layout_constraintVertical_bias="0.757" />
 
     <Button
         android:id="@+id/btn_resetStep"
-        android:layout_width="128dp"
-        android:layout_height="58dp"
-        android:text="Reset"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:text="초기화"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_stepCountBack"
-        app:layout_constraintVertical_bias="0.416" />
+        app:layout_constraintVertical_bias="0.757" />
 
     <TextView
         android:id="@+id/stepNumView"
@@ -82,6 +82,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
+        app:layout_constraintVertical_bias="0.402" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
