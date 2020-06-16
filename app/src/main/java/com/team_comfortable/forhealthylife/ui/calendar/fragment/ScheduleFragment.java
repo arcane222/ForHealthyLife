@@ -127,20 +127,27 @@ public class ScheduleFragment extends Fragment{
     public void editScheduleInDB() {
         initFirebase();
         DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
+
         userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 String date = Date;
 
+                boolean checkedNull = true;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Log.i("tag","3");
                     String key = data.getKey() + "";
                     if (date.equals(key)) {
                         schedule = data.getValue().toString();
                         scheduleList = schedule.split("/");
-
+                        checkedNull = false;
                         break;
                     }
+                    scheduleList = new String[]{"일정 없음"};
+                    checkedNull = false;
+                }
+                if(checkedNull){
                     scheduleList = new String[]{"일정 없음"};
                 }
                 adapter.addAll(scheduleList);

@@ -386,7 +386,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                     String key = data.getKey() + "";
                     if(pos == count){
                         commentKey = key;
-                        Log.i("tag",commentKey);
                     }
                     count++;
                 }
