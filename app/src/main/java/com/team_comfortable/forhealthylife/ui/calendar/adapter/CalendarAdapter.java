@@ -298,6 +298,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
         }
     }
 
+
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseUser mUser;

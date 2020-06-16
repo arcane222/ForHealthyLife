@@ -103,7 +103,6 @@ public class ScheduleFragment extends Fragment{
             public void onClick(int position) {
                 if(scheduleList[0] != "일정 없음") {
                     checkCancel(position);
-
                 }
 
             }
@@ -217,12 +216,9 @@ public class ScheduleFragment extends Fragment{
         }
 
 
-        public View getView(int position, View view, ViewGroup parent)
-        {
+        public View getView(int position, View view, ViewGroup parent) {
             final int pos = position;
-            Log.i("tag2","tag11111111");
-            if (view == null)
-            {
+            if (view == null) {
                 final Context context = parent.getContext();
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.schedule_item, parent, false);
@@ -231,10 +227,11 @@ public class ScheduleFragment extends Fragment{
             TextView schList = (TextView) view.findViewById(R.id.schedule);
             dot.setImageResource(R.drawable.ic_circle_sky);
             schList.setText(scheduleList[position]);
-            view.setOnClickListener(new View.OnClickListener() {
+            view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
+                public boolean onLongClick(View v) {
                     mClickedlistener.onClick(pos);
+                    return true;
                 }
             });
             return view;
