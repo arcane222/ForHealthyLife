@@ -24,22 +24,31 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.calendar.fragment.CalendarFragment;
 import com.team_comfortable.forhealthylife.ui.calendar.fragment.ScheduleFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommunityFragment extends Fragment {
 
-    private CommunityViewModel communityViewModel;
+
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
+    private ArrayList<String> board_titleList = new ArrayList<String>();
+    private ArrayList<String> board_contentList = new ArrayList<String>();
+    private ArrayList<String> board_writerList = new ArrayList<String>();
+    private ArrayList<String> board_timeList = new ArrayList<String>();
 
 
     public void initFirebase()
@@ -56,32 +65,130 @@ public class CommunityFragment extends Fragment {
 
     }
 
+    private CustomList adapter;
+    private ListView listview;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
-        ListView listview = view.findViewById(R.id.community_board);
+        listview = view.findViewById(R.id.community_board);
         Button sinupBtn = view.findViewById(R.id.btn_signup);
-        Log.i("tag", "1");
-        CustomList adapter = new CustomList((Activity) view.getContext());
-        Log.i("tag", "2");
+        sinupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                BoardFragment boardFragment = new BoardFragment();
+                transaction.add(R.id.fragment_community, boardFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        adapter = new CustomList((Activity) view.getContext());
+        editBoardInDB();
         listview.setAdapter(adapter);
-        Log.i("tag", "5");
+
 
         return view;
     }
-    static String[] riceName = {
-            "쌀 밥  (300Kcal)",
-            "보리밥  (300Kcal)",
-            "현미밥  (320Kcal)",
-            "오곡밥  (380Kcal)",
-            "비빔밥  (600Kcal)",
-            "새우볶음밥  (630Kcal)",
-            "김치볶음밥  (590Kcal)",
-            "오므라이스  (690Kcal)",
-            "김 밥  (460Kcal)",
-            "스파게티 (650Kcal)",
-            "자장면 (700Kcal)"
-    };
+
+    //firebase에서 community list를 받아옵니다.
+    public void editBoardInDB() {
+        initFirebase();
+        DatabaseReference userCommunityDB = mReference.child("Community");
+        Log.i("tag4", String.valueOf(1));
+        final int finalI = 0;
+
+        userCommunityDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    final String key12 = data.getKey() + "";
+                    Log.i("tag12",key12);
+                    final DatabaseReference userCommunityDB = mReference.child("Community").child(key12);
+                    userCommunityDB.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Map<String, Object> map = new HashMap<String, Object>();
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                String key = data.getKey() + "";
+                                Log.i("tag", key);
+                                switch(key){
+                                    case "title":
+                                        board_titleList.add(data.getValue().toString());
+                                        break;
+                                    case "writer":
+                                        board_writerList.add(data.getValue().toString());
+                                        break;
+                                    case "content":
+                                        board_contentList.add(data.getValue().toString());
+
+                                        break;
+                                    case "date":
+                                        board_timeList.add(data.getValue().toString());
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            adapter.add(board_titleList.get(0));
+                            //adapter.add(board_writerList.get(0));
+                            //adapter.add(board_timeList.get(0));
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        /*DatabaseReference userScheduleDB = mReference.child("Community").child("abc");
+        Log.i("tag4", String.valueOf(1));
+        final int finalI = 0;
+        userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String key = data.getKey() + "";
+                    Log.i("tag", key);
+                    switch(key){
+                        case "title":
+                            board_titleList.add(data.getValue().toString());
+                            break;
+                        case "writer":
+                            board_writerList.add(data.getValue().toString());
+                            break;
+                        case "content":
+                            board_contentList.add(data.getValue().toString());
+
+                            break;
+                        case "date":
+                            board_timeList.add(data.getValue().toString());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                Log.i("tag", "4");
+
+                adapter.add(board_titleList.get(0));
+                //adapter.add(board_writerList.get(0));
+                //adapter.add(board_timeList.get(0));
+                Log.i("tag", "5");
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });*/
+
+
+
+    }
 
 
     public class CustomList extends ArrayAdapter<String>
@@ -90,15 +197,12 @@ public class CommunityFragment extends Fragment {
 
         public CustomList(Activity context)
         {
-            super(context, R.layout.schedule_item, riceName);
-            Log.i("tag", "7");
+            super(context, R.layout.community_item, new ArrayList<String>());
             this.context = context;
-            Log.i("tag", "8");
         }
 
         public View getView(int position, View view, ViewGroup parent)
         {
-            Log.i("tag", "3");
             final int pos = position;
 
             if (view == null)
@@ -110,16 +214,15 @@ public class CommunityFragment extends Fragment {
             /*
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.community_item, null, true);*/
-            Log.i("tag", "4");
 
             TextView titleList = (TextView) view.findViewById(R.id.communityTitle);
             TextView writerList = (TextView) view.findViewById(R.id.communityWriter);
             TextView timeList = (TextView) view.findViewById(R.id.writeTime);
-            titleList.setText(riceName[pos]);
-            writerList.setText(riceName[pos]);
-            timeList.setText(riceName[pos]);
-
-            Log.i("tag", riceName[pos]);
+            Log.i("tag", "6");
+            titleList.setText(board_titleList.get(position));
+            writerList.setText(board_writerList.get(position));
+            timeList.setText(board_timeList.get(position));
+            Log.i("tag", "7");
             return view;
         }
 
