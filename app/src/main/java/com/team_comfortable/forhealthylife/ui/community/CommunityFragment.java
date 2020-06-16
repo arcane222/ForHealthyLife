@@ -97,12 +97,14 @@ public class CommunityFragment extends Fragment {
         DatabaseReference userCommunityDB = mReference.child("Community");
         Log.i("tag4", String.valueOf(1));
         final int finalI = 0;
+
         userCommunityDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String key = data.getKey() + "";
-                    DatabaseReference userCommunityDB = mReference.child("Community").child(key);
+                    final String key12 = data.getKey() + "";
+                    Log.i("tag12",key12);
+                    final DatabaseReference userCommunityDB = mReference.child("Community").child(key12);
                     userCommunityDB.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
