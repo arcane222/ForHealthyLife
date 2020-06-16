@@ -17,14 +17,14 @@
         android:text="매일 체중를 기록해보세요."
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/datePicker_weight"
+        app:layout_constraintBottom_toTopOf="@id/analysis_datePicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <DatePicker
-        android:id="@+id/datePicker_weight"
+        android:id="@+id/analysis_datePicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editText_inputWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/datePicker_weight" />
+        app:layout_constraintTop_toBottomOf="@id/analysis_datePicker" />
 
     <EditText
         android:id="@+id/editText_inputWeight"

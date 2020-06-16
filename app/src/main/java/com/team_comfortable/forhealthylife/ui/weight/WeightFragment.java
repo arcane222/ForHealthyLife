@@ -2,8 +2,6 @@ package com.team_comfortable.forhealthylife.ui.weight;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -65,7 +60,7 @@ public class WeightFragment extends Fragment {
     {
 
         // Initialize View
-        datePicker = (DatePicker) root.findViewById(R.id.datePicker_weight);
+        datePicker = (DatePicker) root.findViewById(R.id.analysis_datePicker);
         inputWeight = (EditText) root.findViewById(R.id.editText_inputWeight);
         displayWeight = (TextView) root.findViewById(R.id.textView_displayWeight);
         deleteWeightBtn = (Button) root.findViewById(R.id.btn_weight_delete);

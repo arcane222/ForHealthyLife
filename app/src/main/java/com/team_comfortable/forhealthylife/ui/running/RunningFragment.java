@@ -139,7 +139,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
         dialog.show();
     }
 
-
     public void setStepCountInDB(final int count)
     {
         final DatabaseReference dbReference = mReference.child("UserList").child(mUser.getUid()).child("userStepCount");
