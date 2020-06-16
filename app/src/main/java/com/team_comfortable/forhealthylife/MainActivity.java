@@ -63,7 +63,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements EatingFragment.OnListSelectedListener, HomeFragment.OnBtnClickListener
+public class MainActivity extends AppCompatActivity
+        implements EatingFragment.OnListSelectedListener, HomeFragment.OnViewClickListener
 {
     private static final int PERMISSIONS_REQUEST_CODE = 1000;
     private static final String[] REQUEST_PERMISSIONS = {Manifest.permission.ACTIVITY_RECOGNITION};
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         initToolbar();
         initBottomNavMenu();
         setProfile();
+        setHealthInformation();
     }
 
     public void setProfile()
@@ -125,9 +127,17 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         Glide.with(this).load(userImgUrl).into(userImgView);
     }
 
-    public void onTouchCaneldarPanel(View v)
+    public void setHealthInformation()
     {
-        v.setBackgroundColor(Color.GREEN);
+        View root = getLayoutInflater().inflate(R.layout.fragment_home, null);
+        ImageView iv = root.findViewById(R.id.iv_home_healthInformation1);
+        iv.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Log.i("info", "info");
+            }
+        });
     }
 
 
@@ -212,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
     }
 
     /* Home Fragment Button Click Listener (Eating, Running, Exercise) */
-    public void onBtnClick(View v)
+    public void onViewClick(View view)
     {
         Fragment eatingFragment = new EatingFragment();
         Fragment runningFragment = new RunningFragment();
@@ -220,10 +230,11 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         Fragment weightFragment = new WeightFragment();
 
         FragmentTransaction menuFragTransaction = getSupportFragmentManager().beginTransaction();
-        switch(v.getId())
+        Intent intent = null;
+        switch(view.getId())
         {
             case R.id.btn_run:
-                permissionBtn = v;
+                permissionBtn = view;
                 boolean bool = checkPermission();
                 if(bool) menuFragTransaction.replace(R.id.fragment_home, runningFragment);
                 break;
@@ -235,6 +246,27 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
                 break;
             case R.id.btn_weight:
                 menuFragTransaction.replace(R.id.fragment_home, weightFragment);
+                break;
+            case R.id.iv_home_healthInformation1:
+                intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://m.post.naver.com/viewer/postView.nhn?volumeNo=28429012&memberNo=6289885"));
+                startActivity(intent);
+                break;
+            case R.id.iv_home_healthInformation2:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.post.naver.com/viewer/postView.nhn?volumeNo=28506504&memberNo=6289885"));
+                startActivity(intent);
+                break;
+            case R.id.iv_home_healthInformation3:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.post.naver.com/viewer/postView.nhn?volumeNo=28533731&memberNo=6289885"));
+                startActivity(intent);
+                break;
+            case R.id.iv_home_healthInformation4:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.post.naver.com/viewer/postView.nhn?volumeNo=27899236&memberNo=6289885"));
+                startActivity(intent);
+                break;
+            case R.id.iv_home_healthInformation5:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.post.naver.com/viewer/postView.nhn?volumeNo=28546088&memberNo=37968322"));
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -283,9 +315,7 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
             return false;
         }
         else
-        {
             return true;
-        }
     }
 
     @Override
@@ -337,7 +367,6 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
 
     OnBackPressedListener listener;
 
-
     public void setOnBackPressedListener(OnBackPressedListener listener){
         this.listener = listener;
     }
@@ -353,5 +382,4 @@ public class MainActivity extends AppCompatActivity implements EatingFragment.On
         }
 
     }
-
 }

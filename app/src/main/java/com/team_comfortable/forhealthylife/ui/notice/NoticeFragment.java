@@ -16,20 +16,9 @@ import com.team_comfortable.forhealthylife.R;
 
 public class NoticeFragment extends Fragment {
 
-    private NoticeViewModel noticeViewModel;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        noticeViewModel =
-                ViewModelProviders.of(this).get(NoticeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View root = inflater.inflate(R.layout.fragment_notice, container, false);
-        final TextView textView = root.findViewById(R.id.text_notice);
-        noticeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }
