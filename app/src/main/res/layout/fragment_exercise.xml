@@ -5,8 +5,9 @@
     android:id="@+id/fragment_eat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1E1E1"
+    android:background="#D3D3D3"
 
+    android:backgroundTint="#F5F5F5"
     tools:context=".ui.exercise.ExerciseFragment">
 
     <LinearLayout
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/ic_background_white"
+            android:background="@drawable/ic_exercise_background"
             android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -152,12 +153,11 @@
 
         </LinearLayout>
 
-
         <FrameLayout
             android:id="@+id/exercise_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.1">
+            android:layout_weight="1">
 
             <ListView
                 android:id="@+id/exercise_list"
