@@ -64,9 +64,9 @@
 
             <Button
                 android:id="@+id/btn_kcalReset"
-                android:layout_width="77dp"
-                android:layout_height="45dp"
-                android:text="reset"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_revert"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/Kcal"

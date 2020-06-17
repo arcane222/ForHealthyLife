@@ -6,12 +6,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,12 +70,14 @@ public class CommunityFragment extends Fragment {
 
     private CustomList adapter;
     private ListView listview;
+    private ScrollView scrollview;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
         listview = view.findViewById(R.id.community_board);
         Button sinupBtn = view.findViewById(R.id.btn_signup);
+        scrollview = view.findViewById(R.id.scrollViewCommunity);
         sinupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +91,18 @@ public class CommunityFragment extends Fragment {
         adapter = new CustomList((Activity) view.getContext());
         editBoardInDB();
         listview.setAdapter(adapter);
+        listview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP){
+                    scrollview.requestDisallowInterceptTouchEvent(false);
+                }
+                else {
+                    scrollview.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            }
+        });
         adapter.setOnClicklistener2(new OnlistClickListener2() {
             @Override
             public void onListClick(String key) {
