@@ -2,11 +2,9 @@ package com.team_comfortable.forhealthylife.ui.community;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +14,10 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.MainActivity;
-import com.team_comfortable.forhealthylife.OnBackPressedListener;
 import com.team_comfortable.forhealthylife.R;
-import com.team_comfortable.forhealthylife.ui.calendar.fragment.CalendarFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class BoardFragment extends Fragment implements OnBackPressedListener {
+public class BoardFragment extends Fragment  {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseUser mUser;
@@ -97,14 +90,12 @@ public class BoardFragment extends Fragment implements OnBackPressedListener {
                 transaction.commit();
             }
         });
-
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-
         return root;
     }
 
@@ -140,23 +131,5 @@ public class BoardFragment extends Fragment implements OnBackPressedListener {
         timeDate = timeFormat.format(calendar.getTime());
         currentDate  = dateFormat.format(calendar.getTime());
 
-    }
-
-
-
-    @Override
-    public void onBackPressed() {
-
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        CommunityFragment communityFragment = new CommunityFragment();
-        transaction.replace(R.id.fragment_community, communityFragment);
-
-        transaction.commit();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        activity.setOnBackPressedListener(this);
     }
 }

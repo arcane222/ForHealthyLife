@@ -148,6 +148,7 @@
                     android:id="@+id/comment_list"
                     android:layout_width="360dp"
                     android:layout_height="300dp"
+                    android:divider="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

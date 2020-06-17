@@ -85,11 +85,11 @@ public class Data {
 
     static Integer[] sideDishImage = {
             R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home
+            R.drawable.ic_spinach,
+            R.drawable.ic_sidedish_kkakdugi,
+            R.drawable.ic_sidedish_cabbage_kimchi,
+            R.drawable.ic_sidedish_nabak,
+            R.drawable.ic_sidedish_52sobak2
     };
 
     static String[] fastFoodName = {

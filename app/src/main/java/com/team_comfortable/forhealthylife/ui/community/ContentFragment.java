@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,9 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.MainActivity;
-import com.team_comfortable.forhealthylife.OnBackPressedListener;
 import com.team_comfortable.forhealthylife.R;
-import com.team_comfortable.forhealthylife.ui.calendar.fragment.CalendarFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,9 +39,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ContentFragment extends Fragment implements OnBackPressedListener {
+public class ContentFragment extends Fragment {
 
-    private int position;
     private String key, commentKey;
     MainActivity activity;
     private ArrayList<String> comment_textList = new ArrayList<String>();
@@ -58,10 +54,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
         super.onCreate(savedInstanceState);
         activity = (MainActivity) getActivity();
     }
-/*
-    public void getPosition(int position){
-        this.position = position;
-    }*/
+
     public void getKey(String key){
         this.key = key;
     }
@@ -80,16 +73,13 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
         dateText = view.findViewById(R.id.content_date);
         contentText = view.findViewById(R.id.content_board);
         listview = view.findViewById(R.id.comment_list);
-
         commentText = view.findViewById(R.id.commentText);
 
         Button btnBack = view.findViewById(R.id.btn_contentBack);
         Button btnCommentEdit = view.findViewById(R.id.btn_commentEdit);
         btnContentRemove = view.findViewById(R.id.btn_contentRemove);
 
-
         adapter = new CustomList((Activity) getContext());
-
         editCommentListInDB();
         listview.setAdapter(adapter);
         adapter.setOnClicklistener3(new OnlistClickListener3() {
@@ -151,7 +141,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
 
-
     public void initFirebase()
     {
         mAuth = FirebaseAuth.getInstance();
@@ -186,7 +175,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                             break;
                     }
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -234,7 +222,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
     }
 
     public void checkRemove(){
-
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("게시물 삭제");
         dialog.setMessage("게시물을 삭제하시겠습니까?");
@@ -251,7 +238,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
-                //Toast.makeText(getContext(), "취소하였습니다.", Toast.LENGTH_SHORT).show();
+
             }
         });
         dialog.show();
@@ -260,7 +247,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
 
     //firebase에 댓글 내용을 입력합니다.
     public void editCommentInDB(){
-
         setTime();
         DatabaseReference communityReference = mReference.child("Community").child(key).child("comment");
         Map<String, Object> commentInfo = new HashMap<String, Object>();
@@ -285,8 +271,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
 
     }
 
-
-
     //firebase에 댓글 data를 받아와 list를 작성합니다.
     public void editCommentListInDB(){
         comment_textList = new ArrayList<String>();
@@ -310,7 +294,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                                 switch (key) {
                                     case "content":
                                         comment_textList.add(data.getValue().toString());
-
                                         break;
                                     case "writer":
                                         comment_writerList.add(data.getValue().toString());
@@ -323,7 +306,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                                 }
                             }
                             adapter.add(comment_textList.get(0));
-
                         }
 
                         @Override
@@ -331,12 +313,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
 
                         }
                     });
-
                 }
-
-                //adapter.addAll(comment_textList);
-
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -373,7 +350,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                                         break;
                                 }
                             }
-
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -425,7 +401,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
-                //Toast.makeText(getContext(), "취소하였습니다.", Toast.LENGTH_SHORT).show();
+
             }
         });
         dialog.show();
@@ -447,7 +423,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                 checkRemove2(position);
             }
         });
-
     }
 
     String currentDate, timeDate;
@@ -461,22 +436,6 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
 
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        CommunityFragment communityFragment = new CommunityFragment();
-        transaction.replace(R.id.fragment_community, communityFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        activity.setOnBackPressedListener(this);
-    }
 
     public interface OnlistClickListener3 {
         public void onListClick(int position);
@@ -508,14 +467,10 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.comment_item, parent, false);
             }
-            /*
-            LayoutInflater inflater = context.getLayoutInflater();
-            View rowView = inflater.inflate(R.layout.community_item, null, true);*/
             TextView textList = (TextView) view.findViewById(R.id.commentText);
             TextView writerList = (TextView) view.findViewById(R.id.commentWriter);
             TextView timeList = (TextView) view.findViewById(R.id.commentDate);
             Button btncommentRemove = (Button) view.findViewById(R.id.btn_commentRemove);
-            Log.i("tag",checkPosition+"");
             for(int i =0; i < checkPosition.size();i++){
                 if(checkPosition.get(i) == pos){
                     btncommentRemove.setVisibility(View.VISIBLE);
@@ -533,7 +488,5 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
             });
             return view;
         }
-
     }
-
 }
