@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background_white"
-    android:padding="8dp">
+    android:backgroundTint="#F5F5F5"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/commentText"
-        android:layout_width="142dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/commentDate"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03" />
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/commentDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/commentWriter"
-        app:layout_constraintStart_toEndOf="@id/commentText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
+        <TextView
+            android:id="@+id/commentText"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_profile_barbackground"
+            android:gravity="center"
+            android:text="TextView"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/commentWriter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/commentDate"
-        app:layout_constraintTop_toBottomOf="@id/btn_commentRemove" />
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_commentRemove"
-        android:layout_width="77dp"
-        android:layout_height="31dp"
-        android:visibility="invisible"
-        android:text="Delete"
-        app:layout_constraintBottom_toTopOf="@+id/commentWriter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
-        app:layout_constraintStart_toEndOf="@+id/commentText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48000002" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/commentDate"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/commentWriter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_commentRemove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_schedule_cancel"
+            android:textSize="10sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</LinearLayout>

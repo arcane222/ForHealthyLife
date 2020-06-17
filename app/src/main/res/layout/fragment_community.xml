@@ -3,10 +3,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_community"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:id="@+id/fragment_community"
+    android:background="#D3D3D3"
+    android:backgroundTint="#F5F5F5"
     tools:context=".ui.community.CommunityFragment">
 
     <LinearLayout

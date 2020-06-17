@@ -2,127 +2,146 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.community.ContentFragment"
-    android:id="@+id/fragment_content"
-    android:background="#FFFFFF">
+    android:layout_alignParentBottom="true"
+    android:background="#D3D3D3"
+    android:backgroundTint="#F5F5F5"
+    android:windowSoftInputMode="adjustPan"
+    tools:context=".ui.community.ContentFragment">
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/content_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="157dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.153"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_contentBack"
-            app:layout_constraintVertical_bias="0.083" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:windowSoftInputMode="adjustPan">
 
-        <TextView
-            android:id="@+id/content_writer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.59"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_contentRemove"
-            app:layout_constraintVertical_bias="0.061" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:windowSoftInputMode="adjustPan">
 
-        <TextView
-            android:id="@+id/content_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.883"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_contentRemove"
-            app:layout_constraintVertical_bias="0.061" />
+                <Button
+                    android:id="@+id/btn_contentBack"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_back" />
 
-        <TextView
-            android:id="@+id/content_board"
-            android:layout_width="315dp"
-            android:layout_height="273dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content_writer"
-            app:layout_constraintVertical_bias="0.071" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/btn_contentBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="뒤로가기"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+                <Button
+                    android:id="@+id/btn_contentRemove"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_schedule_cancel"
+                    android:visibility="invisible" />
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_contentRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:text="삭 제"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.777"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:windowSoftInputMode="adjustPan">
 
-        <EditText
-            android:id="@+id/commentText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.272"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content_board"
-            app:layout_constraintVertical_bias="0.149" />
+                <TextView
+                    android:id="@+id/content_title"
+                    android:layout_width="210dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_profile_barbackground"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_commentEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.303"
-            app:layout_constraintStart_toEndOf="@+id/commentText"
-            app:layout_constraintTop_toBottomOf="@+id/content_board"
-            app:layout_constraintVertical_bias="0.151" />
+                <TextView
+                    android:id="@+id/content_writer"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_profile_barbackground"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/comment_list"
-            android:layout_width="329dp"
-            android:layout_height="173dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.524"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/commentText"
-            app:layout_constraintVertical_bias="0.388" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/content_date"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_profile_barbackground"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:windowSoftInputMode="adjustPan">
+
+                <TextView
+                    android:id="@+id/content_board"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:background="@drawable/ic_contentboard_background"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@drawable/ic_contentboard_background">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:windowSoftInputMode="adjustPan"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ListView
+                        android:id="@+id/comment_list"
+                        android:layout_width="360dp"
+                        android:layout_height="300dp" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:windowSoftInputMode="adjustPan">
+
+                <EditText
+                    android:id="@+id/commentText"
+                    android:layout_width="310dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_profile_barbackground"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:maxLength="40" />
+
+                <Button
+                    android:id="@+id/btn_commentEdit"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_registercontent"
+                    android:text="   등록"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>
