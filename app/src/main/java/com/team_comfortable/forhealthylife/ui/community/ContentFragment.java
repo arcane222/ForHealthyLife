@@ -12,12 +12,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +69,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
     private TextView titleText,writerText,dateText,contentText;
     private EditText commentText;
     private Button btnContentRemove;
+    private ScrollView scrollview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,9 +128,21 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
 
             }
         });
+        scrollview = view.findViewById(R.id.scrollView);
         setContentInDB();
         checkContentInDB();
-
+        listview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP){
+                    scrollview.requestDisallowInterceptTouchEvent(false);
+                }
+                else {
+                    scrollview.requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            }
+        });
         return view;
     }
 
