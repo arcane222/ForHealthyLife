@@ -276,7 +276,7 @@ public class CalendarAdapter extends RecyclerView.Adapter
                             break;
                         }
                         else{
-                            imgDay.setImageResource(R.drawable.ic_circle_sky);
+                            imgDay.setImageResource(R.drawable.ic_background_white);
                         }
                     }
                 }

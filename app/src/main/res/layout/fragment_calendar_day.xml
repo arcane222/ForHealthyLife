@@ -22,8 +22,9 @@
 
     <ImageView
         android:id="@+id/item_img"
-        android:layout_width="39dp"
-        android:layout_height="29dp"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="45dp"
         app:srcCompat="@color/common_google_signin_btn_text_dark_default" />
 

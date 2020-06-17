@@ -13,6 +13,7 @@
         android:layout_height="400dp"
         android:layout_gravity="center"
         android:background="#FFFFFF"
+
         android:orientation="vertical">
 
         <TextView
