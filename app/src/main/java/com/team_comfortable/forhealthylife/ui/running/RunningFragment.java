@@ -19,7 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,9 +79,9 @@ public class RunningFragment extends Fragment implements SensorEventListener
         {
             Toast.makeText(getContext(),"No Step Detect Sensor",Toast.LENGTH_SHORT).show();
         }
-        mReset = (Button)root.findViewById(R.id.btn_resetStep);
-        mSave = (Button)root.findViewById(R.id.btn_saveStep);
-        mStepCountTextView = root.findViewById(R.id.stepNumView);
+        mReset = (Button)root.findViewById(R.id.btn_resetStepCount);
+        mSave = (Button)root.findViewById(R.id.btn_saveStepCount);
+        mStepCountTextView = root.findViewById(R.id.tv_running_stepCount);
     }
 
     private void initButton()

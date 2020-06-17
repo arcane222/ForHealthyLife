@@ -9,95 +9,114 @@
     android:backgroundTint="#F5F5F5"
     tools:context=".ui.community.BoardFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_del"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_schedule_cancel"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toStartOf="@id/btn_edit"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <Button
+                    android:id="@+id/btn_del"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_schedule_cancel"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toStartOf="@id/btn_edit"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
 
-            <Button
-                android:id="@+id/btn_edit"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_registercontent2"
-                android:text="       등록"
-                android:textColor="#707070"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="글 등록"
+                    android:textColor="#0288D1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/edit_board"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_submit"
+                    android:textColor="#707070"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/board_title"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center"
                 android:text="제목"
+                android:textColor="#0288D1"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edit_boardTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:layout_weight="2"
                 android:background="@drawable/ic_profile_barbackground"
                 android:ems="10"
                 android:gravity="center"
+                android:hint="글제목을 입력하세요"
                 android:inputType="textPersonName"
                 android:maxLength="30" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edit_board"
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/ic_analysis_content_background"
-                android:ems="10"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:id="@+id/board_title2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center"
-                android:hint="내용을 입력하세요."
-                android:inputType="textMultiLine|textNoSuggestions"
+                android:text="내용"
+                android:textColor="#0288D1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                android:scrollHorizontally="false" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@drawable/ic_contentboard_background">
+
+                <EditText
+                    android:id="@+id/edit_board"
+                    android:layout_width="330dp"
+                    android:layout_height="330dp"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="내용을 입력하세요."
+
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:scrollHorizontally="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

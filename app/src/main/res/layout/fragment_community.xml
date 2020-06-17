@@ -10,61 +10,63 @@
     android:backgroundTint="#F5F5F5"
     tools:context=".ui.community.CommunityFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/community_title"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_profile_barbackground"
-            android:gravity="center"
-            android:text="자유게시판"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ListView
-            android:id="@+id/community_board"
-            android:layout_width="match_parent"
-            android:layout_height="400dp">
-
-        </ListView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Space
-                android:layout_width="155dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/btn_signup"
-                android:layout_width="100dp"
+            <TextView
+                android:id="@+id/community_title"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_registercontent"
+                android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center"
-                android:text="        글 쓰기"
-                android:textColor="#474747"
-                android:textSize="12sp"
+                android:text="자유게시판"
+                android:textColor="#0288D1"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Space
-                android:layout_width="155dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
+            <ListView
+                android:id="@+id/community_board"
+                android:layout_width="match_parent"
+                android:layout_height="450dp">
 
-    </LinearLayout>
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="155dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_signup"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_registercontent"
+                    android:gravity="center"
+                    android:text="        글 쓰기"
+                    android:textColor="#474747"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="155dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

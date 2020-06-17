@@ -1,101 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_weight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80D8FF"
+    android:background="#D3D3D3"
+    android:backgroundTint="#F5F5F5"
+    android:orientation="vertical"
     tools:context=".ui.weight.WeightFragment">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="#FFD180"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center"
         android:text="매일 체중를 기록해보세요."
+        android:textColor="#FFA000"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/analysis_datePicker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:textStyle="bold" />
 
     <DatePicker
         android:id="@+id/analysis_datePicker"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_light"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ic_analysis_content_background"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
-        app:layout_constraintBottom_toTopOf="@id/textView_displayWeight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"></DatePicker>
+        android:scrollbarSize="20sp">
+    </DatePicker>
 
     <TextView
         android:id="@+id/textView_displayWeight"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="#FFD180"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center"
         android:text="당신의 몸무게는?"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editText_inputWeight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/analysis_datePicker" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editText_inputWeight"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:backgroundTint="@android:color/holo_blue_light"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_profile_barbackground"
         android:ems="10"
         android:gravity="center"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_displayWeight"
-        tools:layout_constraintBottom_toTopOf="@id/btn_confirm_weight" />
+        android:hint="여기에 몸무게를 입력하세요"
+        android:inputType="numberDecimal" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_weight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_inputWeight" />
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/ic_weight" />
 
-    <Button
-        android:id="@+id/btn_weight_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFD180"
-        android:text="등록"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_weight_delete"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_weight_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFD180"
-        android:text="삭제"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_weight_register"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        <Button
+            android:id="@+id/btn_weight_delete"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_profile_changegenbtn"
+            android:text="삭제" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_weight_register"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_profile_changegenbtn"
+            android:text="등록" />
+    </LinearLayout>
+
+</LinearLayout>
