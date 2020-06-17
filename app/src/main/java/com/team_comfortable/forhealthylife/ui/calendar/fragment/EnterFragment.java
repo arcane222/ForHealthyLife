@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,29 +20,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.team_comfortable.forhealthylife.MainActivity;
-import com.team_comfortable.forhealthylife.OnBackPressedListener;
 import com.team_comfortable.forhealthylife.R;
 
-import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class EnterFragment extends Fragment implements OnBackPressedListener {
+public class EnterFragment extends Fragment {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     private EditText EditSch, EditDate;
-    MainActivity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = (MainActivity) getActivity();
-
     }
 
     public void initFirebase()
@@ -101,7 +91,6 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
 
             }
         });
-
         return root;
     }
 
@@ -162,22 +151,6 @@ public class EnterFragment extends Fragment implements OnBackPressedListener {
         return true;
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        CalendarFragment calendarFragment = new CalendarFragment();
-        transaction.replace(R.id.fragment_calendar, calendarFragment);
-        transaction.addToBackStack(this.getClass().getSimpleName());
-        transaction.commit();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        activity.setOnBackPressedListener(this);
-    }
 
 
 

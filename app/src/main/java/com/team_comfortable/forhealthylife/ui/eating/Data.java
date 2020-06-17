@@ -84,7 +84,7 @@ public class Data {
     static Integer[] sideDishKcal = {50,40,20,15,6,10};
 
     static Integer[] sideDishImage = {
-            R.drawable.ic_home,
+            R.drawable.ic_sidedish_sprouts,
             R.drawable.ic_spinach,
             R.drawable.ic_sidedish_kkakdugi,
             R.drawable.ic_sidedish_cabbage_kimchi,
