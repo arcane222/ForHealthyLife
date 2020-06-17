@@ -1,5 +1,6 @@
 package com.team_comfortable.forhealthylife.ui.eating;
 
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.team_comfortable.forhealthylife.MainActivity;
 import com.team_comfortable.forhealthylife.R;
 
 public class RiceFragment extends Fragment {
@@ -28,6 +39,55 @@ public class RiceFragment extends Fragment {
         return new RiceFragment();
     }
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
+    private void initFirebase()
+    {
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+    }
+    private int kcalSum;
+
+    public void setKcalRice(int kcal, int check){
+        final int Kcal = kcal;
+        final int Check = check;
+        initFirebase();
+        final DatabaseReference kcalInDB = mReference.child("UserList").child(mUser.getUid());
+        kcalInDB.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String key = data.getKey();
+                    if(key.equals("userKcal")){
+                        if(Check == 0){
+                            kcalSum = Integer.parseInt(data.getValue().toString());
+                            kcalSum += Kcal;
+                            kcalInDB.child(key).setValue(kcalSum);
+                            eatingViewModel.setInteger(Kcal);
+                            break;
+                        }
+                        else if(Check == 1){
+                            kcalSum = Integer.parseInt(data.getValue().toString());
+                            kcalSum -= Kcal;
+                            kcalInDB.child(key).setValue(kcalSum);
+                            eatingViewModel.setInteger(Kcal);
+                            break;
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState)
@@ -36,21 +96,7 @@ public class RiceFragment extends Fragment {
         ListView listview = view.findViewById(R.id.riceName);
         CustomList adapter = new CustomList((Activity) view.getContext());
         listview.setAdapter(adapter);
-       //listview.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_checked, Data.riceName));
-        /*mWordSelListener = (MainActivity) getActivity();
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mWordSelListener.onWordSelected(position);
-            }
-        });*/
 
-        /*listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mEatModel.setInteger(position);
-            }
-        });*/
         return view;
     }
 
@@ -74,80 +120,42 @@ public class RiceFragment extends Fragment {
         public View getView(int position, View view, ViewGroup parent)
         {
             final int pos = position;
-            eatingViewModel.setVersion(0);
+
 
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.food_item, null, true);
 
             ImageView imageView = (ImageView) rowView.findViewById(R.id.riceImage);
             TextView foodName = (TextView) rowView.findViewById(R.id.riceName);
-            final TextView amount = (TextView) rowView.findViewById(R.id.foodAmount);
+
             Button incrButton = (Button) rowView.findViewById(R.id.incrAmountBtn);
-            Button decrButton = (Button) rowView.findViewById(R.id.decrAmountBtn);
+
 
             imageView.setImageResource(Data.riceImage[position]);
             foodName.setText(Data.riceName[position]);
-            amount.setText(Data.amountCount[position]+"");
+
 
             incrButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    eatingViewModel.setInteger(pos);
-                    eatingViewModel.setOperation(1);
-                    if(Integer.parseInt(amount.getText().toString()) < 9){
-                       amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) + 1));
-                       eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
-                    }
+                    final int kcal = Data.riceKcal[pos];
+                    setKcalRice(kcal,0);
+                    Snackbar.make(v, Data.riceName[pos]+" 이 추가되었습니다.",
+                            Snackbar.LENGTH_LONG).setAction("되돌리기", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            setKcalRice(kcal,1);
+                        }
+                    }).show();
 
                 }
             });
-            decrButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    eatingViewModel.setInteger(pos);
-                    eatingViewModel.setOperation(0);
-                    if(Integer.parseInt(amount.getText().toString()) > 0) {
-                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) - 1));
-                        eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
-                    }
-                }
-            });
 
-            /*name.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    eatingViewModel.setInteger(pos);
-                    Toast.makeText(context, pos + "번째 이미지 선택", Toast.LENGTH_SHORT).show();
-
-                    EatingFragment eatF = new EatingFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("position",pos);
-                    eatF.setArguments(bundle);
-                }
-            });*/
             return rowView;
         }
     }
-
-    /*
-    @Override
-    public void onBackKey() {
-        MainActivity activity = (MainActivity) getActivity();
-        activity.setOnKeyBackPressedListener(null);
-        activity.onBackPressed();
-    }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        ((MainActivity)context).setOnKeyBackPressedListener(this);
-    }
-    */
-
-
 }

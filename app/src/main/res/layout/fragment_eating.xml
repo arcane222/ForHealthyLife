@@ -25,7 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="총 섭취량 :   "
+                android:textColor="#0288D1"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/calculKcal"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -37,7 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
+                android:textColor="#0288D1"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/Kcal"
                 app:layout_constraintStart_toEndOf="@id/total"
@@ -48,11 +52,24 @@
                 android:id="@+id/Kcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="70dp"
                 android:text="Kcal"
+                android:textColor="#0288D1"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/calculKcal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_kcalReset"
+                android:layout_width="77dp"
+                android:layout_height="45dp"
+                android:text="reset"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Kcal"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

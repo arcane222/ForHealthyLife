@@ -10,11 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,18 +38,31 @@ import java.util.Map;
 public class EatingFragment extends Fragment
 {
 
+
     private EatingViewModel eatingViewModel;
     private TextView kcalView;
-    private int kcalSum, pos, opr, ver;
+    private int kcalSum, ver;
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
+    private void initFirebase()
+    {
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+    }
 
 
     public interface OnListSelectedListener
     {
         public void onListSelected(int position);
     }
-
     OnListSelectedListener mListSelListener;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -55,11 +70,16 @@ public class EatingFragment extends Fragment
     {
 
         View root = inflater.inflate(R.layout.fragment_eating, container, false);
-
-
         ListView listview = root.findViewById(R.id.eat_list);
         kcalView = root.findViewById(R.id.calculKcal);
-
+        Button btn_kcalreset = root.findViewById(R.id.btn_kcalReset);
+        btn_kcalreset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetKcal();
+            }
+        });
+        getKcal();
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Data.eats);
         listview.setAdapter(adapter);
         mListSelListener = (MainActivity) getActivity();
@@ -69,35 +89,9 @@ public class EatingFragment extends Fragment
                 mListSelListener.onListSelected(position);
             }
         });
-        /*
-        if(savedInstanceState != null){
-            int pos = getArguments().getInt("position");
-            textview.setText(Data.riceKcal[pos]+"Kcal");
-        }
-        */
-
-
-        //listview.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Data.eats));
-        /*mWordSelListener = (MainActivity) getActivity();
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mWordSelListener.onWordSelected(position);
-
-            }
-        });*/
-
-
         return root;
     }
-/*
-    public class CustomList extends ArrayAdapter<String> {
-        private final Activity context;
-        public CustomList(Activity context) {
-            super(context, R.layout.food_item, Data.riceName);
-            this.context = context;
-        }
-    }*/
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
@@ -111,122 +105,62 @@ public class EatingFragment extends Fragment
             @Override
             public void onChanged(Integer integer)
             {
-                pos = integer;
+                setKcal();
             }
         });
-        eatingViewModel.getOperation().observe(this, new Observer<Integer>()
-        {
-            @Override
-            public void onChanged(Integer integer)
-            {
-                opr = integer;
-            }
-        });
-        eatingViewModel.getVersion().observe(this, new Observer<Integer>()
-        {
-            @Override
-            public void onChanged(Integer integer)
-            {
-                ver = integer;
-            }
-        });
-        eatingViewModel.getCount().observe(this, new Observer<Integer>()
-        {
+    }
 
+    public void setKcal(){
+        initFirebase();
+        DatabaseReference kcalInDB = mReference.child("UserList").child(mUser.getUid());
+        kcalInDB.addListenerForSingleValueEvent(new ValueEventListener()
+        {
             @Override
-            public void onChanged(Integer integer)
-            {
-                switch(ver){
-                    case 0:
-                        if(opr == 1){
-                            if(integer > 0){
-                                kcalSum += Data.riceKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        else{
-                            if(integer >= 0){
-                                kcalSum -= Data.riceKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String key = data.getKey() + "";
+                    if(key.equals("userKcal")){
+                        kcalSum = Integer.parseInt(data.getValue().toString());
+                        kcalView.setText(String.valueOf(kcalSum));
                         break;
-                    case 1:
-                        if(opr == 1){
-                            if(integer > 0){
-                                kcalSum += Data.soupKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        else{
-                            if(integer >= 0){
-                                kcalSum -= Data.soupKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        break;
-                    case 2:
-                        if(opr == 1){
-                            if(integer > 0){
-                                kcalSum += Data.sideDishKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        else{
-                            if(integer >= 0){
-                                kcalSum -= Data.sideDishKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        break;
-                    case 3:
-                        if(opr == 1){
-                            if(integer > 0){
-                                kcalSum += Data.fastFoodKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        else{
-                            if(integer >= 0){
-                                kcalSum -= Data.fastFoodKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        break;
-                    case 4:
-                        if(opr == 1){
-                            if(integer > 0){
-                                kcalSum += Data.drinkKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        else{
-                            if(integer >= 0){
-                                kcalSum -= Data.drinkKcal[pos];
-                                kcalView.setText(String.valueOf(kcalSum));
-                            }
-                        }
-                        break;
+                    }
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
         });
-
     }
 
-    public void onFoodBtnClicked(View view)
-    {
-
+    public void getKcal(){
+        initFirebase();
+        DatabaseReference kcalInDB = mReference.child("UserList").child(mUser.getUid());
+        kcalInDB.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String key = data.getKey() + "";
+                    if(key.equals("userKcal")){
+                        kcalSum = Integer.parseInt(data.getValue().toString());
+                        kcalView.setText(String.valueOf(kcalSum));
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
-    /*
-    public void onStart() {
-        super.onStart();
-
-        Bundle args = getArguments();
-        if (args != null) {
-            int pos = args.getInt("position");
-            textview.setText(Data.riceKcal[pos]+"Kcal");
-        }
+    public void resetKcal(){
+        initFirebase();
+        DatabaseReference kcalInDB = mReference.child("UserList").child(mUser.getUid()).child("userKcal");
+        kcalInDB.setValue("0");
+        setKcal();
     }
-    */
+
+
 }
