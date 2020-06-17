@@ -4,89 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:id="@+id/fragment_enter"
-    tools:context=".ui.calendar.fragment.EnterFragment">
+    tools:context=".ui.calendar.fragment.EnterFragment"
+    android:background="#D3D3D3"
+    android:backgroundTint="#F5F5F5">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="취 소"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_enter"
-            app:layout_constraintHorizontal_bias="0.201"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.064" />
-
-        <Button
-            android:id="@+id/btn_enter"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:privateImeOptions="defaultInputmode=korean"
-            android:text="입 력"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_cancel"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.064" />
-
-        <TextView
-            android:id="@+id/text_sch"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:text="일 정"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_sch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
-
-        <EditText
-            android:id="@+id/edit_sch"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="일정을 입력하시오"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.575"
-            app:layout_constraintStart_toEndOf="@id/text_sch"
-            app:layout_constraintTop_toBottomOf="@+id/btn_enter"
-            app:layout_constraintVertical_bias="0.101" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_schedule_cancel" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="일정 등록"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_enter"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_profile_changegenbtn"
+                android:privateImeOptions="defaultInputmode=korean"
+                android:text="완 료" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/text_date"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:text="날 짜"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/edit_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_sch"
-            app:layout_constraintVertical_bias="0.19999999" />
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_profile_barbackground"
+            android:gravity="center"
+            android:text="날짜"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edit_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_profile_barbackground"
             android:ems="10"
+            android:gravity="clip_horizontal|center"
             android:hint="YYMMDD"
-            android:inputType="date"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/text_date"
-            app:layout_constraintTop_toBottomOf="@+id/edit_sch"
-            app:layout_constraintVertical_bias="0.214" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/text_sch"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_profile_barbackground"
+            android:gravity="center"
+            android:text="일정 내용"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_sch"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_profile_barbackground"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="일정을 입력하시오"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
 
 </FrameLayout>

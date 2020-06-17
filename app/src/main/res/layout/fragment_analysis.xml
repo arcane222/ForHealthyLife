@@ -5,9 +5,10 @@
     android:id="@+id/layout_analysis"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDDDDD"
     android:orientation="vertical"
-    tools:context=".ui.analysis.AnalysisFragment">
+    tools:context=".ui.analysis.AnalysisFragment"
+    android:background="#D3D3D3"
+    android:backgroundTint="#F5F5F5">
 
     <ScrollView
         android:id="@+id/analysis_scrollView"
@@ -29,8 +30,8 @@
             <TextView
                 android:id="@+id/tv_analysis_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DDDDDD"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center"
                 android:text="주간 활동 분석"
                 android:textSize="24sp"
@@ -39,25 +40,26 @@
             <DatePicker
                 android:id="@+id/analysis_datePicker"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#039BE5"
+                android:layout_height="200dp"
+                android:background="@drawable/ic_analysis_content_background"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"></DatePicker>
 
             <Button
                 android:id="@+id/btn_analysis"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_profile_barbackground"
                 android:text="분석" />
 
             <TextView
                 android:id="@+id/tv_analysis_subtitle_weight"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#9C9C9C"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 체중 변화"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -72,8 +74,8 @@
             <TextView
                 android:id="@+id/tv_analysis_content_weight"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#C1C1C1"
+                android:layout_height="200dp"
+                android:background="@drawable/ic_analysis_content_background"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 체중 변화 사항입니다."
                 android:textSize="18sp"
@@ -82,11 +84,11 @@
             <TextView
                 android:id="@+id/tv_analysis_subtitle_stepCount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#9C9C9C"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 걸음수"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.LineChart
@@ -98,8 +100,8 @@
             <TextView
                 android:id="@+id/tv_analysis_content_stepCount"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#C1C1C1"
+                android:layout_height="200dp"
+                android:background="@drawable/ic_analysis_content_background"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 걸음수 현황 입니다."
                 android:textSize="18sp"
