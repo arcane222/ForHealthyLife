@@ -1,5 +1,6 @@
 package com.team_comfortable.forhealthylife.ui.exercise;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,16 +25,18 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.team_comfortable.forhealthylife.MainActivity;
+import com.team_comfortable.forhealthylife.OnBackPressedListener;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
 import com.team_comfortable.forhealthylife.ui.eating.EatingViewModel;
 import com.team_comfortable.forhealthylife.ui.exercise.DataExercise;
 import com.team_comfortable.forhealthylife.ui.exercise.ExerciseViewModel;
+import com.team_comfortable.forhealthylife.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseFragment extends Fragment {
+public class ExerciseFragment extends Fragment implements OnBackPressedListener {
 
     private ExerciseViewModel exerciseViewModel;
     private int pos;
@@ -42,6 +45,15 @@ public class ExerciseFragment extends Fragment {
     private TextView TitleText,LevelText,FocusText,UsingText,EquipmentText,Level,Focus,Using,Equipment;
 
     EatingFragment.OnListSelectedListener mListSelListener;
+
+    MainActivity activity;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = (MainActivity) getActivity();
+
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -248,8 +260,21 @@ public class ExerciseFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        HomeFragment homeFragment = new HomeFragment();
+        transaction.replace(R.id.fragment_home, homeFragment);
 
+        transaction.commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activity.setOnBackPressedListener(this);
+    }
 
 
 
