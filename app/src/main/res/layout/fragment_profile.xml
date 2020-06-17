@@ -5,15 +5,15 @@
     android:id="@+id/layout_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B9F6CA"
+    android:background="#F8F8F8"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/tv_profile_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFD180"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_horizontal|center_vertical"
         android:text="님의 프로필 "
         android:textColor="#8C9EFF"
@@ -30,7 +30,7 @@
         android:id="@+id/layout_profileImg"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="#80D8FF"
+        android:background="#F8F8F8"
         app:layout_constraintBottom_toTopOf="@id/tv_profile_uid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +38,8 @@
 
         <ImageView
             android:id="@+id/iv_profile_profileImg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,11 +52,11 @@
         android:id="@+id/tv_profile_uid"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFE57F"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
-        android:text="   UID :"
+        android:text="      UID :"
         android:textColor="#777777"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_profile_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,11 +67,11 @@
         android:id="@+id/tv_profile_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFD180"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
-        android:text="   닉네임 :"
+        android:text="      닉네임 :"
         android:textColor="#777777"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_profile_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,11 +82,11 @@
         android:id="@+id/tv_profile_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFE57F"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
-        android:text="   이메일 : "
+        android:text="      이메일 : "
         android:textColor="#777777"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/cl_profile_gender"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,11 +106,11 @@
             android:id="@+id/tv_profile_gender"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#FFD180"
+            android:background="@drawable/ic_profile_barbackground"
             android:gravity="center_vertical"
-            android:text="   성별 :"
+            android:text="      성별 :"
             android:textColor="#777777"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,9 +119,9 @@
 
         <Button
             android:id="@+id/btn_genderChange"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="0dp"
-            android:background="#FFE57F"
+            android:background="@drawable/ic_profile_changegenbtn"
             android:text="변경"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -143,52 +143,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_profile_gender">
 
-        <TextView
-            android:id="@+id/tv_profile_height"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FFE57F"
-            android:gravity="center_vertical"
-            android:text="   키 :"
-            android:textColor="#777777"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tv_profile_weight"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FFD180"
-            android:gravity="center_vertical"
-            android:text="   체중 :"
-            android:textColor="#777777"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/et_profile_height"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center_vertical"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:text="      키 :"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_profile_age"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FFE57F"
-            android:gravity="center_vertical"
-            android:text="   나이 :"
-            android:textColor="#777777"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_profile_weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center_vertical"
+                android:text="      체중 :"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/et_profile_age"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center_vertical"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:text="      나이 :"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_profile_stepCount"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFD180"
+        android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
-        android:text="   총 걸음수 :"
+        android:text="      총 걸음수 :"
         android:textColor="#777777"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
