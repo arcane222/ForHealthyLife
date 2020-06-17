@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -127,12 +128,12 @@ public class AnalysisFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("E");
         //calendar.add(Calendar.DATE, -2);
         String day2 = dateFormat.format(calendar.getTime());
-        if(day2.equals("Tue")) calendar.add(Calendar.DATE, -1);
-        if(day2.equals("Wed")) calendar.add(Calendar.DATE, -2);
-        if(day2.equals("Thu")) calendar.add(Calendar.DATE, -3);
-        if(day2.equals("Fri")) calendar.add(Calendar.DATE, -4);
-        if(day2.equals("Sat")) calendar.add(Calendar.DATE, -5);
-        if(day2.equals("Sun")) calendar.add(Calendar.DATE, -6);
+        if(day2.equals("Tue") || day2.equals("화")) calendar.add(Calendar.DATE, -1);
+        if(day2.equals("Wed") || day2.equals("수")) calendar.add(Calendar.DATE, -2);
+        if(day2.equals("Thu") || day2.equals("목")) calendar.add(Calendar.DATE, -3);
+        if(day2.equals("Fri") || day2.equals("금")) calendar.add(Calendar.DATE, -4);
+        if(day2.equals("Sat") || day2.equals("토")) calendar.add(Calendar.DATE, -5);
+        if(day2.equals("Sun") || day2.equals("일")) calendar.add(Calendar.DATE, -6);
         for(int i = 0; i < 7; i++)
         {
             SimpleDateFormat dFormat = new SimpleDateFormat("yyyyMMdd");
