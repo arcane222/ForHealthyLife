@@ -4,75 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background_white"
     android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/riceImage"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/riceName"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/ic_home" />
-
-    <TextView
-        android:id="@+id/riceName"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:paddingTop="7dp"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/foodAmount"
-        app:layout_constraintHorizontal_weight="2"
-        app:layout_constraintStart_toEndOf="@+id/riceImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-    <TextView
-        android:id="@+id/foodAmount"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:text="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/incrAmountBtn"
-        app:layout_constraintStart_toEndOf="@id/riceName"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <Button
-        android:id="@+id/incrAmountBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_plus_button"
-        android:onClick="onBtnClik"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/decrAmountBtn"
-        app:layout_constraintStart_toEndOf="@id/foodAmount"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <Button
-        android:id="@+id/decrAmountBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/ic_substract_button"
-        android:onClick="onBtnClik"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_foodlist_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/incrAmountBtn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/riceImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            app:srcCompat="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/riceName"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center_vertical"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/incrAmountBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_plus_button"
+            android:onClick="onBtnClik" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

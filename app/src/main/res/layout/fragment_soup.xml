@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
-        android:background="@color/cardview_light_background">
+        android:background="?android:attr/windowBackground">
 
     </ListView>
 </FrameLayout>

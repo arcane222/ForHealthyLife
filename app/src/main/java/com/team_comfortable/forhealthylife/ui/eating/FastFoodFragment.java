@@ -17,17 +17,72 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class FastFoodFragment extends Fragment {
 
     private EatingViewModel eatingViewModel;
 
     public static FastFoodFragment newInstance() {
         return new FastFoodFragment();
+    }
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
+    private void initFirebase()
+    {
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+    }
+    private int kcalSum;
+
+    public void setKcalFastFood(int kcal, int check){
+        final int Kcal = kcal;
+        final int Check = check;
+        initFirebase();
+        final DatabaseReference kcalInDB = mReference.child("UserList").child(mUser.getUid());
+        kcalInDB.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String key = data.getKey();
+                    if(key.equals("userKcal")){
+                        if(Check == 0){
+                            kcalSum = Integer.parseInt(data.getValue().toString());
+                            kcalSum += Kcal;
+                            kcalInDB.child(key).setValue(kcalSum);
+                            eatingViewModel.setInteger(Kcal);
+                            break;
+                        }
+                        else if(Check == 1){
+                            kcalSum = Integer.parseInt(data.getValue().toString());
+                            kcalSum -= Kcal;
+                            kcalInDB.child(key).setValue(kcalSum);
+                            eatingViewModel.setInteger(Kcal);
+                            break;
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
     @Override
@@ -55,56 +110,47 @@ public class FastFoodFragment extends Fragment {
 
         public CustomList(Activity context)
         {
-            super(context, R.layout.food_item, Data.sideDishName);
+            super(context, R.layout.food_item, Data.fastFoodName);
             this.context = context;
         }
 
         public View getView(int position, View view, ViewGroup parent)
         {
             final int pos = position;
-            eatingViewModel.setVersion(3);
+
 
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView = inflater.inflate(R.layout.food_item, null, true);
 
             ImageView imageView = (ImageView) rowView.findViewById(R.id.riceImage);
             TextView foodName = (TextView) rowView.findViewById(R.id.riceName);
-            final TextView amount = (TextView) rowView.findViewById(R.id.foodAmount);
             Button incrButton = (Button) rowView.findViewById(R.id.incrAmountBtn);
-            Button decrButton = (Button) rowView.findViewById(R.id.decrAmountBtn);
-
             imageView.setImageResource(Data.fastFoodImage[position]);
             foodName.setText(Data.fastFoodName[position]);
-            amount.setText(Data.amountCount[position]+"");
+
 
             incrButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    eatingViewModel.setInteger(pos);
-                    eatingViewModel.setOperation(1);
-                    if(Integer.parseInt(amount.getText().toString()) < 9){
-                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) + 1));
-                        eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
-                    }
+                    final int kcal = Data.fastFoodKcal[pos];
+                    setKcalFastFood(kcal,0);
+                    Snackbar.make(v, Data.fastFoodName[pos]+" 이 추가되었습니다.",
+                            Snackbar.LENGTH_LONG).setAction("되돌리기", new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            setKcalFastFood(kcal,1);
+                        }
+                    }).show();
+
 
                 }
             });
 
-            decrButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    eatingViewModel.setInteger(pos);
-                    eatingViewModel.setOperation(0);
-                    if(Integer.parseInt(amount.getText().toString()) > 0) {
-                        amount.setText(String.valueOf(Integer.parseInt(amount.getText().toString()) - 1));
-                        eatingViewModel.setCount(Integer.parseInt(amount.getText().toString()));
-                    }
-                }
-            });
+
 
             return rowView;
         }
