@@ -34,6 +34,7 @@
                 android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center"
                 android:text="주간 활동 분석"
+                android:textColor="#1976D2"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -50,7 +51,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_profile_barbackground"
-                android:text="분석" />
+                android:text="분석"
+                android:textColor="#FFA000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_analysis_subtitle_weight"
@@ -59,6 +63,7 @@
                 android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 체중 변화"
+                android:textColor="#0288D1"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -88,6 +93,7 @@
                 android:background="@drawable/ic_profile_barbackground"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 걸음수"
+                android:textColor="#388E3C"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

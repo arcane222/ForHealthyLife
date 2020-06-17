@@ -128,7 +128,7 @@ public class RunningFragment extends Fragment implements SensorEventListener
                 Toast.makeText(getContext(), "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-        dialog.setNegativeButton("아니오.", new DialogInterface.OnClickListener()
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {

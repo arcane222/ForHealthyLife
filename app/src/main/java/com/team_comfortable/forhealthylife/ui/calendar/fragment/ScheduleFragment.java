@@ -275,7 +275,7 @@ public class ScheduleFragment extends Fragment{
                 Toast.makeText(getContext(), "일정이 취소되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-        dialog.setNegativeButton("아니오.", new DialogInterface.OnClickListener()
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {

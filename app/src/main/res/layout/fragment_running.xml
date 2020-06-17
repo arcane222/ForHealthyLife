@@ -12,12 +12,12 @@
     <TextView
         android:id="@+id/tv_running_title"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_profile_barbackground"
         android:gravity="center"
         android:text="한 걸음 한 걸음 걸어보아요"
-        android:textColor="@android:color/holo_green_light"
-        android:textSize="20sp"
+        android:textColor="#0288D1"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,8 +51,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/ic_profile_changegenbtn"
             android:text="초기화"
-            android:textColor="#4C4C4C"
-            android:textSize="14sp"
+            android:textColor="#D32F2F"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <Button
@@ -61,8 +61,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/ic_profile_changegenbtn"
             android:text="저장"
-            android:textColor="#4C4C4C"
-            android:textSize="14sp"
+            android:textColor="#0288D1"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 

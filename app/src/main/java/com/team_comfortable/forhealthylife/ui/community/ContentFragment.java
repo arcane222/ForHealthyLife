@@ -247,7 +247,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                 Toast.makeText(getContext(), "게시물이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-        dialog.setNegativeButton("아니오.", new DialogInterface.OnClickListener()
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
@@ -421,7 +421,7 @@ public class ContentFragment extends Fragment implements OnBackPressedListener {
                 Toast.makeText(getContext(), "댓글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-        dialog.setNegativeButton("아니오.", new DialogInterface.OnClickListener()
+        dialog.setNegativeButton("아니오", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
