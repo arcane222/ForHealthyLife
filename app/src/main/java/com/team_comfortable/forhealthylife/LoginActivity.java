@@ -174,6 +174,8 @@ public class LoginActivity extends AppCompatActivity
                     map.put("userStepCount", "");
                     map.put("userWeight", "");
                     map.put("userHeight", "");
+                    map.put("userStepGoal", "");
+                    map.put("userWeightGoal", "");
                     map.put("userGender", "");
                     map.put("userAge", "");
                     map.put("userKcal","0");
