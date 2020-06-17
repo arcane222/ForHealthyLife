@@ -7,44 +7,54 @@
     android:backgroundTint="#F5F5F5"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_profile_barbackground">
 
         <TextView
             android:id="@+id/commentText"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_profile_barbackground"
+            android:layout_width="220sp"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="TextView"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linear_container"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/linear_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_commentRemove"
+            app:layout_constraintStart_toEndOf="@+id/commentText"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/commentDate"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="@drawable/ic_profile_barbackground"
-                android:gravity="center"
-                android:text="TextView"
-                android:textSize="10sp"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:gravity="bottom|center"
+                android:text="요일"
+                android:textSize="9sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/commentWriter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_profile_barbackground"
-                android:gravity="center"
-                android:text="TextView"
+                android:layout_width="60sp"
+                android:layout_height="30dp"
+                android:ellipsize="end"
+                android:gravity="center|top"
+                android:text="작성자"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <Button
@@ -53,7 +63,11 @@
             android:layout_height="30dp"
             android:background="@drawable/ic_schedule_cancel"
             android:textSize="10sp"
-            android:visibility="invisible" />
-    </LinearLayout>
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/linear_container"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

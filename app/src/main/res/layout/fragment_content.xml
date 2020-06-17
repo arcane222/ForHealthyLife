@@ -34,10 +34,16 @@
                     android:layout_height="50dp"
                     android:background="@drawable/ic_back" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="글 / 댓글"
+                    android:textColor="#0288D1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_contentRemove"
@@ -47,83 +53,106 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/content_title_sub"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center"
+                android:text="제목"
+                android:textColor="#1976D2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_profile_barbackground"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:windowSoftInputMode="adjustPan">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/content_title"
-                    android:layout_width="310dp"
-                    android:layout_height="50dp"
+                    android:id="@+id/content_date_sub"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/ic_profile_barbackground"
+                    android:gravity="center"
+                    android:text="작성일시"
+                    android:textColor="#1976D2"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/content_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
                     android:background="@drawable/ic_profile_barbackground"
                     android:gravity="center"
                     android:text="TextView"
                     android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/content_writer"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:background="@drawable/ic_profile_barbackground"
-                        android:gravity="center"
-                        android:text="TextView"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/content_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:background="@drawable/ic_profile_barbackground"
-                        android:gravity="center"
-                        android:text="TextView"
-                        android:textStyle="bold" />
-                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:windowSoftInputMode="adjustPan">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/content_board"
+                    android:id="@+id/content_writer_sub"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:background="@drawable/ic_contentboard_background"
+                    android:layout_height="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/ic_profile_barbackground"
+                    android:gravity="center"
+                    android:text="작성자"
+                    android:textColor="#1976D2"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/content_writer"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_profile_barbackground"
                     android:gravity="center"
                     android:text="TextView"
                     android:textStyle="bold" />
+
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_board"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@drawable/ic_contentboard_background"
+                android:gravity="center"
+                android:text="TextView"
+                android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:background="@drawable/ic_contentboard_background">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:windowSoftInputMode="adjustPan"
+                <ListView
+                    android:id="@+id/comment_list"
+                    android:layout_width="360dp"
+                    android:layout_height="300dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ListView
-                        android:id="@+id/comment_list"
-                        android:layout_width="360dp"
-                        android:layout_height="300dp" />
-                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
@@ -140,7 +169,7 @@
                     android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:maxLength="30" />
+                    android:maxLength="27" />
 
                 <Button
                     android:id="@+id/btn_commentEdit"

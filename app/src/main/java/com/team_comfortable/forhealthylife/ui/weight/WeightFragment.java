@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -98,6 +99,7 @@ public class WeightFragment extends Fragment {
                 {
                     handleWeightInDB(pickerDate, "", "remove");
                     displayWeight.setText("0" + " (kg)");
+                    Toast.makeText(getContext(), "해당 날짜의 체중을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -106,11 +108,15 @@ public class WeightFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                if(pickerDate != null)
+                String input = String.valueOf(inputWeight.getText());
+                if(pickerDate != null && input != null)
                 {
-                    String input = String.valueOf(inputWeight.getText());
-                    handleWeightInDB(pickerDate, input, "add");
-                    displayWeight.setText(input + " (kg)");
+                    if(!input.equals(""))
+                    {
+                        handleWeightInDB(pickerDate, input, "add");
+                        displayWeight.setText(input + " (kg)");
+                        Toast.makeText(getContext(), "체중 값을 등록하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
