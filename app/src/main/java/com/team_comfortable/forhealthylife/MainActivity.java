@@ -354,7 +354,7 @@ public class MainActivity extends AppCompatActivity
                 else
                 {
                     // “다시 묻지 않음”을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
-                    Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. \n설정(앱 정보)에서 신체활동권한을 허용해야 합니다. ",
+                    Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. 설정(앱 정보)에서\n신체활동권한을 허용해야 합니다. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
