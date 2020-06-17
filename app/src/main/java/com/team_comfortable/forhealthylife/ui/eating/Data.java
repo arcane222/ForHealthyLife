@@ -108,11 +108,11 @@ public class Data {
 
     static Integer[] fastFoodImage = {
             R.drawable.ic_hotdog,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
+            R.drawable.ic_3mjjajang,
+            R.drawable.ic_3mcurry,
+            R.drawable.ic_soup,
+            R.drawable.ic_burger,
+            R.drawable.ic_chickenleg,
             R.drawable.ic_home,
             R.drawable.ic_home,
             R.drawable.ic_home,
@@ -133,15 +133,15 @@ public class Data {
     static Integer[] drinkKcal = {100,100,120,120,45,125,110,125,80};
 
     static Integer[] drinkImage = {
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home
+            R.drawable.ic_coke,
+            R.drawable.ic_soda,
+            R.drawable.ic_fanta,
+            R.drawable.ic_orangejuice,
+            R.drawable.ic_tomatojuice,
+            R.drawable.ic_sikhye,
+            R.drawable.ic_cocoa,
+            R.drawable.ic_milk,
+            R.drawable.ic_cancoffee
     };
 }
 
