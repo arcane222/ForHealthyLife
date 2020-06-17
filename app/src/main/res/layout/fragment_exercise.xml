@@ -15,28 +15,149 @@
         android:orientation="vertical">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="297dp"
-            android:background="@drawable/ic_kcalshow_background">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ic_background_white"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/exeTitleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/levelTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/levelTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:text="난이도"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/exeLevelText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/exeTitleText" />
+
+                <TextView
+                    android:id="@+id/exeLevelText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/focusTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/levelTitle" />
+
+                <TextView
+                    android:id="@+id/focusTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:text="초점"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/exeFocusText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/exeLevelText" />
+
+                <TextView
+                    android:id="@+id/exeFocusText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/usingTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/focusTitle" />
+
+                <TextView
+                    android:id="@+id/usingTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:text="사용 신체 부위"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/exeUsingText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/exeFocusText" />
+
+                <TextView
+                    android:id="@+id/exeUsingText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/equipmentTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/usingTitle" />
+
+                <TextView
+                    android:id="@+id/equipmentTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:text="장 비"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/exeEquipmentText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/exeUsingText" />
+
+                <TextView
+                    android:id="@+id/exeEquipmentText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/equipmentTitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <AdapterViewFlipper
                 android:id="@+id/exerciseViewFlipper"
-                android:layout_width="370dp"
-                android:layout_height="251dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="40dp"
+                android:layout_weight="1" />
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
         <FrameLayout
             android:id="@+id/exercise_list_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1.1">
 
             <ListView
                 android:id="@+id/exercise_list"
