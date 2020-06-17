@@ -1,0 +1,92 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M50,50m-48.5,0a48.5,48.5 0,1 1,97 0a48.5,48.5 0,1 1,-97 0"/>
+  <path
+      android:pathData="M4.5,49.55a45.25,45.55 0,1 0,90.5 0a45.25,45.55 0,1 0,-90.5 0z"
+      android:fillColor="#949dae"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M8.5,49.92a41.03,41.42 0,1 0,82.06 0a41.03,41.42 0,1 0,-82.06 0z"/>
+  <path
+      android:pathData="M32.17,40.47a2.1,2.1 0,0 1,0.11 -1.26c1,-2.57 4.66,-10.55 12.22,-9.71 6.66,0.74 9.49,-0.16 10.51,-0.68a3.09,3.09 0,0 1,1.55 -0.34,12.26 12.26,0 0,1 10.33,6.1 11.62,11.62 0,0 1,1.5 5.92c0,2.16 0.28,5.53 2.11,7.29A5.32,5.32 0,0 1,72.15 51c0.32,2.92 -0.49,7.9 -7.65,12.46 -6.87,4.38 -8.67,6 -9,6.63a2.46,2.46 0,0 1,-1 1c-2.17,1.08 -7.35,2.76 -12,-2.6 0,0 -5,-5 -8,-6s-9,-10 -5,-15C32.5,43.75 32.41,41.41 32.17,40.47Z"
+      android:strokeWidth="2"
+      android:fillColor="#f8f8f8"
+      android:strokeColor="#000"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M50.5,50.5m-13,0a13,13 0,1 1,26 0a13,13 0,1 1,-26 0"/>
+  <path
+      android:pathData="M50.5,50.5m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+      android:fillColor="#f8c579"/>
+  <path
+      android:pathData="M8.66,48.66S15.5,46.5 17.5,50.5c0,0 2,-3 5,-1 0,0 -1.63,-11.15 -10.31,-14.58C12.19,34.92 8.81,42.81 8.66,48.66Z"
+      android:fillColor="#f89969"/>
+  <path
+      android:pathData="M15.5,34.5l2,-3 11,8 -3,9S22.5,38.5 15.5,34.5Z"
+      android:fillColor="#f89969"/>
+  <path
+      android:pathData="M20,28l2,-3l9,7l-2,4l-9,-8z"
+      android:fillColor="#f89969"/>
+  <path
+      android:pathData="M25,22l3,-2l8,7l-2,2l-9,-7z"
+      android:fillColor="#f89969"/>
+  <path
+      android:pathData="M32,17l3,-1l9,9l-3,1l-9,-9z"
+      android:fillColor="#f89969"/>
+  <path
+      android:pathData="M39,15 L50,25S54,10 39,15Z"
+      android:fillColor="#d2e680"/>
+  <path
+      android:pathData="M55,13V25h3S63,19 55,13Z"
+      android:fillColor="#d2e680"/>
+  <path
+      android:pathData="M64,16V28s4,3 4,-3c0,0 1,-2 2,-2C70,23 71,17 64,16Z"
+      android:fillColor="#d2e680"/>
+  <path
+      android:pathData="M72,39s7,-3 4,-7 -7,-8 -2,-6 17,4 10,21l-3,3s-6,-3 -6,-2 3.5,-7.5 -1.5,-5.5Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M68.5,65.5s-2,6 3,2c0,0 8,-11 9,0s4,-4 4,-4 -2,-12 -9,-12C75.5,51.5 76.5,61.5 68.5,65.5Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M46.5,74.5l-5,-2s-1,13 6,14Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M33.5,71.5l2,-2s2,1 2,5 2,10 3,11c0,0 -4,2 -6,-4C34.5,81.5 35.5,74.5 33.5,71.5Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M24.5,77.5s5,-2 5,-4c0,0 2,2 1,9Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M19.5,72.75a3.75,2.75 0,1 0,7.5 0a3.75,2.75 0,1 0,-7.5 0z"
+      android:fillColor="#f8c579"/>
+  <path
+      android:pathData="M25.75,67.06a3.75,2.75 0,1 0,7.5 0a3.75,2.75 0,1 0,-7.5 0z"
+      android:fillColor="#f8c579"/>
+  <path
+      android:pathData="M19.75,55.06a2.75,3.75 0,1 0,5.5 0a2.75,3.75 0,1 0,-5.5 0z"
+      android:fillColor="#f8c579"/>
+  <path
+      android:pathData="M11.75,54.06a2.75,3.75 0,1 0,5.5 0a2.75,3.75 0,1 0,-5.5 0z"
+      android:fillColor="#f8c579"/>
+  <path
+      android:pathData="M16.5,60.5l6,5s7,-6 3,-6c0,0 -3,3 -6,0S16.5,60.5 16.5,60.5Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M14.5,63.5l3,6l2,-2l-5,-4z"
+      android:fillColor="#f5e4c8"/>
+  <path
+      android:pathData="M51,75v4s11,-2 16,-7l-3,-3S52,76 51,75Z"
+      android:fillColor="#f8e6cb"/>
+  <path
+      android:pathData="M51.5,83.5v4s15,2 27,-13c0,0 -3,-2 -2,-7C76.5,67.5 70.5,78.5 51.5,83.5Z"
+      android:fillColor="#f8c579"/>
+  <path
+      android:pathData="M82,52s4,-3 4,-5V57Z"
+      android:fillColor="#f5f5f5"/>
+</vector>

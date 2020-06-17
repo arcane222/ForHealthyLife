@@ -32,16 +32,16 @@ public class Data {
 
     static Integer[] riceImage = {
             R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice,
-            R.drawable.ic_rice
+            R.drawable.ic_rice_bori,
+            R.drawable.ic_rice_hyunmi,
+            R.drawable.ic_rice_5gokbap,
+            R.drawable.ic_rice_bibimbap,
+            R.drawable.ic_rice_shrimp,
+            R.drawable.ic_rice_kimchi,
+            R.drawable.ic_rice_omelet,
+            R.drawable.ic_rice_kimbap,
+            R.drawable.ic_rice_spaghetti,
+            R.drawable.ic_rice_jjajangn_noodle
     };
 
     static String[] soupName = {
@@ -113,9 +113,9 @@ public class Data {
             R.drawable.ic_soup,
             R.drawable.ic_burger,
             R.drawable.ic_chickenleg,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
+            R.drawable.ic_chicken_nuggets,
+            R.drawable.ic_french_fries,
+            R.drawable.ic_pizza,
     };
 
     static String[] drinkName = {

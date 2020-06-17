@@ -36,7 +36,7 @@ import com.team_comfortable.forhealthylife.ui.home.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseFragment extends Fragment implements OnBackPressedListener {
+public class ExerciseFragment extends Fragment  {
 
     private ExerciseViewModel exerciseViewModel;
     private int pos;
@@ -46,13 +46,10 @@ public class ExerciseFragment extends Fragment implements OnBackPressedListener 
 
     EatingFragment.OnListSelectedListener mListSelListener;
 
-    MainActivity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = (MainActivity) getActivity();
-
     }
 
     @Override
@@ -260,21 +257,7 @@ public class ExerciseFragment extends Fragment implements OnBackPressedListener 
         }
     }
 
-    @Override
-    public void onBackPressed() {
 
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
-        transaction.replace(R.id.fragment_home, homeFragment);
-
-        transaction.commit();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        activity.setOnBackPressedListener(this);
-    }
 
 
 
