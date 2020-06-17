@@ -85,7 +85,7 @@ public class ExerciseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
-        exerciseViewModel.setInteger(12);
+        exerciseViewModel.setInteger(15);
         exerciseViewModel.getInteger().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
@@ -180,6 +180,24 @@ public class ExerciseFragment extends Fragment {
             case 11:
                 for(int i =0; i < DataExercise.climberImage.length; i++){
                     imageId.add(DataExercise.climberImage[i]);
+                    setTextInfo(position);
+                }
+                break;
+            case 12:
+                for(int i =0; i < DataExercise.shoulderImage.length; i++){
+                    imageId.add(DataExercise.shoulderImage[i]);
+                    setTextInfo(position);
+                }
+                break;
+            case 13:
+                for(int i =0; i < DataExercise.lateralImage.length; i++){
+                    imageId.add(DataExercise.lateralImage[i]);
+                    setTextInfo(position);
+                }
+                break;
+            case 14:
+                for(int i =0; i < DataExercise.vraiseImage.length; i++){
+                    imageId.add(DataExercise.vraiseImage[i]);
                     setTextInfo(position);
                 }
                 break;

@@ -8,7 +8,8 @@ public class DataExercise {
             "스트레칭",
             "가슴 운동",
             "등 운동",
-            "코어 운동"
+            "코어 운동",
+            "어깨 운동"
     };
 
     static String[] stretchName = {
@@ -35,9 +36,12 @@ public class DataExercise {
             "마운틴 클라이머"
     };
 
-    static String[] Img = {
-            "Image1"
+    static String[] shoulderName = {
+            "숄더 프레스",
+            "래터럴 레이즈",
+            "V 레이즈"
     };
+
 
     static Integer[] bowImage= {
             R.drawable.bow_stretching1,
@@ -104,6 +108,23 @@ public class DataExercise {
             R.drawable.mountain_climber2
     };
 
+    static Integer[] shoulderImage = {
+            R.drawable.shoulder_press1,
+            R.drawable.shoulder_press2
+    };
+
+    static Integer[] lateralImage = {
+            R.drawable.lateral_raise1,
+            R.drawable.lateral_raise2
+    };
+
+    static Integer[] vraiseImage = {
+            R.drawable.v_raise1,
+            R.drawable.v_raise2
+    };
+
+
+
     static String[] exeTitle = {
             "활 자세",
             "아기 자세",
@@ -116,7 +137,10 @@ public class DataExercise {
             "바벨로우",
             "윗몸일으키기",
             "니 레이즈",
-            "마운틴 클라이머"
+            "마운틴 클라이머",
+            "숄더 프레스",
+            "래터럴 레이즈",
+            "V 레이즈"
     };
 
     static String[] exeLevel = {
@@ -131,13 +155,19 @@ public class DataExercise {
             "중급",
             "초급",
             "중급",
-            "중급"
+            "중급",
+            "고급",
+            "초급",
+            "초급"
     };
 
     static String[] exeFocus = {
             "유연성, 기동성, 호흡",
             "유연성, 호흡",
             "유연성, 기동성",
+            "근력",
+            "근력",
+            "근력",
             "근력",
             "근력",
             "근력",
@@ -161,7 +191,10 @@ public class DataExercise {
             "등, 이두근, 어깨, 복근",
             "복근, 등",
             "복근, 등 상부, 골반",
-            "복근"
+            "복근",
+            "어깨, 팔, 등, 복근",
+            "어깨 근육, 트랩",
+            "어깨 근육, 트랩"
     };
 
     static String[] exeEquipment = {
@@ -176,7 +209,10 @@ public class DataExercise {
             "바벨",
             "장비 없음",
             "풀업바",
-            "장비 없음"
+            "장비 없음",
+            "바벨",
+            "덤벨",
+            "덤벨"
     };
 
 
