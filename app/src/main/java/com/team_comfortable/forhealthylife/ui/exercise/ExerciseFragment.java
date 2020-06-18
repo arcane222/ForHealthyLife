@@ -1,6 +1,5 @@
 package com.team_comfortable.forhealthylife.ui.exercise;
 
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -21,17 +20,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import com.team_comfortable.forhealthylife.MainActivity;
-import com.team_comfortable.forhealthylife.OnBackPressedListener;
+
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
-import com.team_comfortable.forhealthylife.ui.eating.EatingViewModel;
-import com.team_comfortable.forhealthylife.ui.exercise.DataExercise;
-import com.team_comfortable.forhealthylife.ui.exercise.ExerciseViewModel;
-import com.team_comfortable.forhealthylife.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +36,7 @@ public class ExerciseFragment extends Fragment  {
     AdapterViewFlipper v_fllipper;
     List<Integer> imageId = new ArrayList<Integer>();
     private TextView TitleText,LevelText,FocusText,UsingText,EquipmentText,Level,Focus,Using,Equipment;
-
     EatingFragment.OnListSelectedListener mListSelListener;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +48,13 @@ public class ExerciseFragment extends Fragment  {
                              @Nullable Bundle savedInstanceState) {
         exerciseViewModel =
                 ViewModelProviders.of(this).get(ExerciseViewModel.class);
-
         View root = inflater.inflate(R.layout.fragment_exercise, container, false);
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         ListView listview = root.findViewById(R.id.exercise_list);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, DataExercise.exercise);
         listview.setAdapter(adapter);
@@ -70,14 +66,8 @@ public class ExerciseFragment extends Fragment  {
         Focus = root.findViewById(R.id.focusTitle);
         Using = root.findViewById(R.id.usingTitle);
         Equipment = root.findViewById(R.id.equipmentTitle);
-
-
-
-
-
         EquipmentText = root.findViewById(R.id.exeEquipmentText);
         v_fllipper = (AdapterViewFlipper) root.findViewById(R.id.exerciseViewFlipper);
-
         mListSelListener = (MainActivity) getActivity();
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,7 +82,6 @@ public class ExerciseFragment extends Fragment  {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-
         exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
         exerciseViewModel.setInteger(15);
         exerciseViewModel.getInteger().observe(getViewLifecycleOwner(), new Observer<Integer>() {
@@ -100,11 +89,10 @@ public class ExerciseFragment extends Fragment  {
             public void onChanged(Integer integer) {
                 pos = integer;
                 onImage(pos);
-
            }
         });
-
     }
+
     public void setTextInfo(int position){
         TitleText.setText(DataExercise.exeTitle[position]);
         Level.setVisibility(View.VISIBLE);
@@ -213,17 +201,10 @@ public class ExerciseFragment extends Fragment  {
             default:
                 return;
         }
-
         v_fllipper.setAdapter(new galleryAdapter(getActivity()));
-
         v_fllipper.setFlipInterval(1000);
-
         v_fllipper.startFlipping();
-
     }
-
-
-
 
     public class galleryAdapter extends BaseAdapter {
 
@@ -256,11 +237,5 @@ public class ExerciseFragment extends Fragment  {
             return convertView;
         }
     }
-
-
-
-
-
-
 
 }

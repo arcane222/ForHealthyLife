@@ -16,8 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.team_comfortable.forhealthylife.R;
-import com.team_comfortable.forhealthylife.ui.eating.EatingViewModel;
-import com.team_comfortable.forhealthylife.ui.exercise.ExerciseViewModel;
 
 public class StretchingFragment extends Fragment {
 
@@ -40,18 +38,12 @@ public class StretchingFragment extends Fragment {
                exerciseViewModel.setInteger(position);
             }
         });
-
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
-
-
-
     }
-
 }

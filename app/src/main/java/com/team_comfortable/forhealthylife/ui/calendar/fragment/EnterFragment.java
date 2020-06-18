@@ -104,7 +104,6 @@ public class EnterFragment extends Fragment {
             {
                 Map<String, Object> map = new HashMap<String, Object>();
                 String tmp = schedule;
-
                 for(DataSnapshot data : dataSnapshot.getChildren())
                 {
                     String key= data.getKey()+"";
@@ -113,7 +112,6 @@ public class EnterFragment extends Fragment {
                         tmp = data.getValue().toString() + "/" + schedule;
                         break;
                     }
-
                 }
                 map.put(date, tmp);
                 dbReference.updateChildren(map);
@@ -150,9 +148,4 @@ public class EnterFragment extends Fragment {
         if(!check) return false;
         return true;
     }
-
-
-
-
-
 }

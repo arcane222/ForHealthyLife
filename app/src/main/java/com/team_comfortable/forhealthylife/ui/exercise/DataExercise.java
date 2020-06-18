@@ -42,7 +42,6 @@ public class DataExercise {
             "V 레이즈"
     };
 
-
     static Integer[] bowImage= {
             R.drawable.bow_stretching1,
             R.drawable.bow_stretching2,
@@ -124,12 +123,11 @@ public class DataExercise {
     };
 
 
-
     static String[] exeTitle = {
             "활 자세",
             "아기 자세",
-            "누워서 척추 비틀기 자세",
-            "디클라인 벤치 프레스",
+            "누워서 척추 \n비틀기 자세",
+            "디클라인 \n벤치 프레스",
             "덤벨 플라이",
             "딥 스",
             "풀 업",
@@ -214,7 +212,4 @@ public class DataExercise {
             "덤벨",
             "덤벨"
     };
-
-
-
 }

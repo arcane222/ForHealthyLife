@@ -58,7 +58,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
         initFirebase();
         initData(root);
         initButton();
-
         return root;
     }
 
@@ -72,7 +71,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
 
     private void initData(View root)
     {
-        // 센서 연결 - 걸음수 센서를 이용한 흔듬 감지
         sensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
         stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if(stepCountSensor == null)
@@ -82,11 +80,16 @@ public class RunningFragment extends Fragment implements SensorEventListener
         mReset = (Button)root.findViewById(R.id.btn_resetStepCount);
         mSave = (Button)root.findViewById(R.id.btn_saveStepCount);
         mStepCountTextView = root.findViewById(R.id.tv_running_stepCount);
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initButton()
     {
-        // 초기화 버튼 : 다시 숫자를 0으로 만들어준다.
         mReset.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -96,8 +99,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
                 mStepCountTextView.setText(Integer.toString(mSteps));
             }
         });
-
-        // 저장 버튼 : 현 걸음수를 저장한다.
         mSave.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -143,7 +144,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
     {
         final DatabaseReference dbReference = mReference.child("UserList").child(mUser.getUid()).child("userStepCount");
         final String date = getCurrentDate();
-
         dbReference.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
@@ -177,7 +177,6 @@ public class RunningFragment extends Fragment implements SensorEventListener
         super.onStart();
         if(stepCountSensor !=null)
         {
-            //센서의 속도 설정
             sensorManager.registerListener(this,stepCountSensor,SensorManager.SENSOR_DELAY_GAME);
         }
     }
@@ -192,13 +191,10 @@ public class RunningFragment extends Fragment implements SensorEventListener
     {
         if(event.sensor.getType() == Sensor.TYPE_STEP_COUNTER)
         {
-            // StepCountSensor 는 앱이 꺼지더라도 초기화 X. 그러므로 우리는 초기값을 가지고 있어야함.
             if (mCounterSteps < 1)
             {
-                // initial value
                 mCounterSteps = (int) event.values[0];
             }
-            //리셋 안된 값 + 현재값 - 리셋 안된 값
             mSteps = (int) event.values[0] - mCounterSteps;
             mStepCountTextView.setText(Integer.toString(mSteps));
             Log.i("log: ", "New step detected by STEP_COUNTER sensor. Total step count: " + mSteps );

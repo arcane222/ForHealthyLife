@@ -43,7 +43,6 @@ public class ShoulderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
     }
 }
