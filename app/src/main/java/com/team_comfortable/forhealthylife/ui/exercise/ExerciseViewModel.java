@@ -9,7 +9,6 @@ public class ExerciseViewModel extends ViewModel {
 
     public ExerciseViewModel() {
         position = new MutableLiveData<>();
-
     }
 
     public LiveData<Integer> getInteger() {

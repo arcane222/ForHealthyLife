@@ -16,8 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.team_comfortable.forhealthylife.R;
-import com.team_comfortable.forhealthylife.ui.exercise.DataExercise;
-import com.team_comfortable.forhealthylife.ui.exercise.ExerciseViewModel;
 
 public class CoreFragment extends Fragment {
 
@@ -46,7 +44,6 @@ public class CoreFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
     }
 }
