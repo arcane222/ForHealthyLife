@@ -19,11 +19,9 @@ public class CalendarHeader extends ViewModel
         String value = DateUtil.getDate(time, DateUtil.CALENDAR_HEADER_FORMAT);
         this.header = value;
     }
-
     public void setHeader(String header) {
         this.header = header;
     }
-    
     public void setmCurrentTime(long mCurrentTime){
         this.mCurrentTime = mCurrentTime;
     }

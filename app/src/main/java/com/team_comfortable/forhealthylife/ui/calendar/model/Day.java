@@ -24,13 +24,10 @@ public class Day extends ViewModel
     public void setDate(String day) {
         this.date = day;
     }
-    // TODO : day에 달력일값넣기
+
     public void setCalendar(Calendar calendar) {
         day = DateUtil.getDate(calendar.getTimeInMillis(), DateUtil.DAY_FORMAT);
         date = DateUtil.getDate(calendar.getTimeInMillis(), DateUtil.DATE_FORMAT);
     }
-
-
-
 }
 

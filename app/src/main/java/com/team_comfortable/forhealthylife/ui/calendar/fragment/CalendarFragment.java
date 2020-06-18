@@ -7,51 +7,33 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.team_comfortable.forhealthylife.OnBackPressedListener;
 import com.team_comfortable.forhealthylife.R;
 import com.team_comfortable.forhealthylife.ui.calendar.adapter.CalendarAdapter;
 import com.team_comfortable.forhealthylife.ui.calendar.util.Keys;
-import com.team_comfortable.forhealthylife.ui.eating.EatingFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.firebase.ui.auth.ui.email.RegisterEmailFragment.TAG;
+
 
 public class CalendarFragment extends Fragment
 {
     public int mCenterPosition;
-    private long mCurrentTime;
     public ArrayList<Object> mCalendarList = new ArrayList<>();
-
     public TextView textView;
     public RecyclerView recyclerView;
     private CalendarAdapter mAdapter;
     private StaggeredGridLayoutManager manager;
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -117,12 +99,10 @@ public class CalendarFragment extends Fragment
              recyclerView.scrollToPosition(mCenterPosition);
          }
 
-
      }
 
      public void setCalendarList(GregorianCalendar cal)
      {
-         //setTitle(cal.getTimeInMillis());
          ArrayList<Object> calendarList = new ArrayList<>();
          for (int i = -300; i < 300; i++)
          {
@@ -134,12 +114,9 @@ public class CalendarFragment extends Fragment
                  if (i == 0) {
                      mCenterPosition = calendarList.size();
                  }
-                 // 타이틀
                  calendarList.add(calendar.getTimeInMillis());
-                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1; // 해당 월에 시작하는 요일 -1 을 하면 빈칸을 구할 수 있겠죠 ?
-                 int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 해당 월에 마지막 요일
-
-                 // EMPTY 생성
+                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+                 int max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
                  for (int j = 0; j < dayOfWeek; j++) {
                      calendarList.add(Keys.EMPTY);
                  }

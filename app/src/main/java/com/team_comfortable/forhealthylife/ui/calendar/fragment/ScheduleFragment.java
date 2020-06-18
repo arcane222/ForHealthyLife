@@ -10,13 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,9 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team_comfortable.forhealthylife.R;
-import com.team_comfortable.forhealthylife.ui.eating.RiceFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +65,6 @@ public class ScheduleFragment extends Fragment{
         if(DD.charAt(0) == '0') {
             DD = DD.substring(1, 2);
         }
-
         return MM+"월 "+DD+"일";
     }
 
@@ -78,12 +72,9 @@ public class ScheduleFragment extends Fragment{
         return new ScheduleFragment();
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
     }
 
     private CustomList adapter;
@@ -104,7 +95,6 @@ public class ScheduleFragment extends Fragment{
                 if(scheduleList[0] != "일정 없음") {
                     checkCancel(position);
                 }
-
             }
         });
         view.setOnClickListener(new View.OnClickListener() {
@@ -117,26 +107,19 @@ public class ScheduleFragment extends Fragment{
                 transaction.commit();
             }
         });
-
         return view;
     }
-
-
 
     //firebase에서 schedule list를 받아옵니다.
     public void editScheduleInDB() {
         initFirebase();
         DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
-
         userScheduleDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Object> map = new HashMap<String, Object>();
                 String date = Date;
-
                 boolean checkedNull = true;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Log.i("tag","3");
                     String key = data.getKey() + "";
                     if (date.equals(key)) {
                         schedule = data.getValue().toString();
@@ -157,7 +140,8 @@ public class ScheduleFragment extends Fragment{
             }
         });
     }
-    //firebase에서 취소한 list 삭제합니다.
+
+    //firebase에서 취소한 list를 삭제합니다.
     public void cancelScheduleInDB(String list){
         initFirebase();
         DatabaseReference userScheduleDB = mReference.child("UserList").child(mUser.getUid()).child("userSchedule");
@@ -172,9 +156,7 @@ public class ScheduleFragment extends Fragment{
             public void onClick(int position) {
                 if(scheduleList[0] != "일정 없음") {
                     checkCancel(position);
-
                 }
-
             }
         });
     }
@@ -192,9 +174,7 @@ public class ScheduleFragment extends Fragment{
             public void onClick(int position) {
                 if(scheduleList[0] != "일정 없음") {
                     checkCancel(position);
-
                 }
-
             }
         });
     }
@@ -214,14 +194,12 @@ public class ScheduleFragment extends Fragment{
             this.mClickedlistener = mClickedlistener;
         }
 
-
         public CustomList(Activity context)
         {
             super(context, R.layout.schedule_item, new ArrayList<String>());
             this.context = context;
 
         }
-
 
         public View getView(int position, View view, ViewGroup parent) {
             final int pos = position;
@@ -244,7 +222,6 @@ public class ScheduleFragment extends Fragment{
             return view;
         }
     }
-
 
     public void checkCancel(int position){
         final int pos = position;
@@ -279,10 +256,9 @@ public class ScheduleFragment extends Fragment{
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
-                //Toast.makeText(getContext(), "취소하였습니다.", Toast.LENGTH_SHORT).show();
+
             }
         });
         dialog.show();
     }
-
 }
