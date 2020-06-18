@@ -60,16 +60,16 @@ public class Data {
     static Integer[] soupKcal = {90,50,50,350,450,350,180,115,190,400};
 
     static Integer[] soupImage = {
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home,
-            R.drawable.ic_home
+            R.drawable.ic_soup1,
+            R.drawable.ic_soup1,
+            R.drawable.ic_soup1,
+            R.drawable.ic_soup1,
+            R.drawable.ic_soup3,
+            R.drawable.ic_soup2,
+            R.drawable.ic_soup2,
+            R.drawable.ic_soup3,
+            R.drawable.ic_soup2,
+            R.drawable.ic_soup2
     };
 
     static String[] sideDishName = {
