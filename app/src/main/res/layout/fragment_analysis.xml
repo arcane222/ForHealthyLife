@@ -83,7 +83,7 @@
                 android:background="@drawable/ic_analysis_content_background"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 체중 변화 사항입니다."
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -110,7 +110,7 @@
                 android:background="@drawable/ic_analysis_content_background"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="주간 걸음수 현황 입니다."
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

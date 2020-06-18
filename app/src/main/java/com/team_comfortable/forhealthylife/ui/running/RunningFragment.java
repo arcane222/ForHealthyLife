@@ -115,7 +115,8 @@ public class RunningFragment extends Fragment implements SensorEventListener
         return currentDate;
     }
 
-    public void checkSaving(){
+    public void checkSaving()
+    {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("걸음 수 저장");
         dialog.setMessage("현재 걸음 수를 저장 및 초기화 하시겠습니까?");
@@ -205,6 +206,5 @@ public class RunningFragment extends Fragment implements SensorEventListener
     }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 }

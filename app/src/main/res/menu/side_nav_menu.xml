@@ -13,10 +13,6 @@
             android:icon="@android:drawable/ic_menu_view"
             android:title="@string/side_menu_analysis" />
         <item
-            android:id="@+id/side_menu_notice"
-            android:icon="@android:drawable/ic_menu_myplaces"
-            android:title="@string/side_menu_notice" />
-        <item
             android:id="@+id/side_menu_settings"
             android:icon="@android:drawable/ic_menu_preferences"
             android:title="@string/side_menu_settings" />

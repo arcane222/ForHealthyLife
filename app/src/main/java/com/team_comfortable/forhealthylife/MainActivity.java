@@ -29,6 +29,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.team_comfortable.forhealthylife.ui.calendar.fragment.CalendarFragment;
 import com.team_comfortable.forhealthylife.ui.community.CommunityFragment;
 import com.team_comfortable.forhealthylife.ui.eating.DrinkFragment;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity
     private AppBarConfiguration mAppBarConfiguration;
     private static final int REQUEST_RECOGNITION  = 1;
     private View permissionBtn;
+    private Toolbar mainToolbar;
+    private BottomNavigationView bottomNavigationView;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -83,7 +87,6 @@ public class MainActivity extends AppCompatActivity
         initToolbar();
         initBottomNavMenu();
         setProfile();
-        setHealthInformation();
     }
 
     public void setProfile()
@@ -101,18 +104,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
-                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
-                mAuth.signOut(); // Firebase Sign out
-                mGoogleSignInClient.signOut(); // Google Sign out
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                Toast.makeText(getApplicationContext(), "로그아웃 하였습니다.", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-                finish();
+                LogOut();
             }
         });
 
@@ -128,25 +120,29 @@ public class MainActivity extends AppCompatActivity
         Glide.with(this).load(userImgUrl).into(userImgView);
     }
 
-    public void setHealthInformation()
+
+    public void LogOut()
     {
-        View root = getLayoutInflater().inflate(R.layout.fragment_home, null);
-        ImageView iv = root.findViewById(R.id.iv_home_healthInformation1);
-        iv.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Log.i("info", "info");
-            }
-        });
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+        mAuth.signOut(); // Firebase Sign out
+        mGoogleSignInClient.signOut(); // Google Sign out
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "로그아웃 하였습니다.", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        finish();
     }
 
 
     // 상단 툴바 초기설정 메소드
     public void initToolbar()
     {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.mainToolbar);
-        setSupportActionBar(toolbar);
+        mainToolbar = (Toolbar) findViewById(R.id.mainToolbar);
+        setSupportActionBar(mainToolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.side_nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -161,19 +157,29 @@ public class MainActivity extends AppCompatActivity
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    public Toolbar getMainToolbar()
+    {
+        return mainToolbar;
+    }
+
 
     // 하단 메뉴 설정 메소드
     @RequiresApi(api = Build.VERSION_CODES.P)
     public void initBottomNavMenu()
     {
-        final BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav_view);
+        bottomNavigationView = findViewById(R.id.bottom_nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.bottom_menu_home, R.id.bottom_menu_schedule, R.id.bottom_menu_community)
                 .build();
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupWithNavController(bottomNavView, navController);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+    }
+
+    public BottomNavigationView getBottomNavView()
+    {
+        return bottomNavigationView;
     }
 
     public void onListSelected(int position)

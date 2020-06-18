@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AnalysisFragment extends Fragment {
 
@@ -49,6 +50,7 @@ public class AnalysisFragment extends Fragment {
     private Button analysisBtn;
     private String pickerDateValue;
     private ArrayList<HashMap<String, Object>> weightList, stepCountList;
+    private int stepGoal = -1, weightGoal = -1;
 
     private class GraphAxisValueFormatter extends ValueFormatter
     {
@@ -83,6 +85,11 @@ public class AnalysisFragment extends Fragment {
 
     private void initData(View root)
     {
+        stepCountList = new ArrayList<HashMap<String, Object>>();
+        weightList = new ArrayList<HashMap<String, Object>>();
+        getDataFromDB();
+        getDataFromDB2();
+
         datePicker = root.findViewById(R.id.analysis_datePicker);
         String pickerDateValue = getPickerDate_yyMMdd(datePicker);
         tv_title = root.findViewById(R.id.tv_analysis_title);
@@ -99,10 +106,27 @@ public class AnalysisFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                setDataInList("userWeight");
-                setDataInList("userStepCount");
+                if(stepGoal == -1 || weightGoal == -1)
+                {
+                    Toast.makeText(getContext(), "데이터 로딩중입니다. 잠시 기다려주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setDataAndCreateChart("weight");
+                setDataAndCreateChart("stepCount");
             }
         });
+    }
+
+    private String findToday(String key, ArrayList<HashMap<String, Object>> list)
+    {
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list.get(i).get(key) != null)
+            {
+                return list.get(i).get(key).toString();
+            }
+        }
+        return null;
     }
 
     private String getPickerDate_yyMMdd(DatePicker picker)
@@ -143,36 +167,39 @@ public class AnalysisFragment extends Fragment {
         return weekDateList;
     }
 
-
-    public void setDataInList(final String key)
+    private void getDataFromDB2()
     {
-        final DatabaseReference dbReference = mReference.child("UserList").child(mUser.getUid()).child(key);
+        final DatabaseReference dbReference = mReference.child("UserList").child(mUser.getUid()).child("userStepCount");
+        final DatabaseReference dbReference2 = mReference.child("UserList").child(mUser.getUid()).child("userWeight");
+
         dbReference.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                ArrayList<Entry> entryList = new ArrayList<Entry>();
-                ArrayList<String> weekDateList = findWeek(datePicker);
-                for(int i = 0; i < weekDateList.size(); i++)
+                for (DataSnapshot data : dataSnapshot.getChildren())
                 {
-                    boolean isExist = false;
-                    DataSnapshot currData = null;
-                    for(DataSnapshot data : dataSnapshot.getChildren())
-                    {
-                        if(weekDateList.get(i).equals(data.getKey()))
-                        {
-                            isExist = true;
-                            currData = data;
-                        }
-                    }
-                    if(isExist) entryList.add(new Entry(i, Float.parseFloat(currData.getValue().toString())));
-                    else entryList.add(new Entry(i, 0f));
+                    HashMap<String, Object> hMap = new HashMap<String, Object>();
+                    hMap.put(data.getKey(), data.getValue().toString());
+                    stepCountList.add(hMap);
                 }
-                if(key.equals("userWeight"))
-                    createChart(chartWeight, "날짜별 체중현황 (kg)", weekDateList, entryList);
-                else if(key.equals("userStepCount"))
-                    createChart(chartStepCount, "날짜별 걸음수 현황 (걸음수)", weekDateList, entryList);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        dbReference2.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    HashMap<String, Object> hMap = new HashMap<String, Object>();
+                    hMap.put(data.getKey(), data.getValue().toString());
+                    weightList.add(hMap);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -180,7 +207,49 @@ public class AnalysisFragment extends Fragment {
         });
     }
 
-    private void createChart(LineChart chart, String label,
+    private void setDataAndCreateChart(String type)
+    {
+        ArrayList<Entry> entryList = new ArrayList<Entry>();
+        ArrayList<String> weekDateList = findWeek(datePicker);
+
+        if(type.equals("weight"))
+        {
+            for(int i = 0; i < weekDateList.size(); i++)
+            {
+                float entryVal = 0f;
+                for(int j = 0; j < weightList.size(); j++)
+                {
+                    if(weightList.get(j).get(weekDateList.get(i)) != null)
+                    {
+                        entryVal = Float.parseFloat(weightList.get(j).get(weekDateList.get(i)).toString());
+                    }
+                }
+                entryList.add(new Entry(i, entryVal));
+            }
+            drawChart(chartWeight, "날짜별 체중현황 (kg)", weekDateList, entryList);
+            analyzeData(entryList, type);
+        }
+        else if(type.equals("stepCount"))
+        {
+            for(int i = 0; i < weekDateList.size(); i++)
+            {
+                float entryVal = 0f;
+                for(int j = 0; j < stepCountList.size(); j++)
+                {
+                    if(stepCountList.get(j).get(weekDateList.get(i)) != null)
+                    {
+                        entryVal = Float.parseFloat(stepCountList.get(j).get(weekDateList.get(i)).toString());
+                    }
+                }
+                entryList.add(new Entry(i, entryVal));
+            }
+            drawChart(chartStepCount, "날짜별 걸음수 현황 (걸음수)", weekDateList, entryList);
+            analyzeData(entryList, type);
+        }
+    }
+
+
+    private void drawChart(LineChart chart, String label,
                              ArrayList<String> weekDateList, ArrayList<Entry> entryList)
     {
         int color = 0;
@@ -223,5 +292,89 @@ public class AnalysisFragment extends Fragment {
 
         chart.setData(data);
         chart.invalidate();
+    }
+
+    private void getDataFromDB()
+    {
+        final DatabaseReference dbReference = mReference.child("UserList").child(mUser.getUid());
+        dbReference.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    String dataKey = data.getKey();
+                    if (dataKey.equals("userStepGoal"))
+                        stepGoal = Integer.parseInt(data.getValue().toString());
+                    else if (dataKey.equals("userWeightGoal"))
+                        weightGoal = Integer.parseInt(data.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void analyzeData(ArrayList<Entry> entry, String type)
+    {
+        String weightToday = findToday(getPickerDate_yyMMdd(datePicker), weightList);
+        String stepToday = findToday(getPickerDate_yyMMdd(datePicker), stepCountList);
+        float weightToday_float = 0f;
+        float stepToday_float = 0f;
+        if(weightToday != null) weightToday_float = Float.parseFloat(weightToday);
+        if(stepToday != null) stepToday_float = Float.parseFloat(stepToday);
+
+        float weekDataSum = 0f;
+        for(int i = 0; i < entry.size(); i++)
+        {
+            weekDataSum = weekDataSum + entry.get(i).getY();
+        }
+        float avg = weekDataSum / 7;
+
+        if(type.equals("weight"))
+        {
+            if(weightGoal == 0)
+            {
+                tv_content_weight.setText("목표 체중 값이 0입니다.\n목표 체중값을 설정해주세요.");
+                return;
+            }
+            else
+            {
+                String day = "( " + getPickerDate_yyMMdd(datePicker) + " )";
+                String today = "오늘의 체중 : " + weightToday_float;
+                String avg_str = "주간 체중 평균 : " + avg + " kg";
+                String goal = "주간 목표 체중 : " + weightGoal + " kg";
+                String analysis_str = "\n";
+                if(weightToday_float > weightGoal * 1.5) analysis_str += "목표체중까지 많이 남았군요.\n더욱 노력하세요.";
+                else if(weightToday_float > weightGoal * 1.2) analysis_str += "목표체중까지 많이 도달했습니다.\n조금더 노력해봐요!";
+                else if(weightToday_float > weightGoal) analysis_str += "고지가 코앞입니다\n 조금만 더 힘내세요!";
+                else if(weightToday_float < weightGoal) analysis_str += "축하드립니다! 목표체중를 달성하셨네요!";
+                tv_content_weight.setText(day + "\n" + today + "\n" + avg_str + "\n" + goal + "\n" + analysis_str);
+            }
+        }
+        else if(type.equals("stepCount"))
+        {
+            if(stepGoal == 0)
+            {
+                tv_content_stepCount.setText("목표 걸음수 값이 0입니다.\n목표 걸음수를 설정해주세요.");
+                return;
+            }
+            else
+            {
+                String day = "( " + getPickerDate_yyMMdd(datePicker) + " )";
+                String today = "오늘의 걸음 수 : "  + stepToday_float;
+                String sum_str = "주간 걸음수 합 : " + weekDataSum;
+                String avg_str = "주간 평균 걸음수 : " + avg;
+                String goal = "주간 목표 총걸음수 : " + stepGoal;
+                String analysis_str = "\n";
+                if(weekDataSum < stepGoal / 2) analysis_str += "걸음수가 많이 부족해요! \n조금 더 열심히 걸어보는건 어떨까요?";
+                else if(weekDataSum < stepGoal) analysis_str += "열심히 걷고 있군요? \n조금 더 걸어보아요!";
+                else if(weekDataSum > stepGoal) analysis_str += "목표치를 달성하였군요. \n건강한 삶을 살고 계시네요!";
+                tv_content_stepCount.setText(day + "\n" + today + "\n" + sum_str + "\n" + avg_str + "\n" + goal + "\n" + analysis_str);
+            }
+        }
     }
 }

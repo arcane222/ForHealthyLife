@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/tv_profile_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_horizontal|center_vertical"
         android:text="님의 프로필 "
@@ -51,7 +51,7 @@
     <TextView
         android:id="@+id/tv_profile_uid"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
         android:text="      UID :"
@@ -66,7 +66,7 @@
     <TextView
         android:id="@+id/tv_profile_name"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
         android:text="      닉네임 :"
@@ -81,7 +81,7 @@
     <TextView
         android:id="@+id/tv_profile_email"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
         android:text="      이메일 : "
@@ -96,7 +96,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_profile_gender"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toTopOf="@id/ll_profile_weight_height_age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +136,7 @@
     <LinearLayout
         android:id="@+id/ll_profile_weight_height_age"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/tv_profile_stepCount"
         app:layout_constraintEnd_toEndOf="parent"
@@ -221,7 +221,7 @@
     <TextView
         android:id="@+id/tv_profile_stepCount"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_profile_barbackground"
         android:gravity="center_vertical"
         android:text="      총 걸음수 :"
