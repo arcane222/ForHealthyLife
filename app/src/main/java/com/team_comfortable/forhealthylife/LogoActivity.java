@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.team_comfortable.forhealthylife.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

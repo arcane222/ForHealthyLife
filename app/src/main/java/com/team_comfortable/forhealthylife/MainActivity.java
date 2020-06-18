@@ -145,8 +145,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(mainToolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.side_nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.side_menu_profile, R.id.side_menu_analysis, R.id.side_menu_notice,
                 R.id.side_menu_settings, R.id.bottom_menu_home, R.id.bottom_menu_schedule,
@@ -168,8 +166,6 @@ public class MainActivity extends AppCompatActivity
     public void initBottomNavMenu()
     {
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.bottom_menu_home, R.id.bottom_menu_schedule, R.id.bottom_menu_community)
                 .build();
@@ -318,8 +314,6 @@ public class MainActivity extends AppCompatActivity
             }
             else
             {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
                 ActivityCompat.requestPermissions(this, REQUEST_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
             }
@@ -334,9 +328,7 @@ public class MainActivity extends AppCompatActivity
     {
         if (requestCode == PERMISSIONS_REQUEST_CODE && grantResults.length == 1) {
 
-            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
             boolean check_result = true;
-            // 모든 퍼미션을 허용했는지 체크합니다.
             for (int result : grantResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
                     check_result = false;
@@ -345,10 +337,8 @@ public class MainActivity extends AppCompatActivity
             }
 
             if(!check_result){
-                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUEST_PERMISSIONS[0]))
                 {
-                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
                     Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. \n신체활동권한을 허용해주세요. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener()
                     {
@@ -359,7 +349,6 @@ public class MainActivity extends AppCompatActivity
                 }
                 else
                 {
-                    // “다시 묻지 않음”을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
                     Snackbar.make(permissionBtn, "접근권한이 거부되었습니다. 설정(앱 정보)에서\n신체활동권한을 허용해야 합니다. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
                         @Override
@@ -374,7 +363,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
 
     OnBackPressedListener listener;
 

@@ -28,8 +28,6 @@ public class Data {
 
     static Integer[] riceKcal = {300,300,320,380,600,630,590,690,460,650,700};
 
-    static Integer[] amountCount = {0,0,0,0,0,0,0,0,0,0,0};
-
     static Integer[] riceImage = {
             R.drawable.ic_rice,
             R.drawable.ic_rice_bori,

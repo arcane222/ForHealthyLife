@@ -2,7 +2,6 @@ package com.team_comfortable.forhealthylife.ui.analysis;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 
 public class AnalysisFragment extends Fragment {
 
@@ -48,7 +46,6 @@ public class AnalysisFragment extends Fragment {
             tv_content_weight, tv_content_stepCount;
     private LineChart chartWeight, chartStepCount;
     private Button analysisBtn;
-    private String pickerDateValue;
     private ArrayList<HashMap<String, Object>> weightList, stepCountList;
     private int stepGoal = -1, weightGoal = -1;
 
@@ -150,7 +147,6 @@ public class AnalysisFragment extends Fragment {
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
         SimpleDateFormat dateFormat = new SimpleDateFormat("E");
-        //calendar.add(Calendar.DATE, -2);
         String day2 = dateFormat.format(calendar.getTime());
         if(day2.equals("Tue") || day2.equals("화")) calendar.add(Calendar.DATE, -1);
         if(day2.equals("Wed") || day2.equals("수")) calendar.add(Calendar.DATE, -2);
