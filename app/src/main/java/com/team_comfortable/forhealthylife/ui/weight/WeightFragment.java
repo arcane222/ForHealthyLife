@@ -101,7 +101,7 @@ public class WeightFragment extends Fragment {
                 if(pickerDate != null)
                 {
                     handleWeightInDB(pickerDate, "", "remove");
-                    displayWeight.setText("0" + " (kg)");
+                    displayWeight.setText("0" + " kg");
                     Toast.makeText(getContext(), "해당 날짜의 체중을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -117,7 +117,7 @@ public class WeightFragment extends Fragment {
                     if(!input.equals(""))
                     {
                         handleWeightInDB(pickerDate, input, "add");
-                        displayWeight.setText(input + " (kg)");
+                        displayWeight.setText(input + " kg");
                         Toast.makeText(getContext(), "체중 값을 등록하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -167,13 +167,13 @@ public class WeightFragment extends Fragment {
                 }
                 else if(handleMode.equals("find"))
                 {
-                    findWeight = "0 (KG)";
+                    findWeight = "0 kg";
                     for(DataSnapshot data : dataSnapshot.getChildren())
                     {
                         String key = data.getKey();
                         if(key.equals(date))
                         {
-                            findWeight = data.getValue().toString() + " (kg)";
+                            findWeight = data.getValue().toString() + " kg";
                             break;
                         }
                     }
